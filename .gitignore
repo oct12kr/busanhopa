@@ -27,3 +27,5 @@ dev-stderr.log
 *.pem
 .push-clone*/
 .push-worktree*/
+
+.vercel

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 const businessName = "대전세븐나이트 웨이터 딸기";
-const area = "대전광역시 유성구 봉명동";
-const detailAddress = "상세주소 입력 예정";
+const area = "대전광역시 중구 유천동";
+const detailAddress = "332-28";
 const phoneDisplay = "010-1234-5678";
 const phoneHref = "tel:01012345678";
 const kakaoId = "strawberry7";
@@ -82,24 +82,23 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "NightClub",
   name: businessName,
-  alternateName: ["대전세븐나이트", "유성세븐나이트", "웨이터 딸기"],
+  alternateName: ["대전세븐나이트", "중구세븐나이트", "유천동세븐나이트", "웨이터 딸기"],
   description:
-    "대전광역시 유성구 봉명동 대전세븐나이트 예약 상담. 웨이터 딸기의 가격 안내, 부킹 케어, 재방문 고객 관리, 시크릿 가이드 서비스.",
+    "대전광역시 중구 유천동 332-28 대전세븐나이트 예약 상담. 웨이터 딸기의 가격 안내, 부킹 케어, 재방문 고객 관리, 시크릿 가이드 서비스.",
   url: siteUrl,
   image: [
     `${siteUrl}/images/seven%20(1).png`,
     `${siteUrl}/images/seven%20(2).png`,
     `${siteUrl}/images/seven%20(3).png`,
-    `${siteUrl}/images/seven%20(4).png`,
     `${siteUrl}/images/seven%20(5).png`
   ],
   telephone: phoneDisplay,
   priceRange: "상담 후 안내",
-  areaServed: ["대전광역시", "유성구", "봉명동"],
+  areaServed: ["대전광역시", "중구", "유천동"],
   address: {
     "@type": "PostalAddress",
     streetAddress: detailAddress,
-    addressLocality: "유성구 봉명동",
+    addressLocality: "중구 유천동",
     addressRegion: "대전광역시",
     addressCountry: "KR"
   },
@@ -191,7 +190,7 @@ export default function Home() {
               <span className="block text-[#ff5f7a]">웨이터 딸기</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82 md:text-xl">
-              유성구 봉명동에서 특별한 밤을 준비한다면 방문 전 상담부터
+              대전광역시 중구 유천동 332-28에서 특별한 밤을 준비한다면 방문 전 상담부터
               예약, 테이블 구성, 분위기 케어까지 딸기가 빠르게 안내합니다.
               이미지 안 문구에 기대지 않고 필요한 정보는 모두 HTML 텍스트로
               분명하게 담았습니다.
@@ -213,7 +212,7 @@ export default function Home() {
           </div>
           <div className="grid gap-4 rounded-lg border border-white/12 bg-black/58 p-5 backdrop-blur">
             {[
-              ["위치", "대전 유성구 봉명동"],
+              ["위치", "대전광역시 중구 유천동 332-28"],
               ["상담", "전화 · 카카오톡 빠른 안내"],
               ["예약", "인원과 예산에 맞춘 테이블 구성"]
             ].map(([label, value]) => (
@@ -288,7 +287,7 @@ export default function Home() {
               VIP Room Mood
             </p>
             <h2 className="mt-4 text-4xl font-black leading-tight md:text-6xl">
-              조명, 음악, 테이블 흐름까지 맞춘 유성세븐나이트 분위기
+              조명, 음악, 테이블 흐름까지 맞춘 대전세븐나이트 분위기
             </h2>
             <p className="mt-6 text-lg leading-9 text-white/82">
               생일, 회식, 친구 모임, 혼자 방문까지 목적에 따라 좋은 자리는
@@ -313,13 +312,13 @@ export default function Home() {
             <p className="text-lg leading-8 text-white/72">
               검색엔진이 읽을 수 있도록 이미지 설명, 예약 키워드, 지역 키워드,
               상담 정보를 HTML 문장으로 구성했습니다. 대전세븐나이트,
-              유성세븐나이트, 웨이터 딸기 관련 핵심 문구를 자연스럽게
+              중구 유천동, 웨이터 딸기 관련 핵심 문구를 자연스럽게
               배치했습니다.
             </p>
           </div>
           <div className="mt-10 overflow-hidden rounded-lg border border-white/12">
             <Image
-              src="/images/seven (4).png"
+              src="/images/seven (3).png"
               alt="대전세븐나이트 VIP룸과 샴페인 테이블 갤러리"
               width={2400}
               height={1000}
@@ -415,15 +414,15 @@ export default function Home() {
               카카오톡 ID: {kakaoId}
             </address>
             <p className="mt-5 leading-8 text-white/68">
-              상세주소가 확정되면 지도 iframe과 주차 안내를 연결합니다. 현재는
-              유성구 봉명동 지역 키워드를 중심으로 검색 노출에 필요한 텍스트
-              구조를 먼저 잡았습니다.
+              대전광역시 중구 유천동 332-28 주소를 기준으로 방문 전 상담과
+              예약 안내를 연결합니다. 지도와 주차 안내는 확인 후 추가로
+              반영하겠습니다.
             </p>
           </div>
           <div className="flex min-h-[360px] items-center justify-center rounded-lg border border-dashed border-white/20 bg-[#111015] p-6 text-center leading-8 text-white/68">
             Google Maps 영역
             <br />
-            상세주소 확정 후 지도와 주차 안내를 연결하세요.
+            지도와 주차 안내를 확인 후 연결하세요.
           </div>
         </div>
       </section>
@@ -479,7 +478,7 @@ export default function Home() {
       <footer className="border-t border-white/10 bg-black px-5 py-8 text-sm leading-7 text-white/60">
         <div className="mx-auto max-w-7xl">
           <p className="font-black text-white">
-            {businessName} | 유성세븐나이트 예약 상담
+            {businessName} | 대전세븐나이트 예약 상담
           </p>
           <p>
             사업자 정보: 입력 예정 · 주소: {area} {detailAddress} · 전화:
@@ -487,7 +486,7 @@ export default function Home() {
             {phoneDisplay} · 카카오톡 ID: {kakaoId}
           </p>
           <p>
-            대전세븐나이트, 유성세븐나이트, 웨이터 딸기, 정직한 가격 안내,
+            대전세븐나이트, 중구 유천동, 웨이터 딸기, 정직한 가격 안내,
             부킹 케어, 재방문 관리, 방문 가이드 정보를 제공합니다.
           </p>
         </div>
