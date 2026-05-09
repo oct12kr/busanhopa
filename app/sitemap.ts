@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://daejeon-seven-nights-strawberry.vercel.app";
+const siteUrl = "https://daejeon-seven-night.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

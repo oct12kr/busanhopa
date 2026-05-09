@@ -7,7 +7,7 @@ const phoneDisplay = "010-1234-5678";
 const phoneHref = "tel:01012345678";
 const kakaoId = "strawberry7";
 const kakaoHref = "https://open.kakao.com/o/strawberry7";
-const siteUrl = "https://daejeon-seven-nights-strawberry.vercel.app";
+const siteUrl = "https://daejeon-seven-night.com";
 
 const navItems = [
   { href: "#hero", label: "딸기" },

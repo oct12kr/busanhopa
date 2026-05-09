@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://daejeon-seven-nights-strawberry.vercel.app";
+const siteUrl = "https://daejeon-seven-night.com";
 const title =
   "대전세븐나이트 웨이터 딸기 | 대전 예약 상담";
 const description =
