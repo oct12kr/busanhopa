@@ -5,11 +5,14 @@ const area = "대전광역시 중구 유천동";
 const detailAddress = "332-28";
 const phoneDisplay = "010-9562-0035";
 const phoneHref = "tel:01095620035";
+const kakaoOpenChatHref = "https://open.kakao.com/o/strawberry7";
 const siteUrl = "https://daejeon-seven-night.com";
 const fullAddress = `${area} ${detailAddress}`;
 const mapQuery = encodeURIComponent(fullAddress);
 const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
+const floatingActionClass =
+  "group flex h-14 w-14 items-center justify-center rounded-full border border-[#273247]/70 bg-white text-[#273247] shadow-[0_8px_22px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#ff5f7a] hover:text-[#ff5f7a] focus:outline-none focus:ring-2 focus:ring-[#f7d680] focus:ring-offset-2 focus:ring-offset-[#08080a]";
 
 const navItems = [
   { href: "#hero", label: "딸기" },
@@ -133,11 +136,107 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
+function PhoneIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-7 w-7"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+    </svg>
+  );
+}
+
+function ChatIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-7 w-7"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+    >
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9H13a8.48 8.48 0 0 1 8 8v.5Z" />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-7 w-7"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8" />
+      <path d="M8 17h8" />
+      <path d="M8 9h2" />
+    </svg>
+  );
+}
+
+function FloatingActionButtons() {
+  return (
+    <aside
+      aria-label="빠른 상담 버튼"
+      className="fixed right-4 top-1/2 z-[80] flex -translate-y-1/2 flex-col gap-3 md:right-8"
+    >
+      <a
+        href={phoneHref}
+        aria-label={`전화 상담 ${phoneDisplay}`}
+        title={`전화 상담 ${phoneDisplay}`}
+        className={floatingActionClass}
+      >
+        <PhoneIcon />
+        <span className="sr-only">전화 상담</span>
+      </a>
+      <a
+        href={kakaoOpenChatHref}
+        aria-label="카카오톡 오픈채팅 상담"
+        title="카카오톡 오픈채팅 상담"
+        target="_blank"
+        rel="noreferrer"
+        className={floatingActionClass}
+      >
+        <ChatIcon />
+        <span className="sr-only">카카오톡 오픈채팅 상담</span>
+      </a>
+      <a
+        href="#menu-price"
+        aria-label="메뉴판 가격 안내"
+        title="메뉴판 가격 안내"
+        className={floatingActionClass}
+      >
+        <MenuIcon />
+        <span className="sr-only">메뉴판 가격 안내</span>
+      </a>
+    </aside>
+  );
+}
+
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#08080a] text-[#fffaf7]">
-      <JsonLd data={localBusinessSchema} />
-      <JsonLd data={faqSchema} />
+    <>
+      <FloatingActionButtons />
+      <main className="min-h-screen overflow-hidden bg-[#08080a] text-[#fffaf7]">
+        <JsonLd data={localBusinessSchema} />
+        <JsonLd data={faqSchema} />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#08080a]/88 backdrop-blur-xl">
         <nav
@@ -376,8 +475,11 @@ export default function Home() {
                 <li>단체 방문은 톤을 맞추면 테이블 분위기가 더 좋아집니다.</li>
               </ul>
             </article>
-            <article className="rounded-lg border border-white/10 bg-black/36 p-6">
-              <h3 className="text-2xl font-black text-[#ff5f7a]">주류 구성</h3>
+            <article
+              id="menu-price"
+              className="scroll-mt-28 rounded-lg border border-white/10 bg-black/36 p-6"
+            >
+              <h3 className="text-2xl font-black text-[#ff5f7a]">메뉴판 가격 안내</h3>
               <ul className="mt-5 space-y-3 leading-7 text-white/74">
                 <li>2~3명은 가볍게 시작할 수 있는 기본 구성이 좋습니다.</li>
                 <li>4~6명은 테이블 흐름이 끊기지 않는 중간 구성을 추천합니다.</li>
@@ -494,6 +596,7 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }
