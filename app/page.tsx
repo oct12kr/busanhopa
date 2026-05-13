@@ -11,8 +11,8 @@ const fullAddress = `${area} ${detailAddress}`;
 const mapQuery = encodeURIComponent(fullAddress);
 const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
-const floatingActionClass =
-  "group flex h-14 w-14 items-center justify-center rounded-full border border-[#273247]/70 bg-white text-[#273247] shadow-[0_8px_22px_rgba(0,0,0,0.28)] transition hover:-translate-y-0.5 hover:border-[#ff5f7a] hover:text-[#ff5f7a] focus:outline-none focus:ring-2 focus:ring-[#f7d680] focus:ring-offset-2 focus:ring-offset-[#08080a]";
+const floatingActionBaseClass =
+  "group flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_28px_rgba(0,0,0,0.38)] backdrop-blur transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#f7d680] focus:ring-offset-2 focus:ring-offset-[#08080a] md:h-16 md:w-16";
 
 const navItems = [
   { href: "#hero", label: "딸기" },
@@ -148,7 +148,9 @@ function PhoneIcon() {
       strokeLinejoin="round"
       strokeWidth="1.8"
     >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+      <path d="M14.05 5.42a5 5 0 0 1 4.54 4.54" />
+      <path d="M14.05 2a8.44 8.44 0 0 1 7.95 7.94" />
+      <path d="M22 16.92v2.38a2 2 0 0 1-2.18 2 19.33 19.33 0 0 1-8.42-3 19.06 19.06 0 0 1-5.88-5.88 19.33 19.33 0 0 1-3-8.42A2 2 0 0 1 4.5 1.82h2.38a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.8 2 2 0 0 1-.45 2.1l-1 1a15.68 15.68 0 0 0 5.88 5.88l1-1a2 2 0 0 1 2.1-.45 12.8 12.8 0 0 0 2.8.7A2 2 0 0 1 22 16.92Z" />
     </svg>
   );
 }
@@ -166,6 +168,9 @@ function ChatIcon() {
       strokeWidth="1.8"
     >
       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9H13a8.48 8.48 0 0 1 8 8v.5Z" />
+      <path d="M9 10h.01" />
+      <path d="M12 10h.01" />
+      <path d="M15 10h.01" />
     </svg>
   );
 }
@@ -195,13 +200,13 @@ function FloatingActionButtons() {
   return (
     <aside
       aria-label="빠른 상담 버튼"
-      className="fixed right-4 top-1/2 z-[80] flex -translate-y-1/2 flex-col gap-3 md:right-8"
+      className="fixed bottom-6 right-4 z-[80] flex flex-col gap-3 md:bottom-10 md:right-8"
     >
       <a
         href={phoneHref}
         aria-label={`전화 상담 ${phoneDisplay}`}
         title={`전화 상담 ${phoneDisplay}`}
-        className={floatingActionClass}
+        className={`${floatingActionBaseClass} border-[#ff8aa0]/50 bg-[#ff5f7a] text-white hover:border-white/70 hover:bg-[#ff7690]`}
       >
         <PhoneIcon />
         <span className="sr-only">전화 상담</span>
@@ -212,7 +217,7 @@ function FloatingActionButtons() {
         title="카카오톡 오픈채팅 상담"
         target="_blank"
         rel="noreferrer"
-        className={floatingActionClass}
+        className={`${floatingActionBaseClass} border-[#f7d680]/70 bg-[#fee500] text-[#2a2115] hover:border-white/80 hover:bg-[#f7d680]`}
       >
         <ChatIcon />
         <span className="sr-only">카카오톡 오픈채팅 상담</span>
@@ -221,7 +226,7 @@ function FloatingActionButtons() {
         href="#menu-price"
         aria-label="메뉴판 가격 안내"
         title="메뉴판 가격 안내"
-        className={floatingActionClass}
+        className={`${floatingActionBaseClass} border-[#f7d680]/55 bg-[#111015]/92 text-[#f7d680] hover:border-[#ff5f7a] hover:bg-[#19131a] hover:text-[#ff5f7a]`}
       >
         <MenuIcon />
         <span className="sr-only">메뉴판 가격 안내</span>
