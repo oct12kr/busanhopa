@@ -3,11 +3,13 @@ import Image from "next/image";
 const businessName = "대전세븐나이트 웨이터 딸기";
 const area = "대전광역시 중구 유천동";
 const detailAddress = "332-28";
-const phoneDisplay = "010-1234-5678";
-const phoneHref = "tel:01012345678";
-const kakaoId = "strawberry7";
-const kakaoHref = "https://open.kakao.com/o/strawberry7";
+const phoneDisplay = "010-9562-0035";
+const phoneHref = "tel:01095620035";
 const siteUrl = "https://daejeon-seven-night.com";
+const fullAddress = `${area} ${detailAddress}`;
+const mapQuery = encodeURIComponent(fullAddress);
+const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 
 const navItems = [
   { href: "#hero", label: "딸기" },
@@ -62,7 +64,7 @@ const timeTips = [
 const faqs = [
   {
     q: "대전세븐나이트 예약은 어떻게 하나요?",
-    a: "전화 또는 카카오톡으로 날짜, 시간, 인원수를 알려주세요. 웨이터 딸기가 예약 가능 여부와 추천 구성을 안내합니다."
+    a: "전화로 날짜, 시간, 인원수를 알려주세요. 웨이터 딸기가 예약 가능 여부와 추천 구성을 안내합니다."
   },
   {
     q: "처음 방문해도 괜찮나요?",
@@ -89,8 +91,7 @@ const localBusinessSchema = {
   image: [
     `${siteUrl}/images/seven%20(1).png`,
     `${siteUrl}/images/seven%20(2).png`,
-    `${siteUrl}/images/seven%20(3).png`,
-    `${siteUrl}/images/seven%20(5).png`
+    `${siteUrl}/images/seven%20(3).png`
   ],
   telephone: phoneDisplay,
   priceRange: "상담 후 안내",
@@ -107,8 +108,7 @@ const localBusinessSchema = {
     telephone: phoneDisplay,
     contactType: "reservations",
     availableLanguage: ["ko-KR", "Korean"]
-  },
-  sameAs: [kakaoHref]
+  }
 };
 
 const faqSchema = {
@@ -200,20 +200,14 @@ export default function Home() {
                 href={phoneHref}
                 className="inline-flex items-center justify-center rounded-md bg-[#ff5f7a] px-7 py-4 text-lg font-black text-white shadow-glow hover:bg-[#e44b65]"
               >
-                지금 예약 상담
-              </a>
-              <a
-                href={kakaoHref}
-                className="inline-flex items-center justify-center rounded-md border border-[#f7d680] px-7 py-4 text-lg font-black text-[#f7d680] hover:bg-[#f7d680] hover:text-[#08080a]"
-              >
-                카카오톡 문의
+                {phoneDisplay}
               </a>
             </div>
           </div>
           <div className="grid gap-4 rounded-lg border border-white/12 bg-black/58 p-5 backdrop-blur">
             {[
               ["위치", "대전광역시 중구 유천동 332-28"],
-              ["상담", "전화 · 카카오톡 빠른 안내"],
+              ["상담", phoneDisplay],
               ["예약", "인원과 예산에 맞춘 테이블 구성"]
             ].map(([label, value]) => (
               <div key={label} className="rounded-md border border-white/10 p-5">
@@ -354,8 +348,8 @@ export default function Home() {
           </div>
           <div className="mt-10 overflow-hidden rounded-lg border border-white/12">
             <Image
-              src="/images/seven (5).png"
-              alt="웨이터 딸기 시크릿 가이드 이미지"
+              src="/images/seven (3).png"
+              alt="대전세븐나이트 방문 가이드 이미지"
               width={2400}
               height={1000}
               className="h-auto w-full"
@@ -407,22 +401,37 @@ export default function Home() {
               <strong className="block text-2xl text-[#f7d680]">
                 {businessName}
               </strong>
-              주소: {area} {detailAddress}
+              주소: {fullAddress}
               <br />
               전화 예약: <a href={phoneHref}>{phoneDisplay}</a>
-              <br />
-              카카오톡 ID: {kakaoId}
             </address>
             <p className="mt-5 leading-8 text-white/68">
-              대전광역시 중구 유천동 332-28 주소를 기준으로 방문 전 상담과
-              예약 안내를 연결합니다. 지도와 주차 안내는 확인 후 추가로
-              반영하겠습니다.
+              대전광역시 중구 유천동 332-28 주소를 기준으로 구글 지도와
+              길찾기를 연결했습니다. 방문 전 전화로 예약 시간을 확인해주세요.
             </p>
           </div>
-          <div className="flex min-h-[360px] items-center justify-center rounded-lg border border-dashed border-white/20 bg-[#111015] p-6 text-center leading-8 text-white/68">
-            Google Maps 영역
-            <br />
-            지도와 주차 안내를 확인 후 연결하세요.
+          <div className="overflow-hidden rounded-lg border border-white/12 bg-[#111015]">
+            <iframe
+              title="대전세븐나이트 구글 지도"
+              src={mapEmbedSrc}
+              className="h-[360px] w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div className="flex flex-col gap-3 border-t border-white/10 p-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm font-semibold leading-6 text-white/70">
+                {fullAddress}
+              </p>
+              <a
+                href={mapDirectionsHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-md border border-[#f7d680] px-4 py-2 text-sm font-black text-[#f7d680] hover:bg-[#f7d680] hover:text-[#08080a]"
+              >
+                구글 길찾기
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -434,7 +443,7 @@ export default function Home() {
               Reservation
             </p>
             <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-              대전세븐나이트 예약은 딸기에게 바로 문의하세요
+              대전세븐나이트 예약은 전화로 바로 문의하세요
             </h2>
             <p className="mt-5 text-lg leading-8 text-white/74">
               방문 날짜, 시간, 인원, 예산을 알려주시면 대전세븐나이트 현장
@@ -447,12 +456,6 @@ export default function Home() {
                 className="inline-flex items-center justify-center rounded-md bg-[#ff5f7a] px-6 py-4 font-black text-white hover:bg-[#e44b65]"
               >
                 {phoneDisplay} 전화 예약
-              </a>
-              <a
-                href={kakaoHref}
-                className="inline-flex items-center justify-center rounded-md border border-[#f7d680] px-6 py-4 font-black text-[#f7d680] hover:bg-[#f7d680] hover:text-[#08080a]"
-              >
-                카카오톡 strawberry7
               </a>
             </div>
           </div>
@@ -483,7 +486,7 @@ export default function Home() {
           <p>
             사업자 정보: 입력 예정 · 주소: {area} {detailAddress} · 전화:
             {" "}
-            {phoneDisplay} · 카카오톡 ID: {kakaoId}
+            {phoneDisplay}
           </p>
           <p>
             대전세븐나이트, 중구 유천동, 웨이터 딸기, 정직한 가격 안내,

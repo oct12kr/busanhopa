@@ -18,6 +18,8 @@ yarn-error.log*
 pnpm-debug.log*
 dev-stdout.log
 dev-stderr.log
+.npm-cache
+.tools
 
 # local env
 .env*
