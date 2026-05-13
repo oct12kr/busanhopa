@@ -136,12 +136,12 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
-function PhoneIcon() {
+function PhoneIcon({ className = "h-7 w-7" }: { className?: string }) {
   return (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="h-7 w-7"
+      className={className}
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
@@ -296,15 +296,14 @@ export default function Home() {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82 md:text-xl">
               대전광역시 중구 유천동 332-28에서 특별한 밤을 준비한다면 방문 전 상담부터
               예약, 테이블 구성, 분위기 케어까지 딸기가 빠르게 안내합니다.
-              이미지 안 문구에 기대지 않고 필요한 정보는 모두 HTML 텍스트로
-              분명하게 담았습니다.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href={phoneHref}
-                className="inline-flex items-center justify-center rounded-md bg-[#ff5f7a] px-7 py-4 text-lg font-black text-white shadow-glow hover:bg-[#e44b65]"
+                className="inline-flex w-full max-w-xl items-center justify-center gap-4 rounded-lg border border-[#ff9aae]/80 bg-[#ff5f7a] px-8 py-6 text-4xl font-black text-white shadow-[0_0_38px_rgba(255,95,122,0.52)] transition hover:bg-[#ff7690] sm:w-auto md:px-10 md:py-7 md:text-5xl"
               >
-                {phoneDisplay}
+                <PhoneIcon className="h-10 w-10 shrink-0 md:h-12 md:w-12" />
+                <span>{phoneDisplay}</span>
               </a>
             </div>
           </div>
@@ -316,7 +315,17 @@ export default function Home() {
             ].map(([label, value]) => (
               <div key={label} className="rounded-md border border-white/10 p-5">
                 <p className="text-sm font-bold text-[#f7d680]">{label}</p>
-                <p className="mt-2 text-2xl font-black">{value}</p>
+                {label === "상담" ? (
+                  <a
+                    href={phoneHref}
+                    className="mt-2 inline-flex items-center gap-3 text-3xl font-black text-white hover:text-[#ff5f7a]"
+                  >
+                    <PhoneIcon className="h-7 w-7 shrink-0" />
+                    {value}
+                  </a>
+                ) : (
+                  <p className="mt-2 text-2xl font-black">{value}</p>
+                )}
               </div>
             ))}
           </div>
