@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import FloatingActionButtons from "@/components/FloatingActionButtons";
 
 const siteUrl = "https://daejeon-seven-night.com";
 const title =
@@ -69,7 +72,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <FloatingActionButtons />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

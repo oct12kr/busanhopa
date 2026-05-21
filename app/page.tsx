@@ -1,28 +1,17 @@
 import Image from "next/image";
-
-const businessName = "대전세븐나이트 웨이터 딸기";
-const area = "대전광역시 중구 유천동";
-const detailAddress = "332-28";
-const phoneDisplay = "010-9562-0035";
-const phoneHref = "tel:01095620035";
-const kakaoOpenChatHref = "https://open.kakao.com/o/strawberry7";
-const siteUrl = "https://daejeon-seven-night.com";
-const fullAddress = `${area} ${detailAddress}`;
-const mapQuery = encodeURIComponent(fullAddress);
-const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
-const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
-const floatingActionBaseClass =
-  "group flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_28px_rgba(0,0,0,0.38)] backdrop-blur transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#f7d680] focus:ring-offset-2 focus:ring-offset-[#08080a] md:h-16 md:w-16";
-
-const navItems = [
-  { href: "#hero", label: "딸기" },
-  { href: "#promise", label: "약속" },
-  { href: "#room", label: "분위기" },
-  { href: "#gallery", label: "갤러리" },
-  { href: "#guide", label: "가이드" },
-  { href: "#location", label: "오는길" },
-  { href: "#contact", label: "예약" }
-];
+import {
+  businessName,
+  area,
+  detailAddress,
+  phoneDisplay,
+  phoneHref,
+  kakaoOpenChatHref,
+  siteUrl,
+  fullAddress,
+  mapEmbedSrc,
+  mapDirectionsHref
+} from "@/lib/constants";
+import { PhoneIcon } from "@/components/Icons";
 
 const promises = [
   {
@@ -136,136 +125,11 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
-function PhoneIcon({ className = "h-7 w-7" }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-    >
-      <path d="M14.05 5.42a5 5 0 0 1 4.54 4.54" />
-      <path d="M14.05 2a8.44 8.44 0 0 1 7.95 7.94" />
-      <path d="M22 16.92v2.38a2 2 0 0 1-2.18 2 19.33 19.33 0 0 1-8.42-3 19.06 19.06 0 0 1-5.88-5.88 19.33 19.33 0 0 1-3-8.42A2 2 0 0 1 4.5 1.82h2.38a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.8 2 2 0 0 1-.45 2.1l-1 1a15.68 15.68 0 0 0 5.88 5.88l1-1a2 2 0 0 1 2.1-.45 12.8 12.8 0 0 0 2.8.7A2 2 0 0 1 22 16.92Z" />
-    </svg>
-  );
-}
-
-function ChatIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-7 w-7"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-    >
-      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9H13a8.48 8.48 0 0 1 8 8v.5Z" />
-      <path d="M9 10h.01" />
-      <path d="M12 10h.01" />
-      <path d="M15 10h.01" />
-    </svg>
-  );
-}
-
-function MenuIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-7 w-7"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-    >
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
-      <path d="M14 2v6h6" />
-      <path d="M8 13h8" />
-      <path d="M8 17h8" />
-      <path d="M8 9h2" />
-    </svg>
-  );
-}
-
-function FloatingActionButtons() {
-  return (
-    <aside
-      aria-label="빠른 상담 버튼"
-      className="fixed bottom-6 right-4 z-[80] flex flex-col gap-3 md:bottom-10 md:right-8"
-    >
-      <a
-        href={phoneHref}
-        aria-label={`전화 상담 ${phoneDisplay}`}
-        title={`전화 상담 ${phoneDisplay}`}
-        className={`${floatingActionBaseClass} border-[#ff8aa0]/50 bg-[#ff5f7a] text-white hover:border-white/70 hover:bg-[#ff7690]`}
-      >
-        <PhoneIcon />
-        <span className="sr-only">전화 상담</span>
-      </a>
-      <a
-        href={kakaoOpenChatHref}
-        aria-label="카카오톡 오픈채팅 상담"
-        title="카카오톡 오픈채팅 상담"
-        target="_blank"
-        rel="noreferrer"
-        className={`${floatingActionBaseClass} border-[#f7d680]/70 bg-[#fee500] text-[#2a2115] hover:border-white/80 hover:bg-[#f7d680]`}
-      >
-        <ChatIcon />
-        <span className="sr-only">카카오톡 오픈채팅 상담</span>
-      </a>
-      <a
-        href="#menu-price"
-        aria-label="메뉴판 가격 안내"
-        title="메뉴판 가격 안내"
-        className={`${floatingActionBaseClass} border-[#f7d680]/55 bg-[#111015]/92 text-[#f7d680] hover:border-[#ff5f7a] hover:bg-[#19131a] hover:text-[#ff5f7a]`}
-      >
-        <MenuIcon />
-        <span className="sr-only">메뉴판 가격 안내</span>
-      </a>
-    </aside>
-  );
-}
-
 export default function Home() {
   return (
-    <>
-      <FloatingActionButtons />
-      <main className="min-h-screen overflow-hidden bg-[#08080a] text-[#fffaf7]">
-        <JsonLd data={localBusinessSchema} />
-        <JsonLd data={faqSchema} />
-
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#08080a]/88 backdrop-blur-xl">
-        <nav
-          aria-label="대전세븐나이트 주요 메뉴"
-          className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4"
-        >
-          <a href="#hero" className="text-base font-black text-[#f7d680]">
-            웨이터 딸기
-          </a>
-          <div className="hidden items-center gap-5 text-sm font-semibold text-white/72 md:flex">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="hover:text-[#ff5f7a]">
-                {item.label}
-              </a>
-            ))}
-          </div>
-          <a
-            href={phoneHref}
-            className="rounded-md bg-[#ff5f7a] px-4 py-2 text-sm font-black text-white shadow-glow hover:bg-[#e44b65]"
-          >
-            전화 예약
-          </a>
-        </nav>
-      </header>
+    <main className="min-h-screen overflow-hidden bg-transparent text-[#fffaf7]">
+      <JsonLd data={localBusinessSchema} />
+      <JsonLd data={faqSchema} />
 
       <section
         id="hero"
@@ -594,23 +458,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-black px-5 py-8 text-sm leading-7 text-white/60">
-        <div className="mx-auto max-w-7xl">
-          <p className="font-black text-white">
-            {businessName} | 대전세븐나이트 예약 상담
-          </p>
-          <p>
-            사업자 정보: 입력 예정 · 주소: {area} {detailAddress} · 전화:
-            {" "}
-            {phoneDisplay}
-          </p>
-          <p>
-            대전세븐나이트, 중구 유천동, 웨이터 딸기, 정직한 가격 안내,
-            부킹 케어, 재방문 관리, 방문 가이드 정보를 제공합니다.
-          </p>
-        </div>
-      </footer>
       </main>
-    </>
   );
 }
