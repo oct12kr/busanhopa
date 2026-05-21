@@ -168,7 +168,9 @@ async function wordpressGraphQL<TData>(
   variables?: Record<string, string | number>
 ) {
   const headers: Record<string, string> = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache"
   };
   const authorization = getAuthorizationHeader();
 

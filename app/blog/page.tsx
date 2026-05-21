@@ -4,6 +4,7 @@ import Image from "next/image";
 import { getBlogPostsByCategory } from "@/lib/wordpress";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "블로그 | 대전세븐나이트 웨이터 딸기",
