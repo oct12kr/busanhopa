@@ -182,7 +182,7 @@ async function wordpressGraphQL<TData>(
     method: "POST",
     headers,
     body: JSON.stringify({ query, variables }),
-    cache: "no-store"
+    cache: 'no-store'
   });
 
   const payload = (await response.json().catch(() => null)) as GraphQLResponse<TData> | null;
