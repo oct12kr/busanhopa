@@ -26,8 +26,25 @@ function formatDate(value: string | null) {
   }).format(new Date(value));
 }
 
+interface PostCategory {
+  slug: string;
+  name: string;
+}
+
+interface BlogPost {
+  title: string;
+  slug: string;
+  date: string | null;
+  excerpt?: string | null;
+  categories?: PostCategory[];
+  featuredImage?: {
+    sourceUrl: string;
+    altText?: string | null;
+  } | null;
+}
+
 // 개별 포스트 카드 컴포넌트
-function PostCard({ post }: { post: any }) {
+function PostCard({ post }: { post: BlogPost }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-[#f7d680]/60 hover:shadow-[0_8px_30px_rgba(247,214,128,0.08)]">
       {/* 썸네일 이미지 영역 */}
@@ -52,7 +69,7 @@ function PostCard({ post }: { post: any }) {
       {/* 포스트 정보 영역 */}
       <div className="flex flex-1 flex-col p-2.5 sm:p-3.5">
         <div className="flex items-center gap-2">
-          {post.categories?.slice(0, 1).map((category: any) => (
+          {post.categories?.slice(0, 1).map((category: PostCategory) => (
             <span
               key={category.slug}
               className="rounded-full bg-[#ff5f7a]/10 px-2 py-0.5 text-[9px] sm:text-[10px] font-black text-[#ff5f7a]"

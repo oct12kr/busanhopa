@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { phoneDisplay, phoneHref, kakaoOpenChatHref } from "@/lib/constants";
 import { PhoneIcon, ChatIcon, MenuIcon } from "./Icons";
 
@@ -31,7 +32,7 @@ export default function FloatingActionButtons() {
         <ChatIcon />
         <span className="sr-only">카카오톡 오픈채팅 상담</span>
       </a>
-      <a
+      <Link
         href="/#menu-price"
         aria-label="메뉴판 가격 안내"
         title="메뉴판 가격 안내"
@@ -39,7 +40,7 @@ export default function FloatingActionButtons() {
       >
         <MenuIcon />
         <span className="sr-only">메뉴판 가격 안내</span>
-      </a>
+      </Link>
     </aside>
   );
 }
