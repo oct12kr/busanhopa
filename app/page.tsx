@@ -142,9 +142,12 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70"
+          className="object-cover object-right opacity-70"
         />
+        {/* 좌→우 어둡게: 텍스트 가독성 확보 */}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#08080a_0%,rgba(8,8,10,0.86)_44%,rgba(8,8,10,0.36)_100%)]" />
+        {/* 하→상 어둡게: 모바일에서 텍스트-인물 겹침 시 가독성 보강 */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/40 to-transparent md:hidden" />
         <div className="relative mx-auto grid min-h-[calc(100vh-68px)] max-w-7xl gap-10 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f7d680]">
