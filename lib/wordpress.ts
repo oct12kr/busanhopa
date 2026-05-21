@@ -4,8 +4,6 @@ const WORDPRESS_ENDPOINT_ENV_KEYS = [
   "NEXT_PUBLIC_WORDPRESS_API_URL"
 ] as const;
 
-const POST_REVALIDATE_SECONDS = 300;
-
 type GraphQLError = {
   message: string;
 };
@@ -182,9 +180,7 @@ async function wordpressGraphQL<TData>(
     method: "POST",
     headers,
     body: JSON.stringify({ query, variables }),
-    next: {
-      revalidate: POST_REVALIDATE_SECONDS
-    }
+    cache: "no-store"
   });
 
   const payload = (await response.json().catch(() => null)) as GraphQLResponse<TData> | null;
