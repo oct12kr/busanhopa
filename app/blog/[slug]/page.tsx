@@ -31,7 +31,8 @@ function buildDescription(excerpt: string, title: string) {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const post = await getBlogPostBySlug(slug).catch(() => null);
 
   if (!post) {
@@ -57,7 +58,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const post = await getBlogPostBySlug(slug).catch(() => null);
 
   if (!post) {
