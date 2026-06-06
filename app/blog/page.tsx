@@ -142,10 +142,10 @@ function ColumnFallback({ title }: { title: string }) {
 }
 
 export default async function BlogPage() {
-  // 병렬로 세븐나이트와 딸기 웨이터의 포스팅 가져오기 (각각 3개씩)
+  // 병렬로 세븐나이트와 딸기 웨이터의 포스팅 가져오기 (각각 18개씩)
   const [sevenNightPosts, waiterPosts] = await Promise.all([
-    getBlogPostsByCategory("seven-night-club", 3).catch(() => null),
-    getBlogPostsByCategory("waiter", 3).catch(() => null)
+    getBlogPostsByCategory("seven-night-club", 18).catch(() => null),
+    getBlogPostsByCategory("waiter", 18).catch(() => null)
   ]);
 
   return (
