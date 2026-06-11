@@ -6,13 +6,13 @@ import { usePathname } from "next/navigation";
 import { phoneHref } from "@/lib/constants";
 
 export const navItems = [
-  { href: "/#hero", label: "건대w" },
-  { href: "/#promise", label: "약속" },
-  { href: "/#room", label: "분위기" },
-  { href: "/#gallery", label: "갤러리" },
-  { href: "/#guide", label: "가이드" },
-  { href: "/#location", label: "오는길" },
-  { href: "/#contact", label: "예약" },
+  { href: "/#hero", label: "W소개" },
+  { href: "/#system", label: "시스템" },
+  { href: "/#member", label: "멤버안내" },
+  { href: "/#room", label: "VIP룸" },
+  { href: "/#guide", label: "이용가이드" },
+  { href: "/#location", label: "오시는길" },
+  { href: "/#contact", label: "예약문의" },
   { href: "/blog", label: "블로그" }
 ];
 
@@ -84,8 +84,9 @@ export default function Header() {
         className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4"
       >
         {/* 로고 */}
-        <Link href="/" className="text-base font-black text-[#f7d680]">
-          건대W
+        <Link href="/" className="flex items-center gap-2 text-base font-black text-[#f7d680]">
+          <span className="flex h-8 w-8 items-center justify-center rounded border border-[#f7d680]/40 text-lg font-black">W</span>
+          <span>건대 W</span>
         </Link>
 
         {/* PC 가로 메뉴 (md 이상) */}

@@ -1,12 +1,12 @@
-export const businessName = "대전세븐나이트 건대W";
-export const area = "대전광역시 중구 유천동";
-export const detailAddress = "332-28";
+export const businessName = "건대W";
+export const area = "서울특별시 광진구";
+export const detailAddress = "아차산로33길 16-10";
 export const phoneDisplay = "010-9561-7332";
 export const phoneHref = "tel:01095617332";
+export const managerName = "준건실장";
 export const kakaoOpenChatHref = "https://open.kakao.com/o/strawberry7";
 export const siteUrl = "https://daejeon-seven-night.com";
 export const fullAddress = `${area} ${detailAddress}`;
 const mapQuery = encodeURIComponent(fullAddress);
 export const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 export const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
-

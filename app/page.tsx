@@ -142,59 +142,110 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-right opacity-70"
+          className="object-cover object-center opacity-40"
         />
         {/* 좌→우 어둡게: 텍스트 가독성 확보 */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#08080a_0%,rgba(8,8,10,0.86)_44%,rgba(8,8,10,0.36)_100%)]" />
-        {/* 하→상 어둡게: 모바일에서 텍스트-인물 겹침 시 가독성 보강 */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#08080a_0%,rgba(8,8,10,0.92)_40%,rgba(8,8,10,0.5)_70%,rgba(8,8,10,0.3)_100%)]" />
+        {/* 하→상 어둡게: 모바일 보강 */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/40 to-transparent md:hidden" />
-        <div className="relative mx-auto grid min-h-[calc(100vh-68px)] max-w-7xl gap-10 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+
+        {/* 우상단 W KONDAE HOST BAR 엠블럼 (PC만) */}
+        <div className="absolute right-12 top-12 hidden flex-col items-center gap-2 text-center lg:flex p-8 border border-[#f7d680]/30 shadow-[0_0_30px_rgba(247,214,128,0.15)] bg-black/40 backdrop-blur-sm">
+          <span className="text-7xl font-black text-[#f7d680]/90 drop-shadow-[0_2px_12px_rgba(247,214,128,0.3)]">W</span>
+          <span className="text-sm font-bold uppercase tracking-[0.25em] text-[#f7d680]/80 mt-2">Kondae</span>
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f7d680]/60">Host Bar</span>
+        </div>
+
+        <div className="relative mx-auto grid min-h-[calc(100vh-68px)] max-w-7xl gap-10 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+          {/* 좌측: 메인 카피 */}
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f7d680]">
-              Daejeon Seven Night Reservation
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
+                Kondae W Host Bar
+              </p>
+              <span className="hidden h-px w-24 bg-[#f7d680]/40 sm:block" />
+            </div>
             <h1
               id="hero-title"
-              className="mt-5 max-w-4xl text-5xl font-black leading-tight tracking-normal md:text-7xl"
+              className="mt-6 text-5xl font-black leading-[1.2] tracking-tight md:text-6xl"
             >
-              대전세븐나이트
-              <span className="block text-[#ff5f7a]">건대W</span>
+              건대 <span className="text-[#f7d680] text-7xl md:text-8xl align-middle ml-2">W</span>
+              <br />
+              <span className="text-4xl md:text-[3.2rem] mt-2 block">당신만을 위한 특별한 밤</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82 md:text-xl">
-              대전광역시 중구 유천동 332-28에서 특별한 밤을 준비한다면 방문 전 상담부터
-              예약, 테이블 구성, 분위기 케어까지 건대W가 빠르게 안내합니다.
+            <p className="mt-8 max-w-lg text-base leading-7 text-[#f7d680]/80 md:text-lg">
+              프라이빗한 공간, 완벽한 서비스, 그리고 잊지 못할 시간
+              <br />
+              건대 W에서 최고의 순간을 경험하세요.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={phoneHref}
-                className="inline-flex w-full max-w-xl items-center justify-center gap-4 rounded-lg border border-[#ff9aae]/80 bg-[#ff5f7a] px-8 py-6 text-4xl font-black text-white shadow-[0_0_38px_rgba(255,95,122,0.52)] transition hover:bg-[#ff7690] sm:w-auto md:px-10 md:py-7 md:text-5xl"
-              >
-                <PhoneIcon className="h-10 w-10 shrink-0 md:h-12 md:w-12" />
-                <span>{phoneDisplay}</span>
+
+            {/* 3개 피처 배지 */}
+            <div className="mt-8 flex flex-wrap gap-3">
+              {[
+                { icon: "👤", text: "준건실장 직접 관리" },
+                { icon: "👑", text: "체계적인 시스템" },
+                { icon: "💎", text: "프라이빗 VIP 룸" }
+              ].map((badge) => (
+                <span
+                  key={badge.text}
+                  className="inline-flex items-center gap-2 rounded-md border border-[#f7d680]/30 bg-black/40 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-md"
+                >
+                  <span className="text-[#f7d680]">{badge.icon}</span>
+                  {badge.text}
+                </span>
+              ))}
+            </div>
+
+            {/* 전화번호 박스 */}
+            <div className="mt-10 inline-flex w-full items-center justify-center gap-5 rounded-lg border border-[#f7d680]/40 bg-black/40 px-6 py-5 backdrop-blur-md sm:w-auto sm:justify-start sm:px-10 sm:py-6">
+              <a href={phoneHref} className="flex items-center gap-5 group w-full justify-center sm:justify-start">
+                <span className="flex h-14 w-14 items-center justify-center text-[#f7d680] transition group-hover:scale-110 duration-300">
+                  <PhoneIcon className="h-10 w-10" />
+                </span>
+                <div className="text-center sm:text-left">
+                  <p className="text-3xl font-black text-[#f7d680] sm:text-4xl">{phoneDisplay}</p>
+                  <p className="mt-1 text-sm font-semibold text-[#f7d680]/70">준건실장 전화 예약</p>
+                </div>
               </a>
             </div>
           </div>
-          <div className="grid gap-4 rounded-lg border border-white/12 bg-black/58 p-5 backdrop-blur">
-            {[
-              ["위치", "대전광역시 중구 유천동 332-28"],
-              ["상담", phoneDisplay],
-              ["예약", "인원과 예산에 맞춘 테이블 구성"]
-            ].map(([label, value]) => (
-              <div key={label} className="rounded-md border border-white/10 p-5">
-                <p className="text-sm font-bold text-[#f7d680]">{label}</p>
-                {label === "상담" ? (
-                  <a
-                    href={phoneHref}
-                    className="mt-2 inline-flex items-center gap-3 text-3xl font-black text-white hover:text-[#ff5f7a]"
-                  >
-                    <PhoneIcon className="h-7 w-7 shrink-0" />
-                    {value}
-                  </a>
-                ) : (
-                  <p className="mt-2 text-2xl font-black">{value}</p>
-                )}
+
+          {/* 우측: 안내 카드 */}
+          <div className="grid gap-0 rounded-2xl border border-white/12 bg-black/40 backdrop-blur-md overflow-hidden relative mt-10 md:mt-0 lg:mr-10">
+            {/* 위치 */}
+            <div className="border-b border-white/10 p-6 sm:p-8">
+              <div className="flex items-start gap-5">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#f7d680]/30 text-xl text-[#f7d680]">📍</span>
+                <div>
+                  <p className="text-sm font-bold text-[#f7d680]">위치</p>
+                  <p className="mt-2 text-lg font-black leading-snug">서울특별시 광진구 아차산로33길 16-10</p>
+                </div>
               </div>
-            ))}
+            </div>
+            {/* 담당 */}
+            <div className="border-b border-white/10 p-6 sm:p-8">
+              <div className="flex items-start gap-5">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#f7d680]/30 text-xl text-[#f7d680]">📞</span>
+                <div>
+                  <p className="text-sm font-bold text-[#f7d680]">담당</p>
+                  <p className="mt-2 text-sm font-semibold text-white/60">준건실장</p>
+                  <a href={phoneHref} className="mt-1 block text-2xl font-black text-white hover:text-[#f7d680] transition sm:text-[1.7rem]">
+                    {phoneDisplay}
+                  </a>
+                </div>
+              </div>
+            </div>
+            {/* 예약 안내 */}
+            <div className="p-6 sm:p-8">
+              <div className="flex items-start gap-5">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#f7d680]/30 text-xl text-[#f7d680]">📅</span>
+                <div>
+                  <p className="text-sm font-bold text-[#f7d680]">예약 안내</p>
+                  <p className="mt-2 text-lg font-black leading-snug">전화 예약 후 방문 부탁드립니다.</p>
+                  <p className="mt-2 text-sm text-white/50">최고의 서비스로 모시겠습니다.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
