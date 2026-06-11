@@ -359,28 +359,31 @@ export default function Home() {
 
       <section
         id="room"
-        className="relative isolate border-b border-white/10 py-24"
+        className="relative isolate border-b border-white/10 py-24 min-h-[600px] flex items-center"
       >
         <Image
-          src="/images/seven (3).png"
-          alt=""
+          src="/images/g_hopa (3).png"
+          alt="건대호빠 건대W VIP 룸"
           fill
           sizes="100vw"
-          className="object-cover opacity-64"
+          className="object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#08080a_0%,rgba(8,8,10,0.78)_52%,rgba(8,8,10,0.2)_100%)]" />
-        <div className="relative mx-auto max-w-7xl px-5">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,10,0.85)_0%,rgba(8,8,10,0.6)_50%,rgba(8,8,10,0.1)_100%)]" />
+        <div className="relative mx-auto w-full max-w-7xl px-5">
           <div className="max-w-2xl">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f7d680]">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
               VIP Room Mood
             </p>
-            <h2 className="mt-4 text-4xl font-black leading-tight md:text-6xl">
-              조명, 음악, 테이블 흐름까지 맞춘 대전세븐나이트 분위기
+            <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl lg:text-6xl break-keep">
+              최고의 시간을 위한 완벽한 공간,
+              <br />
+              <span className="text-[#f7d680]">건대호빠 건대W</span>
             </h2>
-            <p className="mt-6 text-lg leading-9 text-white/82">
-              생일, 회식, 친구 모임, 혼자 방문까지 목적에 따라 좋은 자리는
-              달라집니다. 건대W는 방문 시간과 인원, 예산을 기준으로 현장에서
-              가장 어울리는 흐름을 안내합니다.
+            <p className="mt-6 text-lg leading-8 text-white/80 break-keep">
+              생일파티, 비즈니스 모임, 프라이빗한 만남까지 방문 목적에 맞춘
+              최적의 VIP룸과 프리미엄 서비스를 제공합니다.
+              <br className="hidden sm:block" />
+              건대 최고 수준의 시설에서 잊지 못할 특별한 밤을 경험하세요.
             </p>
           </div>
         </div>
