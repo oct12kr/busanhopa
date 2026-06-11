@@ -85,7 +85,7 @@ export default function Header() {
       >
         {/* 로고 */}
         <Link href="/" className="text-base font-black text-[#f7d680]">
-          웨이터 딸기
+          웨이터 건대W
         </Link>
 
         {/* PC 가로 메뉴 (md 이상) */}

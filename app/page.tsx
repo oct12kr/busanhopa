@@ -24,7 +24,7 @@ const promises = [
   },
   {
     title: "재방문 고객 관리",
-    text: "취향과 예산, 선호 좌석, 방문 패턴을 기억해 다음 예약이 더 편해지도록 웨이터 딸기가 이어서 케어합니다."
+    text: "취향과 예산, 선호 좌석, 방문 패턴을 기억해 다음 예약이 더 편해지도록 웨이터 건대W가 이어서 케어합니다."
   }
 ];
 
@@ -56,7 +56,7 @@ const timeTips = [
 const faqs = [
   {
     q: "대전세븐나이트 예약은 어떻게 하나요?",
-    a: "전화로 날짜, 시간, 인원수를 알려주세요. 웨이터 딸기가 예약 가능 여부와 추천 구성을 안내합니다."
+    a: "전화로 날짜, 시간, 인원수를 알려주세요. 웨이터 건대W가 예약 가능 여부와 추천 구성을 안내합니다."
   },
   {
     q: "처음 방문해도 괜찮나요?",
@@ -76,9 +76,9 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "NightClub",
   name: businessName,
-  alternateName: ["대전세븐나이트", "중구세븐나이트", "유천동세븐나이트", "웨이터 딸기"],
+  alternateName: ["대전세븐나이트", "중구세븐나이트", "유천동세븐나이트", "웨이터 건대W"],
   description:
-    "대전광역시 중구 유천동 332-28 대전세븐나이트 예약 상담. 웨이터 딸기의 가격 안내, 부킹 케어, 재방문 고객 관리, 시크릿 가이드 서비스.",
+    "대전광역시 중구 유천동 332-28 대전세븐나이트 예약 상담. 웨이터 건대W의 가격 안내, 부킹 케어, 재방문 고객 관리, 시크릿 가이드 서비스.",
   url: siteUrl,
   image: [
     `${siteUrl}/images/seven%20(1).png`,
@@ -158,11 +158,11 @@ export default function Home() {
               className="mt-5 max-w-4xl text-5xl font-black leading-tight tracking-normal md:text-7xl"
             >
               대전세븐나이트
-              <span className="block text-[#ff5f7a]">웨이터 딸기</span>
+              <span className="block text-[#ff5f7a]">웨이터 건대W</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/82 md:text-xl">
               대전광역시 중구 유천동 332-28에서 특별한 밤을 준비한다면 방문 전 상담부터
-              예약, 테이블 구성, 분위기 케어까지 딸기가 빠르게 안내합니다.
+              예약, 테이블 구성, 분위기 케어까지 건대W가 빠르게 안내합니다.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
@@ -210,7 +210,7 @@ export default function Home() {
                 정직한 가격, 자연스러운 흐름, 기억되는 케어
               </h2>
               <p className="mt-5 text-lg leading-8 text-white/74">
-                대전세븐나이트 웨이터 딸기는 첫 문의부터 방문 후 재예약까지
+                대전세븐나이트 웨이터 건대W는 첫 문의부터 방문 후 재예약까지
                 고객이 궁금해하는 지점을 먼저 정리합니다. 가격, 시간대, 주류
                 구성, 입장 흐름을 실제 텍스트로 안내해 검색과 상담 모두에
                 도움이 되도록 구성했습니다.
@@ -219,7 +219,7 @@ export default function Home() {
             <div className="relative overflow-hidden rounded-lg border border-white/12">
               <Image
                 src="/images/seven (2).png"
-                alt="대전세븐나이트 웨이터 딸기 서비스 안내 이미지"
+                alt="대전세븐나이트 웨이터 건대W 서비스 안내 이미지"
                 width={2400}
                 height={1000}
                 className="h-auto w-full"
@@ -265,7 +265,7 @@ export default function Home() {
             </h2>
             <p className="mt-6 text-lg leading-9 text-white/82">
               생일, 회식, 친구 모임, 혼자 방문까지 목적에 따라 좋은 자리는
-              달라집니다. 딸기는 방문 시간과 인원, 예산을 기준으로 현장에서
+              달라집니다. 건대W는 방문 시간과 인원, 예산을 기준으로 현장에서
               가장 어울리는 흐름을 안내합니다.
             </p>
           </div>
@@ -286,7 +286,7 @@ export default function Home() {
             <p className="text-lg leading-8 text-white/72">
               검색엔진이 읽을 수 있도록 이미지 설명, 예약 키워드, 지역 키워드,
               상담 정보를 HTML 문장으로 구성했습니다. 대전세븐나이트,
-              중구 유천동, 웨이터 딸기 관련 핵심 문구를 자연스럽게
+              중구 유천동, 웨이터 건대W 관련 핵심 문구를 자연스럽게
               배치했습니다.
             </p>
           </div>
@@ -319,7 +319,7 @@ export default function Home() {
               Secret Guide
             </p>
             <h2 className="mt-3 text-4xl font-black leading-tight md:text-6xl">
-              딸기만의 방문 가이드
+              건대W만의 방문 가이드
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/72">
               언제 가면 좋은지, 어떤 스타일이 어울리는지, 어느 정도 예산을

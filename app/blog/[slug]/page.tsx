@@ -37,12 +37,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post) {
     return {
-      title: "블로그 글 | 대전세븐나이트 웨이터 딸기"
+      title: "블로그 글 | 대전세븐나이트 웨이터 건대W"
     };
   }
 
   return {
-    title: `${post.title} | 대전세븐나이트 웨이터 딸기`,
+    title: `${post.title} | 대전세븐나이트 웨이터 건대W`,
     description: buildDescription(post.excerpt, post.title),
     alternates: {
       canonical: `/blog/${post.slug}`

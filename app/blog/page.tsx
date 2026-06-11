@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "블로그 | 대전세븐나이트 웨이터 딸기",
+  title: "블로그 | 대전세븐나이트 웨이터 건대W",
   description:
-    "대전세븐나이트 웨이터 딸기의 예약 안내, 방문 팁, 분위기와 가격 상담 정보를 정리한 블로그입니다.",
+    "대전세븐나이트 웨이터 건대W의 예약 안내, 방문 팁, 분위기와 가격 상담 정보를 정리한 블로그입니다.",
   alternates: {
     canonical: "/blog"
   }
@@ -142,7 +142,7 @@ function ColumnFallback({ title }: { title: string }) {
 }
 
 export default async function BlogPage() {
-  // 병렬로 세븐나이트와 딸기 웨이터의 포스팅 가져오기 (각각 18개씩)
+  // 병렬로 이용정보와 건대호빠의 포스팅 가져오기 (각각 18개씩)
   const [sevenNightPosts, waiterPosts] = await Promise.all([
     getBlogPostsByCategory("aaa", 18).catch(() => null),
     getBlogPostsByCategory("bbb", 18).catch(() => null)
@@ -194,7 +194,7 @@ export default async function BlogPage() {
             )}
           </div>
 
-          {/* 오른쪽 단: 딸기 웨이터 */}
+          {/* 오른쪽 단: 건대호빠 */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-black tracking-tight text-[#ff5f7a] md:text-3xl">
