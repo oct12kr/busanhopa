@@ -144,8 +144,8 @@ function ColumnFallback({ title }: { title: string }) {
 export default async function BlogPage() {
   // 병렬로 세븐나이트와 딸기 웨이터의 포스팅 가져오기 (각각 18개씩)
   const [sevenNightPosts, waiterPosts] = await Promise.all([
-    getBlogPostsByCategory("seven-night-club", 18).catch(() => null),
-    getBlogPostsByCategory("waiter", 18).catch(() => null)
+    getBlogPostsByCategory("aaa", 18).catch(() => null),
+    getBlogPostsByCategory("bbb", 18).catch(() => null)
   ]);
 
   return (
@@ -154,7 +154,7 @@ export default async function BlogPage() {
       <section className="border-b border-white/10 bg-white/[0.02] py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-5">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f7d680]">
-            Seven Night Blog
+            Blog
           </p>
           <div className="mt-4 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <h1 className="text-4xl font-black leading-tight md:text-6xl">
@@ -176,15 +176,15 @@ export default async function BlogPage() {
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-black tracking-tight text-[#f7d680] md:text-3xl">
-                세븐나이트
+                이용정보
               </h2>
               <span className="rounded-full bg-[#f7d680]/10 px-3 py-1 text-xs font-bold text-[#f7d680]">
-                CLUB NEWS
+                이용정보
               </span>
             </div>
             
             {!sevenNightPosts || sevenNightPosts.length === 0 ? (
-              <ColumnFallback title="세븐나이트" />
+              <ColumnFallback title="이용정보" />
             ) : (
               <div className="grid grid-cols-3 gap-3">
                 {sevenNightPosts.map((post) => (
@@ -198,15 +198,15 @@ export default async function BlogPage() {
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-black tracking-tight text-[#ff5f7a] md:text-3xl">
-                딸기 웨이터
+                건대호빠
               </h2>
               <span className="rounded-full bg-[#ff5f7a]/10 px-3 py-1 text-xs font-bold text-[#ff5f7a]">
-                WAITER BLOG
+                건대호빠
               </span>
             </div>
             
             {!waiterPosts || waiterPosts.length === 0 ? (
-              <ColumnFallback title="딸기 웨이터" />
+              <ColumnFallback title="건대호빠" />
             ) : (
               <div className="grid grid-cols-3 gap-3">
                 {waiterPosts.map((post) => (
