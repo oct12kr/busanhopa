@@ -61,20 +61,28 @@ const timeTips = [
 
 const faqs = [
   {
-    q: "대전세븐나이트 예약은 어떻게 하나요?",
-    a: "전화로 날짜, 시간, 인원수를 알려주세요. 건대W가 예약 가능 여부와 추천 구성을 안내합니다."
+    q: "건대 W 예약은 어떻게 하나요?",
+    a: "전화로 방문 날짜와 시간, 인원을 알려주시면 예약 가능 여부와 이용 안내를 빠르게 도와드립니다."
   },
   {
     q: "처음 방문해도 괜찮나요?",
-    a: "물론입니다. 입장 흐름, 기본 비용, 주류 세트, 복장까지 방문 전에 차분하게 안내해드립니다."
+    a: "처음 방문하시는 분들도 부담 없이 이용하실 수 있도록 예약 단계부터 방문 전까지 친절하게 안내해드립니다."
   },
   {
-    q: "인원별 주류 세트 추천이 가능한가요?",
-    a: "가능합니다. 2~3명, 4~6명, 단체 방문처럼 인원과 예산에 맞춰 무리 없는 구성을 제안합니다."
+    q: "몇 명까지 이용 가능한가요?",
+    a: "1~2인 방문부터 친구 모임, 단체 방문까지 인원에 맞는 공간을 안내해드립니다."
   },
   {
-    q: "드레스코드는 어떻게 준비하면 좋나요?",
-    a: "깔끔하고 세련된 스타일을 추천합니다. 과한 연출보다 자신감과 매너가 가장 좋은 인상을 만듭니다."
+    q: "어떤 복장이 어울리나요?",
+    a: "깔끔한 셔츠, 니트, 재킷 등 단정하고 세련된 스타일을 추천합니다."
+  },
+  {
+    q: "당일 예약도 가능한가요?",
+    a: "가능하지만 금요일과 주말은 사전 예약을 권장합니다."
+  },
+  {
+    q: "주차는 가능한가요?",
+    a: "방문 전 문의 주시면 주변 주차 시설을 안내해드립니다."
   }
 ];
 
@@ -577,41 +585,44 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="bg-[#101016] py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f7d680]">
+      <section id="contact" className="bg-[#08080a] py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1fr]">
+          <div className="flex flex-col justify-center">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
               Reservation
             </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-              대전세븐나이트 예약은 전화로 바로 문의하세요
+            <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl break-keep">
+              건대 W 예약 문의는
+              <br />
+              <span className="text-[#f7d680]">전화 한 통으로 간편하게</span>
             </h2>
-            <p className="mt-5 text-lg leading-8 text-white/74">
-              방문 날짜, 시간, 인원, 예산을 알려주시면 대전세븐나이트 현장
-              흐름에 맞는 구성을 빠르게 안내합니다. 만 19세 이상 고객만
-              이용 가능하며, 건전하고 매너 있는 방문을 기준으로 상담합니다.
+            <p className="mt-6 text-lg leading-8 text-white/70 break-keep">
+              방문 날짜, 시간, 인원, 원하는 분위기를 알려주시면 건대 W에서 가장 편안하게 이용하실 수 있도록 안내해드립니다.
+              <br className="hidden sm:block" />
+              처음 방문하시는 분부터 단골 고객까지 예약부터 방문까지 친절하게 도와드립니다.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
                 href={phoneHref}
-                className="inline-flex items-center justify-center rounded-md bg-[#ff5f7a] px-6 py-4 font-black text-white hover:bg-[#e44b65]"
+                className="inline-flex items-center justify-center rounded-xl bg-[#f7d680] px-8 py-4 text-lg font-black text-[#08080a] transition hover:bg-[#ffdf8a] hover:scale-105 shadow-[0_0_20px_rgba(247,214,128,0.2)]"
               >
-                {phoneDisplay} 전화 예약
+                010-9561-7332 예약 문의
               </a>
             </div>
           </div>
-          <div className="rounded-lg border border-white/10 bg-black/42 p-6">
-            <h3 className="text-2xl font-black">자주 묻는 질문</h3>
-            <div className="mt-5 grid gap-4">
+          <div className="rounded-xl border border-[#f7d680]/20 bg-[#111015] p-8 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+            <h3 className="text-2xl font-black text-[#f7d680] mb-6">자주 묻는 질문</h3>
+            <div className="grid gap-4">
               {faqs.map((faq) => (
                 <details
                   key={faq.q}
-                  className="rounded-md border border-white/10 bg-white/[0.04] p-4"
+                  className="group rounded-lg border border-[#f7d680]/10 bg-black/40 p-5 transition hover:border-[#f7d680]/30"
                 >
-                  <summary className="cursor-pointer font-black text-[#f7d680]">
+                  <summary className="flex cursor-pointer items-center justify-between font-bold text-white group-open:text-[#f7d680] list-none">
                     {faq.q}
+                    <span className="text-[#f7d680]/50 transition-transform group-open:rotate-180">▼</span>
                   </summary>
-                  <p className="mt-3 leading-7 text-white/72">{faq.a}</p>
+                  <p className="mt-4 text-[14px] leading-relaxed text-white/70 break-keep">{faq.a}</p>
                 </details>
               ))}
             </div>
