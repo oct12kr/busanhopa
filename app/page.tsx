@@ -15,16 +15,22 @@ import { PhoneIcon } from "@/components/Icons";
 
 const promises = [
   {
+    id: "01",
+    icon: "🏷️",
     title: "정직한 가격 안내",
-    text: "방문 전 기본 비용, 주류 구성, 인원별 추천 세트를 먼저 정리해드립니다. 처음 방문하는 고객도 부담 없이 비교할 수 있도록 숨김 없는 상담을 기준으로 합니다."
+    text: "이용 전 가격과 구성, 시간, 주종 등을 명확하게 안내해드립니다.\n추가 비용 없이 안심하고 이용하실 수 있도록 투명하게 운영합니다."
   },
   {
-    title: "흐름 있는 부킹 케어",
-    text: "무작정 권하는 방식이 아니라 방문 목적, 시간대, 일행 분위기에 맞춰 자연스럽게 즐길 수 있는 방향을 안내합니다."
+    id: "02",
+    icon: "📅",
+    title: "편리한 예약 시스템",
+    text: "전화 한 통으로 간편하게 예약 가능합니다.\n원하시는 시간과 인원에 맞춰 최적의 자리를 준비해드립니다."
   },
   {
-    title: "재방문 고객 관리",
-    text: "취향과 예산, 선호 좌석, 방문 패턴을 기억해 다음 예약이 더 편해지도록 건대W가 이어서 케어합니다."
+    id: "03",
+    icon: "👑",
+    title: "재방문 고객 케어",
+    text: "방문 기록과 취향을 바탕으로 더 나은 서비스와 혜택을 제공합니다.\n언제 방문하셔도 기억되는 특별한 경험을 선사합니다."
   }
 ];
 
@@ -250,44 +256,101 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="promise" className="border-b border-white/10 bg-[#101016] py-20">
+      <section id="system" className="border-b border-white/10 bg-[#08080a] py-24">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#ff5f7a]">
-                Strawberry Promise
+          {/* 상단 2단 레이아웃 */}
+          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
+            {/* 좌측: 타이틀 영역 */}
+            <div className="flex flex-col justify-center">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
+                Kondae W Promise
               </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                정직한 가격, 자연스러운 흐름, 기억되는 케어
+              <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl">
+                프리미엄 서비스,
+                <br />
+                품격 있는 <span className="text-[#f7d680]">경험의 차이</span>
               </h2>
-              <p className="mt-5 text-lg leading-8 text-white/74">
-                대전세븐나이트 건대W는 첫 문의부터 방문 후 재예약까지
-                고객이 궁금해하는 지점을 먼저 정리합니다. 가격, 시간대, 주류
-                구성, 입장 흐름을 실제 텍스트로 안내해 검색과 상담 모두에
-                도움이 되도록 구성했습니다.
+              <p className="mt-8 text-base leading-8 text-white/70 md:text-lg">
+                건대 W는 고객 한 분 한 분의 시간을 소중히 생각합니다.
+                <br />
+                첫 방문부터 재방문까지, 변함없는 서비스와
+                <br />
+                세심한 배려로 특별하고 편안한 시간을 제공합니다.
               </p>
             </div>
-            <div className="relative overflow-hidden rounded-lg border border-white/12">
+
+            {/* 우측: 3열 이미지 카드 오버레이 */}
+            <div className="relative overflow-hidden rounded-xl border border-[#f7d680]/20 min-h-[400px]">
               <Image
-                src="/images/seven (2).png"
-                alt="대전세븐나이트 건대W 서비스 안내 이미지"
-                width={2400}
-                height={1000}
-                className="h-auto w-full"
+                src="/images/g_hopa (1).png"
+                alt="건대W 프리미엄 서비스"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover opacity-30"
               />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80" />
+              
+              <div className="relative h-full grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#f7d680]/20">
+                {[
+                  {
+                    num: "01",
+                    title: "신뢰할 수 있는 시스템",
+                    desc: "투명하고 정직한 운영으로\n신뢰를 최우선으로 합니다.",
+                    icon: "🛡️"
+                  },
+                  {
+                    num: "02",
+                    title: "최상의 공간과 분위기",
+                    desc: "세련된 인테리어와 조명,\n감각적인 분위기를 제공합니다.",
+                    icon: "✨"
+                  },
+                  {
+                    num: "03",
+                    title: "맞춤형 서비스",
+                    desc: "고객의 취향과 스타일에 맞춘\n세심한 맞춤 서비스를 제공합니다.",
+                    icon: "👤"
+                  }
+                ].map((item) => (
+                  <div key={item.num} className="flex flex-col p-6 sm:p-8 hover:bg-white/[0.02] transition">
+                    <div className="text-center">
+                      <span className="block text-2xl font-black italic text-[#f7d680]">{item.num}</span>
+                      <h3 className="mt-3 text-lg font-bold text-[#f7d680]">{item.title}</h3>
+                      <p className="mt-4 text-sm leading-relaxed text-white/70 whitespace-pre-line">
+                        {item.desc}
+                      </p>
+                    </div>
+                    <div className="mt-auto pt-8 flex justify-center">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#f7d680]/30 text-xl text-[#f7d680]">
+                        {item.icon}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {promises.map((promise, index) => (
+
+          {/* 하단 3열 카드 */}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {promises.map((promise) => (
               <article
-                key={promise.title}
-                className="rounded-lg border border-white/10 bg-black/34 p-6"
+                key={promise.id}
+                className="rounded-xl border border-white/10 bg-[#111015] p-8 transition-transform hover:-translate-y-1 hover:border-[#f7d680]/30"
               >
-                <span className="text-3xl font-black text-[#ff5f7a]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-4 text-2xl font-black">{promise.title}</h3>
-                <p className="mt-3 leading-7 text-white/72">{promise.text}</p>
+                <div className="flex items-center gap-5 border-b border-white/10 pb-6">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[#f7d680]/30 bg-black text-2xl text-[#f7d680]">
+                    {promise.icon}
+                  </span>
+                  <div>
+                    <span className="block text-xl font-black italic text-[#f7d680]">
+                      {promise.id}
+                    </span>
+                    <h3 className="mt-1 text-xl font-bold">{promise.title}</h3>
+                  </div>
+                </div>
+                <p className="mt-6 text-sm leading-relaxed text-white/70 whitespace-pre-line">
+                  {promise.text}
+                </p>
               </article>
             ))}
           </div>
