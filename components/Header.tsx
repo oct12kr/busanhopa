@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { phoneHref } from "@/lib/constants";
 
 export const navItems = [
-  { href: "/#hero", label: "딸기" },
+  { href: "/#hero", label: "건대w" },
   { href: "/#promise", label: "약속" },
   { href: "/#room", label: "분위기" },
   { href: "/#gallery", label: "갤러리" },
