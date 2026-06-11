@@ -157,8 +157,10 @@ export default async function BlogPage() {
             Blog
           </p>
           <div className="mt-4 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-            <h1 className="text-4xl font-black leading-tight md:text-6xl">
-              대전세븐나이트 소식과 방문 가이드
+            <h1 className="text-4xl font-black leading-tight md:text-6xl break-keep">
+              건대더블유
+              <br />
+              소식과 방문 가이드
             </h1>
             <p className="text-lg leading-8 text-white/72">
               워드프레스에서 카테고리별 실시간 소식을 모아두었습니다.
