@@ -389,38 +389,39 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="gallery" className="border-b border-white/10 bg-black py-20">
+      <section id="gallery" className="border-b border-white/10 bg-[#08080a] py-24">
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#ff5f7a]">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
                 Gallery
               </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                사진은 분위기를 보여주고, 텍스트는 예약 결정을 돕습니다
+              <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl break-keep">
+                건대 더블유의
+                <br />
+                특별한 <span className="text-[#f7d680]">분위기를 확인하세요</span>
               </h2>
             </div>
-            <p className="text-lg leading-8 text-white/72">
-              검색엔진이 읽을 수 있도록 이미지 설명, 예약 키워드, 지역 키워드,
-              상담 정보를 HTML 문장으로 구성했습니다. 대전세븐나이트,
-              중구 유천동, 건대W 관련 핵심 문구를 자연스럽게
-              배치했습니다.
+            <p className="text-lg leading-8 text-white/70 break-keep">
+              건대W는 찾아주시는 모든 분들이 최고의 순간을 만끽하실 수 있도록
+              고급스러운 인테리어와 세심한 소품 하나까지 정성껏 준비했습니다.
+              프리미엄 공간에서 품격 있는 시간을 만들어보세요.
             </p>
           </div>
-          <div className="mt-10 overflow-hidden rounded-lg border border-white/12">
+          <div className="mt-12 overflow-hidden rounded-xl border border-[#f7d680]/20">
             <Image
-              src="/images/seven (3).png"
-              alt="대전세븐나이트 VIP룸과 샴페인 테이블 갤러리"
+              src="/images/g_hopa (4).png"
+              alt="건대호빠 건대W 갤러리 이미지"
               width={2400}
               height={1000}
-              className="h-auto w-full"
+              className="h-auto w-full opacity-90 transition hover:opacity-100"
             />
           </div>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {galleryCaptions.map((caption) => (
               <article
                 key={caption}
-                className="rounded-md border border-white/10 bg-[#101016] p-4 text-center font-semibold text-white/82"
+                className="rounded-lg border border-[#f7d680]/10 bg-[#111015] p-5 text-center text-sm font-semibold text-[#f7d680]/90 transition hover:border-[#f7d680]/30"
               >
                 {caption}
               </article>
