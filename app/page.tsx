@@ -148,10 +148,10 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-40"
+          className="object-cover object-center opacity-70"
         />
-        {/* 좌→우 어둡게: 텍스트 가독성 확보 */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#08080a_0%,rgba(8,8,10,0.92)_40%,rgba(8,8,10,0.5)_70%,rgba(8,8,10,0.3)_100%)]" />
+        {/* 좌→우 어둡게: 텍스트 가독성 확보 (기존보다 밝게 조절) */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,10,0.8)_0%,rgba(8,8,10,0.6)_40%,rgba(8,8,10,0.2)_70%,rgba(8,8,10,0.0)_100%)]" />
         {/* 하→상 어둡게: 모바일 보강 */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/40 to-transparent md:hidden" />
 
@@ -286,9 +286,9 @@ export default function Home() {
                 alt="건대W 프리미엄 서비스"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover opacity-30"
+                className="object-cover opacity-60"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
               
               <div className="relative h-full grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#f7d680]/20">
                 {[
