@@ -137,7 +137,7 @@ export default function Home() {
         className="relative isolate min-h-[calc(100vh-68px)] border-b border-white/10"
       >
         <Image
-          src="/images/seven (1).png"
+          src="/images/g_hopa (1).png"
           alt=""
           fill
           priority
