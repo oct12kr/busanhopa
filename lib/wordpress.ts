@@ -23,12 +23,27 @@ export type BlogPost = BlogPostSummary & {
   content: string;
 };
 
+export interface WpRestPost {
+  id: number;
+  date: string;
+  modified: string;
+  slug: string;
+  title?: { rendered?: string };
+  excerpt?: { rendered?: string };
+  content?: { rendered?: string };
+  _embedded?: {
+    author?: Array<{ name?: string }>;
+    "wp:featuredmedia"?: Array<{ source_url?: string; alt_text?: string }>;
+    "wp:term"?: Array<Array<{ taxonomy?: string; name?: string; slug?: string }>>;
+  };
+}
+
 function cleanText(html: string) {
   if (!html) return '';
   return html.replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, ' ').trim();
 }
 
-function normalizeRestPost(post: any): BlogPost {
+function normalizeRestPost(post: WpRestPost): BlogPost {
   const title = cleanText(post.title?.rendered || '');
   const slug = post.slug;
   const excerpt = cleanText(post.excerpt?.rendered || '');
@@ -43,17 +58,17 @@ function normalizeRestPost(post: any): BlogPost {
   if (post._embedded?.['wp:featuredmedia']?.[0]) {
     const media = post._embedded['wp:featuredmedia'][0];
     featuredImage = {
-      sourceUrl: media.source_url,
+      sourceUrl: media.source_url || '',
       altText: media.alt_text || title
     };
   }
 
-  let categories: {name: string, slug: string}[] = [];
+  const categories: {name: string, slug: string}[] = [];
   if (post._embedded?.['wp:term']) {
     const terms = post._embedded['wp:term'];
     for (const termArray of terms) {
       for (const term of termArray) {
-        if (term.taxonomy === 'category') {
+        if (term.taxonomy === 'category' && term.name && term.slug) {
           categories.push({
             name: cleanText(term.name),
             slug: term.slug
