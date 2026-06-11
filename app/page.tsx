@@ -537,31 +537,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="location" className="border-b border-white/10 bg-black py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[0.88fr_1.12fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#ff5f7a]">
+      <section id="location" className="border-b border-white/10 bg-[#08080a] py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.88fr_1.12fr]">
+          <div className="flex flex-col justify-center">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
               Location
             </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight">
-              대전세븐나이트 오는길
+            <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl">
+              건대더블유 오시는길
             </h2>
-            <address className="mt-5 not-italic text-lg leading-9 text-white/74">
-              <strong className="block text-2xl text-[#f7d680]">
+            <address className="mt-6 not-italic text-lg leading-9 text-white/70">
+              <strong className="block text-2xl font-black text-[#f7d680] mb-2">
                 {businessName}
               </strong>
               주소: {fullAddress}
               <br />
-              전화 예약: <a href={phoneHref}>{phoneDisplay}</a>
+              전화 예약: <a href={phoneHref} className="hover:text-[#f7d680] transition">{phoneDisplay}</a>
             </address>
-            <p className="mt-5 leading-8 text-white/68">
-              대전광역시 중구 유천동 332-28 주소를 기준으로 구글 지도와
-              길찾기를 연결했습니다. 방문 전 전화로 예약 시간을 확인해주세요.
-            </p>
           </div>
-          <div className="overflow-hidden rounded-lg border border-white/12 bg-[#111015]">
+          <div className="overflow-hidden rounded-xl border border-[#f7d680]/20 bg-[#111015] shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
             <iframe
-              title="대전세븐나이트 구글 지도"
+              title="건대더블유 구글 지도"
               src={mapEmbedSrc}
               className="h-[360px] w-full border-0"
               loading="lazy"
