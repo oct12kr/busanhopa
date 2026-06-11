@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "블로그 | 대전세븐나이트 웨이터 건대W",
+  title: "블로그 | 대전세븐나이트 건대W",
   description:
-    "대전세븐나이트 웨이터 건대W의 예약 안내, 방문 팁, 분위기와 가격 상담 정보를 정리한 블로그입니다.",
+    "대전세븐나이트 건대W의 예약 안내, 방문 팁, 분위기와 가격 상담 정보를 정리한 블로그입니다.",
   alternates: {
     canonical: "/blog"
   }

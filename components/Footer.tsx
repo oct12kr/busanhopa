@@ -12,7 +12,7 @@ export default function Footer() {
           사업자 정보: 입력 예정 · 주소: {area} {detailAddress} · 전화: {phoneDisplay}
         </p>
         <p>
-          대전세븐나이트, 중구 유천동, 웨이터 건대W, 정직한 가격 안내,
+          대전세븐나이트, 중구 유천동, 건대W, 정직한 가격 안내,
           부킹 케어, 재방문 관리, 방문 가이드 정보를 제공합니다.
         </p>
       </div>

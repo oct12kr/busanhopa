@@ -1,4 +1,4 @@
-export const businessName = "대전세븐나이트 웨이터 건대W";
+export const businessName = "대전세븐나이트 건대W";
 export const area = "대전광역시 중구 유천동";
 export const detailAddress = "332-28";
 export const phoneDisplay = "010-9561-7332";
