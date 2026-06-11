@@ -282,7 +282,7 @@ export default function Home() {
             {/* 우측: 3열 이미지 카드 오버레이 */}
             <div className="relative overflow-hidden rounded-xl border border-[#f7d680]/20 min-h-[400px]">
               <Image
-                src="/images/g_hopa (1).png"
+                src="/images/g_hopa (2).png"
                 alt="건대W 프리미엄 서비스"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -311,11 +311,11 @@ export default function Home() {
                     icon: "👤"
                   }
                 ].map((item) => (
-                  <div key={item.num} className="flex flex-col p-6 sm:p-8 hover:bg-white/[0.02] transition">
+                  <div key={item.num} className="flex flex-col p-5 sm:p-6 lg:p-8 hover:bg-white/[0.02] transition">
                     <div className="text-center">
                       <span className="block text-2xl font-black italic text-[#f7d680]">{item.num}</span>
-                      <h3 className="mt-3 text-lg font-bold text-[#f7d680]">{item.title}</h3>
-                      <p className="mt-4 text-sm leading-relaxed text-white/70 whitespace-pre-line">
+                      <h3 className="mt-3 text-base font-bold text-[#f7d680] lg:text-lg break-keep">{item.title}</h3>
+                      <p className="mt-4 text-[13px] leading-relaxed text-white/70 whitespace-pre-line break-keep lg:text-sm">
                         {item.desc}
                       </p>
                     </div>
