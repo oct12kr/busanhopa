@@ -100,7 +100,21 @@ export async function getBlogPosts(first = 12): Promise<BlogPostSummary[]> {
     });
     if (!res.ok) return [];
     const posts = await res.json();
-    return posts.map(normalizeRestPost).map(({ content: _content, ...post }) => post);
+    return posts.map(normalizeRestPost).map((post: BlogPost): BlogPostSummary => {
+      const summary: BlogPostSummary = {
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        uri: post.uri,
+        date: post.date,
+        modified: post.modified,
+        excerpt: post.excerpt,
+        author: post.author,
+        categories: post.categories,
+        featuredImage: post.featuredImage
+      };
+      return summary;
+    });
   } catch (e) {
     console.error("getBlogPosts Error:", e);
     return [];
@@ -132,7 +146,21 @@ export async function getBlogPostsByCategory(
       return [];
     }
     const posts = await res.json();
-    return posts.map(normalizeRestPost).map(({ content: _content, ...post }) => post);
+    return posts.map(normalizeRestPost).map((post: BlogPost): BlogPostSummary => {
+      const summary: BlogPostSummary = {
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        uri: post.uri,
+        date: post.date,
+        modified: post.modified,
+        excerpt: post.excerpt,
+        author: post.author,
+        categories: post.categories,
+        featuredImage: post.featuredImage
+      };
+      return summary;
+    });
   } catch (e) {
     console.error("getBlogPostsByCategory Error:", e);
     return [];
