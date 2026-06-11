@@ -263,7 +263,7 @@ export default function Home() {
             {/* 좌측: 타이틀 영역 */}
             <div className="flex flex-col justify-center">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
-                Kondae W Promise
+                Kondae W System
               </p>
               <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl">
                 프리미엄 서비스,

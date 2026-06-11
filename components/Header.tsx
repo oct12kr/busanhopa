@@ -8,8 +8,8 @@ import { phoneHref } from "@/lib/constants";
 export const navItems = [
   { href: "/#hero", label: "W소개" },
   { href: "/#system", label: "시스템" },
-  { href: "/#member", label: "멤버안내" },
   { href: "/#room", label: "VIP룸" },
+  { href: "/#gallery", label: "Gallery" },
   { href: "/#guide", label: "이용가이드" },
   { href: "/#location", label: "오시는길" },
   { href: "/#contact", label: "예약문의" },
