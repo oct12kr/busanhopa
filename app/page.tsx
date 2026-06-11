@@ -430,59 +430,99 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="guide" className="border-b border-white/10 bg-[#121016] py-20">
-        <div className="mx-auto max-w-7xl px-5">
+      <section id="guide" className="relative isolate border-b border-white/10 py-24 min-h-[800px] flex items-center">
+        {/* 전체 배경 이미지 */}
+        <Image
+          src="/images/guide-bg.png"
+          alt="건대W 방문 가이드 배경"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-50"
+        />
+        {/* 그라디언트 오버레이 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08080a] via-black/60 to-[#08080a]" />
+
+        <div className="relative mx-auto w-full max-w-7xl px-5">
           <div className="text-center">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f7d680]">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#f7d680]/80">
               Secret Guide
             </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-6xl">
-              건대W만의 방문 가이드
+            <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl lg:text-6xl break-keep">
+              <span className="text-[#f7d680]">건대W</span>만의 방문 가이드
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/72">
-              언제 가면 좋은지, 어떤 스타일이 어울리는지, 어느 정도 예산을
-              잡으면 좋은지 방문 전 가장 많이 묻는 내용을 정리했습니다.
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/80 break-keep">
+              언제 방문하면 좋은지, 어떤 스타일이 어울리는지, 어느 정도 예산을
+              잡아야 할지 처음 방문하시는 분들을 위한 핵심적인 팁을 안내합니다.
             </p>
           </div>
-          <div className="mt-10 overflow-hidden rounded-lg border border-white/12">
-            <Image
-              src="/images/seven (3).png"
-              alt="대전세븐나이트 방문 가이드 이미지"
-              width={2400}
-              height={1000}
-              className="h-auto w-full"
-            />
-          </div>
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
-            <article className="rounded-lg border border-white/10 bg-black/36 p-6">
-              <h3 className="text-2xl font-black text-[#ff5f7a]">추천 시간대</h3>
-              <div className="mt-5 grid gap-3">
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            <article className="rounded-xl border border-[#f7d680]/20 bg-black/40 backdrop-blur-md p-8 transition hover:-translate-y-1 hover:border-[#f7d680]/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7d680]/10 text-2xl text-[#f7d680]">
+                  🕒
+                </span>
+                <h3 className="text-2xl font-black text-[#f7d680]">추천 시간대</h3>
+              </div>
+              <div className="grid gap-4">
                 {timeTips.map((tip) => (
-                  <div key={tip.label} className="rounded-md border border-white/10 p-4">
-                    <p className="font-black">{tip.label}</p>
-                    <p className="mt-1 font-bold text-[#f7d680]">{tip.value}</p>
-                    <p className="mt-2 text-sm leading-6 text-white/70">{tip.text}</p>
+                  <div key={tip.label} className="border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                    <div className="flex items-center justify-between">
+                      <p className="font-bold text-white">{tip.label}</p>
+                      <p className="text-sm font-bold text-[#f7d680]">{tip.value}</p>
+                    </div>
+                    <p className="mt-2 text-[13px] leading-relaxed text-white/60 break-keep">{tip.text}</p>
                   </div>
                 ))}
               </div>
             </article>
-            <article className="rounded-lg border border-white/10 bg-black/36 p-6">
-              <h3 className="text-2xl font-black text-[#ff5f7a]">드레스코드</h3>
-              <ul className="mt-5 space-y-3 leading-7 text-white/74">
-                <li>깔끔한 셔츠, 니트, 재킷처럼 단정한 스타일을 추천합니다.</li>
-                <li>과한 액세서리보다 자연스러운 향과 깨끗한 인상이 좋습니다.</li>
-                <li>단체 방문은 톤을 맞추면 테이블 분위기가 더 좋아집니다.</li>
+
+            <article className="rounded-xl border border-[#f7d680]/20 bg-black/40 backdrop-blur-md p-8 transition hover:-translate-y-1 hover:border-[#f7d680]/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7d680]/10 text-2xl text-[#f7d680]">
+                  👔
+                </span>
+                <h3 className="text-2xl font-black text-[#f7d680]">드레스코드</h3>
+              </div>
+              <ul className="space-y-4 text-[14px] leading-relaxed text-white/70">
+                <li className="flex gap-3">
+                  <span className="text-[#f7d680] font-bold">✓</span>
+                  <span className="break-keep">깔끔한 셔츠, 니트, 재킷처럼 단정한 스타일을 추천합니다.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[#f7d680] font-bold">✓</span>
+                  <span className="break-keep">과한 액세서리보다 자연스러운 향과 깨끗한 인상이 좋습니다.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[#f7d680] font-bold">✓</span>
+                  <span className="break-keep">단체 방문은 톤을 맞추면 테이블 분위기가 더 좋아집니다.</span>
+                </li>
               </ul>
             </article>
+
             <article
               id="menu-price"
-              className="scroll-mt-28 rounded-lg border border-white/10 bg-black/36 p-6"
+              className="scroll-mt-28 rounded-xl border border-[#f7d680]/20 bg-black/40 backdrop-blur-md p-8 transition hover:-translate-y-1 hover:border-[#f7d680]/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
             >
-              <h3 className="text-2xl font-black text-[#ff5f7a]">메뉴판 가격 안내</h3>
-              <ul className="mt-5 space-y-3 leading-7 text-white/74">
-                <li>2~3명은 가볍게 시작할 수 있는 기본 구성이 좋습니다.</li>
-                <li>4~6명은 테이블 흐름이 끊기지 않는 중간 구성을 추천합니다.</li>
-                <li>단체와 VIP 방문은 목적에 맞춰 별도 상담이 빠릅니다.</li>
+              <div className="flex items-center gap-4 mb-6">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7d680]/10 text-2xl text-[#f7d680]">
+                  📋
+                </span>
+                <h3 className="text-2xl font-black text-[#f7d680]">메뉴판 안내</h3>
+              </div>
+              <ul className="space-y-4 text-[14px] leading-relaxed text-white/70">
+                <li className="flex gap-3">
+                  <span className="text-[#f7d680] font-bold">✓</span>
+                  <span className="break-keep">2~3명은 가볍게 시작할 수 있는 기본 구성이 좋습니다.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[#f7d680] font-bold">✓</span>
+                  <span className="break-keep">4~6명은 테이블 흐름이 끊기지 않는 중간 구성을 추천합니다.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[#f7d680] font-bold">✓</span>
+                  <span className="break-keep">단체와 VIP 방문은 목적에 맞춰 별도 상담이 빠릅니다.</span>
+                </li>
               </ul>
             </article>
           </div>
