@@ -5,7 +5,7 @@ export const phoneDisplay = "010-9561-7332";
 export const phoneHref = "tel:01095617332";
 export const managerName = "준건실장";
 export const kakaoOpenChatHref = "https://open.kakao.com/o/strawberry7";
-export const siteUrl = "https://daejeon-seven-night.com";
+export const siteUrl = "https://hopa.kr";
 export const fullAddress = `${area} ${detailAddress}`;
 const mapQuery = encodeURIComponent(fullAddress);
 export const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;

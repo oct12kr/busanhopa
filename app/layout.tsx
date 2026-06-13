@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
 
-const siteUrl = "https://daejeon-seven-night.com";
+const siteUrl = "https://hopa.kr";
 const title =
   "건대W | 건대호빠 예약 상담";
 const description =
