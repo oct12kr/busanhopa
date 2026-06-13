@@ -8,7 +8,7 @@ const siteUrl = "https://hopa.kr";
 const title =
   "건대W | 건대호빠 예약 상담";
 const description =
-  "건대W 건대호빠 예약 상담 페이지. 서울특별시 광진구 아차산로33길 16-10 방문 전 가격, 시간대, 룸 분위기, 주류 세트, 드레스코드, 재방문 케어까지 안내해 드립니다.";
+  "건대호빠 건대W. 프라이빗한 공간, 완벽한 서비스. 베테랑 준건실장이 잊지 못할 최고의 순간을 만들어 드립니다. 지금 바로 예약하세요.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "건대W 오시는길"
   ],
   alternates: {
-    canonical: "/"
+    canonical: siteUrl
   },
   openGraph: {
     type: "website",
