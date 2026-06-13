@@ -6,25 +6,25 @@ import FloatingActionButtons from "@/components/FloatingActionButtons";
 
 const siteUrl = "https://daejeon-seven-night.com";
 const title =
-  "대전세븐나이트 건대W | 대전 예약 상담";
+  "건대W | 건대호빠 예약 상담";
 const description =
-  "대전세븐나이트 건대W 예약 상담 페이지. 대전광역시 중구 유천동 332-28 방문 전 가격, 시간대, 룸 분위기, 주류 세트, 드레스코드, 재방문 케어까지 실제 텍스트로 안내합니다.";
+  "건대W 건대호빠 예약 상담 페이지. 서울특별시 광진구 아차산로33길 16-10 방문 전 가격, 시간대, 룸 분위기, 주류 세트, 드레스코드, 재방문 케어까지 안내해 드립니다.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
   keywords: [
-    "대전세븐나이트",
-    "중구세븐나이트",
-    "대전 세븐나이트 예약",
-    "중구 세븐나이트 예약",
+    "건대호빠",
     "건대W",
-    "유천동 나이트",
-    "대전 나이트클럽",
-    "대전세븐나이트 부킹",
-    "중구세븐나이트 부킹",
-    "대전세븐나이트 오는길"
+    "건대호빠 예약",
+    "건대W 예약",
+    "건대 라운지",
+    "광진구 호빠",
+    "건대 하이엔드 라운지",
+    "건대호빠 예약문의",
+    "건대W 예약문의",
+    "건대W 오시는길"
   ],
   alternates: {
     canonical: "/"
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: siteUrl,
-    siteName: "대전세븐나이트 건대W",
+    siteName: "건대W",
     title,
     description,
     images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         url: "/images/seven%20(1).png",
         width: 2400,
         height: 1000,
-        alt: "대전세븐나이트 건대W 예약 상담"
+        alt: "건대W 예약 상담"
       }
     ]
   },

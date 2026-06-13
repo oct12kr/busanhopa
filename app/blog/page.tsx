@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "블로그 | 대전세븐나이트 건대W",
+  title: "블로그 | 건대W 건대호빠",
   description:
-    "대전세븐나이트 건대W의 예약 안내, 방문 팁, 분위기와 가격 상담 정보를 정리한 블로그입니다.",
+    "건대W 건대호빠 예약 안내, 방문 팁, 분위기와 가격 상담 정보를 정리한 블로그입니다.",
   alternates: {
     canonical: "/blog"
   }
@@ -61,7 +61,7 @@ function PostCard({ post }: { post: BlogPost }) {
         ) : (
           <div className="flex h-full w-full items-center justify-center p-3 text-center">
             <span className="text-[10px] font-bold uppercase tracking-wider text-white/30">
-              {post.categories?.[0]?.name || "대전세븐나이트"}
+              {post.categories?.[0]?.name || "건대W"}
             </span>
           </div>
         )}
@@ -174,7 +174,7 @@ export default async function BlogPage() {
       <section className="mx-auto max-w-7xl px-5 py-14 md:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           
-          {/* 왼쪽 단: 세븐나이트 */}
+          {/* 왼쪽 단: 이용정보 */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-black tracking-tight text-[#f7d680] md:text-3xl">

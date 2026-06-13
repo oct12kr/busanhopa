@@ -90,9 +90,9 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "NightClub",
   name: businessName,
-  alternateName: ["대전세븐나이트", "중구세븐나이트", "유천동세븐나이트", "건대W"],
+  alternateName: ["건대W", "건대호빠", "광진구호빠", "건대라운지"],
   description:
-    "대전광역시 중구 유천동 332-28 대전세븐나이트 예약 상담. 건대W의 가격 안내, 부킹 케어, 재방문 고객 관리, 시크릿 가이드 서비스.",
+    "서울특별시 광진구 아차산로33길 16-10 건대W 건대호빠 예약 상담. 가격 안내, 방문 케어, 재방문 고객 관리, 시크릿 가이드 서비스.",
   url: siteUrl,
   image: [
     `${siteUrl}/images/seven%20(1).png`,
@@ -101,12 +101,12 @@ const localBusinessSchema = {
   ],
   telephone: phoneDisplay,
   priceRange: "상담 후 안내",
-  areaServed: ["대전광역시", "중구", "유천동"],
+  areaServed: ["서울특별시", "광진구", "아차산로"],
   address: {
     "@type": "PostalAddress",
     streetAddress: detailAddress,
-    addressLocality: "중구 유천동",
-    addressRegion: "대전광역시",
+    addressLocality: "광진구 아차산로",
+    addressRegion: "서울특별시",
     addressCountry: "KR"
   },
   contactPoint: {

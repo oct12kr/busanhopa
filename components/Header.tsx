@@ -80,7 +80,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#08080a]/88 backdrop-blur-xl">
       <nav
-        aria-label="대전세븐나이트 주요 메뉴"
+        aria-label="건대W 주요 메뉴"
         className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4"
       >
         {/* 로고 */}
