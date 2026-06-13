@@ -5,14 +5,16 @@ import Footer from "@/components/Footer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
 
 const siteUrl = "https://hopa.kr";
-const title =
-  "건대W | 건대호빠 예약 상담";
+const defaultTitle = "건대호빠 건대W | 당신만을 위한 특별한 밤";
 const description =
   "건대호빠 건대W. 프라이빗한 공간, 완벽한 서비스. 베테랑 준건실장이 잊지 못할 최고의 순간을 만들어 드립니다. 지금 바로 예약하세요.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title,
+  title: {
+    default: defaultTitle,
+    template: "%s | 건대W"
+  },
   description,
   keywords: [
     "건대호빠",
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: siteUrl,
     siteName: "건대W",
-    title,
+    title: defaultTitle,
     description,
     images: [
       {
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: defaultTitle,
     description,
     images: ["/images/seven%20(1).png"]
   },
