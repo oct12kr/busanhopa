@@ -35,54 +35,54 @@ const promises = [
 ];
 
 const galleryCaptions = [
-  "VIP룸 인테리어와 프라이빗 테이블 분위기",
-  "샴페인 세팅과 생일, 기념일 예약 연출",
-  "주말 피크타임에 어울리는 조명과 음악 흐름",
-  "단체 방문을 위한 넓은 좌석과 여유 있는 구성"
+  "최고급 가죽 소파와 프라이빗 VIP 룸 세팅",
+  "특별한 날을 완성하는 프리미엄 샴페인 라인업",
+  "트렌디한 음악과 분위기를 압도하는 감각적인 조명",
+  "비즈니스 모임과 단체 회식을 위한 대형 VIP 룸 완비"
 ];
 
 const timeTips = [
   {
     label: "평일 저녁",
-    value: "여유로운 상담",
-    text: "처음 방문하거나 조용히 분위기를 보고 싶은 분께 좋습니다."
+    value: "프라이빗 맞춤 상담",
+    text: "조용한 분위기에서 세심한 케어를 원하시는 첫 방문 고객님께 추천합니다."
   },
   {
     label: "금요일 22시 전",
-    value: "추천 시간",
-    text: "대기 부담이 낮고 테이블 선택 폭이 넓은 편입니다."
+    value: "W 골든 타임",
+    text: "대기 없이 가장 다채로운 초이스와 쾌적한 룸 선택이 가능한 시간대입니다."
   },
   {
     label: "주말 피크타임",
-    value: "사전 예약 필수",
-    text: "방문 인원과 예산을 먼저 알려주시면 구성이 빨라집니다."
+    value: "준건실장 직통 예약",
+    text: "인원수와 원하시는 분위기를 미리 말씀해 주시면 완벽한 세팅을 준비해 드립니다."
   }
 ];
 
 const faqs = [
   {
-    q: "건대 W 예약은 어떻게 하나요?",
-    a: "전화로 방문 날짜와 시간, 인원을 알려주시면 예약 가능 여부와 이용 안내를 빠르게 도와드립니다."
+    q: "건대호빠 W 룸 예약 및 초이스 진행은 어떻게 되나요?",
+    a: "담당 준건실장에게 직통 번호로 연락 주시면, 실시간 룸 현황 파악 후 신속하게 최상급 세팅을 준비해 드립니다."
   },
   {
-    q: "처음 방문해도 괜찮나요?",
-    a: "처음 방문하시는 분들도 부담 없이 이용하실 수 있도록 예약 단계부터 방문 전까지 친절하게 안내해드립니다."
+    q: "호빠 방문이 처음인데 시스템 안내가 가능한가요?",
+    a: "첫 방문 고객님을 위해 맞춤형 브리핑과 투명한 주류 가격을 사전에 안내해 드리며, 어색함 없이 즐기실 수 있도록 전담 케어해 드립니다."
   },
   {
-    q: "몇 명까지 이용 가능한가요?",
-    a: "1~2인 방문부터 친구 모임, 단체 방문까지 인원에 맞는 공간을 안내해드립니다."
+    q: "1인 혼술이나 단체 회식 방문도 가능한가요?",
+    a: "1인 방문을 위한 프라이빗 세팅부터, 대규모 생일파티 및 회식을 완벽히 소화할 수 있는 대형 VIP 룸까지 모두 완비되어 있습니다."
   },
   {
-    q: "어떤 복장이 어울리나요?",
-    a: "깔끔한 셔츠, 니트, 재킷 등 단정하고 세련된 스타일을 추천합니다."
+    q: "입장 시 드레스코드 제한이 있나요?",
+    a: "엄격한 제한은 없으나, 건대W VIP 라운지의 분위기에 맞는 모던하고 깔끔한 댄디룩을 권장해 드리고 있습니다."
   },
   {
-    q: "당일 예약도 가능한가요?",
-    a: "가능하지만 금요일과 주말은 사전 예약을 권장합니다."
+    q: "늦은 시간 당일 방문도 바로 가능한가요?",
+    a: "평일 및 주말 모두 당일 방문이 가능합니다. 단, 주말 피크 타임에는 룸이 만실일 수 있으니 출발 전 미리 연락해 주시면 쾌적하게 안내해 드립니다."
   },
   {
-    q: "주차는 가능한가요?",
-    a: "방문 전 문의 주시면 주변 주차 시설을 안내해드립니다."
+    q: "차량 방문 시 주차 및 발렛 서비스가 되나요?",
+    a: "도착 전 미리 말씀해 주시면, 아차산로 인근의 안전한 주차 공간 안내 및 발렛 서비스를 신속하게 도와드립니다."
   }
 ];
 
@@ -405,15 +405,15 @@ export default function Home() {
                 Gallery
               </p>
               <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl break-keep">
-                건대 더블유의
+                프라이빗한 건대W만의
                 <br />
-                특별한 <span className="text-[#f7d680]">분위기를 확인하세요</span>
+                <span className="text-[#f7d680]">하이엔드 공간</span>
               </h2>
             </div>
             <p className="text-lg leading-8 text-white/70 break-keep">
-              건대W는 찾아주시는 모든 분들이 최고의 순간을 만끽하실 수 있도록
-              고급스러운 인테리어와 세심한 소품 하나까지 정성껏 준비했습니다.
-              프리미엄 공간에서 품격 있는 시간을 만들어보세요.
+              건대호빠 중심에 위치한 건대W는 고객님의 완벽한 밤을 위해
+              최고급 명품 인테리어와 디테일한 조명 세팅을 완성했습니다.
+              준건실장의 세심한 케어와 함께 건대 최고 수준의 VIP 룸에서 잊지 못할 시간을 경험해 보세요.
             </p>
           </div>
           <div className="mt-12 overflow-hidden rounded-xl border border-[#f7d680]/20">
@@ -456,11 +456,11 @@ export default function Home() {
               Secret Guide
             </p>
             <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl lg:text-6xl break-keep">
-              <span className="text-[#f7d680]">건대W</span>만의 방문 가이드
+              <span className="text-[#f7d680]">건대W</span> 준건실장 방문 가이드
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/80 break-keep">
-              언제 방문하면 좋은지, 어떤 스타일이 어울리는지, 어느 정도 예산을
-              잡아야 할지 처음 방문하시는 분들을 위한 핵심적인 팁을 안내합니다.
+              성공적인 모임을 위한 시간대부터 맞춤형 드레스코드, 투명한 시스템 안내까지.
+              건대호빠 W를 200% 즐기기 위한 핵심 가이드를 확인하세요.
             </p>
           </div>
 
@@ -495,15 +495,15 @@ export default function Home() {
               <ul className="space-y-4 text-[14px] leading-relaxed text-white/70">
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">깔끔한 셔츠, 니트, 재킷처럼 단정한 스타일을 추천합니다.</span>
+                  <span className="break-keep">포멀하고 깔끔한 수트나 셔츠, 세련된 댄디룩이 VIP 룸의 무드와 가장 잘 어울립니다.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">과한 액세서리보다 자연스러운 향과 깨끗한 인상이 좋습니다.</span>
+                  <span className="break-keep">화려한 장식보다는 정돈된 스타일과 은은한 향수가 더욱 매력적인 인상을 남깁니다.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">단체 방문은 톤을 맞추면 테이블 분위기가 더 좋아집니다.</span>
+                  <span className="break-keep">지인들과 함께 방문하실 경우, 전반적인 드레스 톤을 맞추시면 한층 더 고급스러운 분위기가 연출됩니다.</span>
                 </li>
               </ul>
             </article>
@@ -516,20 +516,20 @@ export default function Home() {
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7d680]/10 text-2xl text-[#f7d680]">
                   📋
                 </span>
-                <h3 className="text-2xl font-black text-[#f7d680]">메뉴판 안내</h3>
+                <h3 className="text-2xl font-black text-[#f7d680]">맞춤형 시스템 안내</h3>
               </div>
               <ul className="space-y-4 text-[14px] leading-relaxed text-white/70">
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">2~3명은 가볍게 시작할 수 있는 기본 구성이 좋습니다.</span>
+                  <span className="break-keep">소규모(2~3인)는 부담 없이 가볍게 즐기실 수 있는 스탠다드 주류 세트를 추천해 드립니다.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">4~6명은 테이블 흐름이 끊기지 않는 중간 구성을 추천합니다.</span>
+                  <span className="break-keep">중규모(4~6인)는 분위기를 띄우기 좋은 프리미엄 샴페인 조합으로 테이블의 흐름을 이어가세요.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">단체와 VIP 방문은 목적에 맞춰 별도 상담이 빠릅니다.</span>
+                  <span className="break-keep">단체 및 생일 파티는 방문 목적과 예산에 맞춘 스페셜 이벤트를 준건실장이 직접 기획해 드립니다.</span>
                 </li>
               </ul>
             </article>
@@ -588,21 +588,21 @@ export default function Home() {
               Reservation
             </p>
             <h2 className="mt-4 text-4xl font-black leading-[1.3] md:text-5xl break-keep">
-              건대 W 예약 문의는
+              준건실장 다이렉트
               <br />
-              <span className="text-[#f7d680]">전화 한 통으로 간편하게</span>
+              <span className="text-[#f7d680]">VIP 예약 서비스</span>
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/70 break-keep">
-              방문 날짜, 시간, 인원, 원하는 분위기를 알려주시면 건대 W에서 가장 편안하게 이용하실 수 있도록 안내해드립니다.
+              원하시는 날짜와 방문 인원, 선호하는 룸 분위기를 말씀해 주시면 상황에 맞는 최적의 공간을 세팅해 드립니다.
               <br className="hidden sm:block" />
-              처음 방문하시는 분부터 단골 고객까지 예약부터 방문까지 친절하게 도와드립니다.
+              처음 오시는 분도, 오랜 단골 고객님도 한결같은 VVIP 프리미엄 케어로 모시겠습니다.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
                 href={phoneHref}
                 className="inline-flex items-center justify-center rounded-xl bg-[#f7d680] px-8 py-4 text-lg font-black text-[#08080a] transition hover:bg-[#ffdf8a] hover:scale-105 shadow-[0_0_20px_rgba(247,214,128,0.2)]"
               >
-                010-9561-7332 예약 문의
+                010-2136-3119 예약 문의
               </a>
             </div>
           </div>
