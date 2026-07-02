@@ -185,7 +185,7 @@ export default function Home() {
             >
               건대 <span className="text-[#f7d680] text-7xl md:text-8xl align-middle ml-2">W</span>
               <br />
-              <span className="text-4xl md:text-[3.2rem] mt-2 block">당신만을 위한 특별한 밤</span>
+              <span className="text-4xl md:text-[3.2rem] mt-2 block">010-9561-7332 준건실장</span>
             </h1>
             <p className="mt-8 max-w-lg text-base leading-7 text-[#f7d680]/80 md:text-lg">
               프라이빗한 공간, 완벽한 서비스, 그리고 잊지 못할 시간

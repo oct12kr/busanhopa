@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
 
 const siteUrl = "https://hopa.kr";
-const defaultTitle = "건대호빠 건대W | 당신만을 위한 특별한 밤";
+const defaultTitle = "건대호빠 건대W | 010-9561-7332 준건실장";
 const description =
   "건대호빠 건대W. 프라이빗한 공간, 완벽한 서비스. 베테랑 준건실장이 잊지 못할 최고의 순간을 만들어 드립니다. 지금 바로 예약하세요.";
 
