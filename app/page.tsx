@@ -73,10 +73,6 @@ const faqs = [
     a: "1인 방문을 위한 프라이빗 세팅부터, 대규모 생일파티 및 회식을 완벽히 소화할 수 있는 대형 VIP 룸까지 모두 완비되어 있습니다."
   },
   {
-    q: "입장 시 드레스코드 제한이 있나요?",
-    a: "엄격한 제한은 없으나, 건대W VIP 라운지의 분위기에 맞는 모던하고 깔끔한 댄디룩을 권장해 드리고 있습니다."
-  },
-  {
     q: "늦은 시간 당일 방문도 바로 가능한가요?",
     a: "평일 및 주말 모두 당일 방문이 가능합니다. 단, 주말 피크 타임에는 룸이 만실일 수 있으니 출발 전 미리 연락해 주시면 쾌적하게 안내해 드립니다."
   },
@@ -459,7 +455,7 @@ export default function Home() {
               <span className="text-[#f7d680]">건대W</span> 준건실장 방문 가이드
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/80 break-keep">
-              성공적인 모임을 위한 시간대부터 맞춤형 드레스코드, 투명한 시스템 안내까지.
+              성공적인 모임을 위한 시간대부터 유용한 방문 팁, 투명한 시스템 안내까지.
               건대호빠 W를 200% 즐기기 위한 핵심 가이드를 확인하세요.
             </p>
           </div>
@@ -488,22 +484,22 @@ export default function Home() {
             <article className="rounded-xl border border-[#f7d680]/20 bg-black/40 backdrop-blur-md p-8 transition hover:-translate-y-1 hover:border-[#f7d680]/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
               <div className="flex items-center gap-4 mb-6">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7d680]/10 text-2xl text-[#f7d680]">
-                  👔
+                  💡
                 </span>
-                <h3 className="text-2xl font-black text-[#f7d680]">드레스코드</h3>
+                <h3 className="text-2xl font-black text-[#f7d680]">방문 팁</h3>
               </div>
               <ul className="space-y-4 text-[14px] leading-relaxed text-white/70">
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">포멀하고 깔끔한 수트나 셔츠, 세련된 댄디룩이 VIP 룸의 무드와 가장 잘 어울립니다.</span>
+                  <span className="break-keep">방문 전에 원하는 분위기와 이용 목적을 미리 말씀해 주시면 더욱 만족스러운 시간을 준비해드립니다.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">화려한 장식보다는 정돈된 스타일과 은은한 향수가 더욱 매력적인 인상을 남깁니다.</span>
+                  <span className="break-keep">주말과 공휴일은 예약이 빠르게 마감될 수 있으므로 사전 문의를 권장드립니다.</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-[#f7d680] font-bold">✓</span>
-                  <span className="break-keep">지인들과 함께 방문하실 경우, 전반적인 드레스 톤을 맞추시면 한층 더 고급스러운 분위기가 연출됩니다.</span>
+                  <span className="break-keep">궁금한 사항은 방문 전 언제든 편하게 문의하시면 상세하게 안내해드립니다.</span>
                 </li>
               </ul>
             </article>
