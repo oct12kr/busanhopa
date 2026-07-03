@@ -16,6 +16,21 @@ const nextConfig: NextConfig = {
         pathname: "/**"
       }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "hopa.kr",
+          },
+        ],
+        destination: "https://www.hopa.kr/:path*",
+        permanent: true,
+      },
+    ];
   }
 };
 
