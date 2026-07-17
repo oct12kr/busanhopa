@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { PhoneIcon } from "@/components/Icons";
 import { getBlogPostsByCategory, type BlogPostSummary } from "@/lib/wordpress";
-import { businessName, siteUrl } from "@/lib/constants";
+import { businessName, phoneDisplay, phoneHref, siteUrl } from "@/lib/constants";
 
 export const revalidate = 60;
 
@@ -37,8 +38,6 @@ export const metadata: Metadata = {
   }
 };
 
-// TODO: 실제 번호로 교체
-const blogPhonePlaceholder = "010-XXXX-XXXX";
 const postsPerCategory = 12;
 
 type BlogCategoryConfig = {
@@ -183,15 +182,17 @@ function CategorySidebar({ groups }: { groups: BlogCategoryGroup[] }) {
           <br />
           <span className="text-white">부산호빠에서 시작하세요.</span>
         </p>
-        <p className="mt-5 font-display text-[24px] font-bold tracking-[0.04em] text-white">
-          {blogPhonePlaceholder}
-        </p>
-        <Link
-          href="/#contact"
-          className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-[#c9a876]/70 px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#c9a876] hover:text-[#141210]"
+        <a
+          href={phoneHref}
+          className="group mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full border border-[#c9a876]/70 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#c9a876] hover:text-[#141210]"
         >
-          예약하기 →
-        </Link>
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#c9a876] text-[#141210] transition group-hover:bg-[#141210] group-hover:text-[#c9a876]">
+            <PhoneIcon className="h-5 w-5" />
+          </span>
+          <span className="font-display text-[20px] font-bold tracking-[0.04em]">
+            {phoneDisplay}
+          </span>
+        </a>
       </div>
     </aside>
   );

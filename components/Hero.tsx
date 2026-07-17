@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { phoneDisplay, phoneHref } from "@/lib/constants";
 
 function EmblemIcon() {
   return (
@@ -73,7 +73,7 @@ export default function Hero() {
 
         <h1
           id="hero-title"
-          className="font-display mt-5 text-[48px] font-normal leading-none tracking-[0.075em] text-white drop-shadow-[0_16px_44px_rgba(0,0,0,0.38)] sm:text-[64px] lg:text-[112px]"
+          className="font-serif-kr mt-5 bg-[linear-gradient(135deg,#fff7e8_0%,#e8c888_38%,#c9a876_68%,#8f6f3f_100%)] bg-clip-text text-[48px] font-black leading-none tracking-[-0.025em] text-transparent drop-shadow-[0_18px_46px_rgba(0,0,0,0.46)] [-webkit-text-fill-color:transparent] sm:text-[64px] lg:text-[112px]"
         >
           부산호빠
         </h1>
@@ -88,18 +88,18 @@ export default function Hero() {
         </div>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
-          <Link
-            href="/#contact"
+          <a
+            href={phoneHref}
             className="inline-flex min-w-[168px] items-center justify-center bg-[#6b6b4f] px-10 py-4 text-[15px] font-semibold text-white transition hover:brightness-110"
           >
             예약 문의
-          </Link>
-          <Link
-            href="/#system"
+          </a>
+          <a
+            href={phoneHref}
             className="inline-flex min-w-[168px] items-center justify-center border border-white px-10 py-4 text-[15px] font-semibold text-white transition hover:bg-white/10"
           >
-            자세히 보기
-          </Link>
+            {phoneDisplay}
+          </a>
         </div>
       </div>
     </section>
