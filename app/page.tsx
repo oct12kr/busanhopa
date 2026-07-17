@@ -55,8 +55,8 @@ const infoFeatures = [
   },
   {
     icon: "clock",
-    title: "편리한 시간",
-    text: "여유로운 시간대 선택으로\n더욱 즐거운 시간을 보내세요."
+    title: "편리한 일정",
+    text: "방문 일정에 맞춘 안내로\n더욱 편안하게 이용하세요."
   }
 ];
 
@@ -173,21 +173,24 @@ const reassuranceItems = [
   }
 ];
 
-const timeTips = [
+const firstVisitCards = [
   {
-    label: "평일 저녁",
-    value: "차분한 상담 추천",
-    text: "처음 방문하시는 분이나 조용한 분위기를 원하시는 분께 알맞은 시간대입니다."
+    icon: "message",
+    title: "편한 사전 상담",
+    subtitle: "부담 없는 첫 문의",
+    text: "전화나 카카오톡으로 편하게 문의 주시면, 처음이라 서툰 부분까지 차근차근 안내해드립니다. 궁금한 건 뭐든 물어보셔도 괜찮습니다."
   },
   {
-    label: "금요일 22시 전",
-    value: "부산 골든 타임",
-    text: "해운대권 모임 전후로 이동하기 좋고, 원하는 룸 분위기를 고르기 수월한 시간대입니다."
+    icon: "pin",
+    title: "쉬운 위치 안내",
+    subtitle: "헤매지 않도록 확실하게",
+    text: "해운대 영무파라드 호텔 지하 2층, 찾기 쉬운 위치에 자리하고 있습니다. 방문 전 정확한 안내와 함께 도착까지 편하게 도와드립니다."
   },
   {
-    label: "주말 피크타임",
-    value: `${managerName} 직통 확인`,
-    text: "인원수와 선호 분위기를 미리 알려주시면 대기 시간을 줄이고 방문 흐름을 맞춰드립니다."
+    icon: "shield",
+    title: "투명한 비용 안내",
+    subtitle: "예상치 못한 비용 없이",
+    text: "예약 시 이용 시간과 인원에 따른 비용을 미리 명확하게 안내해드리며, 방문 후 놀라실 일이 없도록 투명하게 운영합니다."
   }
 ];
 
@@ -206,7 +209,7 @@ const faqs = [
   },
   {
     q: "당일 예약도 가능한가요?",
-    a: "평일과 주말 모두 당일 상담이 가능합니다. 다만 주말 피크 시간대는 빠르게 마감될 수 있어 출발 전 연락을 권장드립니다."
+    a: "당일 상담도 가능합니다. 다만 예약 상황에 따라 안내 가능한 룸이 달라질 수 있어 방문 전 연락을 권장드립니다."
   },
   {
     q: "부산 어느 지역에서 방문하기 좋은가요?",
@@ -899,80 +902,37 @@ export default function Home() {
               <span className="text-[#d9c49a]">{businessName}</span> 처음이라면
             </h2>
             <p className="mx-auto mt-6 max-w-2xl break-keep text-lg leading-8 text-[#f7efe2]/80">
-              성공적인 모임을 위한 시간대, 부산 지역별 이동 동선, 투명한 상담 안내까지.
-              처음 문의하셔도 편하게 이해하실 수 있도록 핵심만 정리했습니다.
+              처음 방문하시는 분들이 가장 궁금해하시는 것들,
+              <br className="hidden sm:block" />
+              예약부터 도착, 첫 안내까지의 흐름을 미리 정리해드립니다.
+              <br className="hidden sm:block" />
+              망설이지 않으셔도 되도록 최대한 편하게 알려드릴게요.
+            </p>
+            <p className="font-serif-kr mx-auto mt-5 max-w-xl break-keep text-[20px] font-semibold italic leading-relaxed text-[#d9c49a]">
+              낯선 첫걸음이, 편안한 시간이 되도록.
             </p>
           </div>
 
           <div className="mt-16 grid gap-6 lg:grid-cols-3">
-            <article className="rounded-lg border border-[#d9c49a]/20 bg-[#202519]/72 p-8 shadow-[0_28px_80px_rgba(0,0,0,0.26)] backdrop-blur-md transition hover:-translate-y-1 hover:border-[#aeb995]/50">
-              <div className="mb-6 flex items-center gap-4">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#d9c49a]/10 text-2xl text-[#d9c49a]">
-                  🕒
-                </span>
-                <h3 className="text-2xl font-black text-[#d9c49a]">추천 시간대</h3>
-              </div>
-              <div className="grid gap-4">
-                {timeTips.map((tip) => (
-                  <div key={tip.label} className="border-b border-[#d9c49a]/12 pb-4 last:border-0 last:pb-0">
-                    <div className="flex items-center justify-between gap-4">
-                      <p className="font-bold text-[#f7efe2]">{tip.label}</p>
-                      <p className="text-sm font-bold text-[#aeb995]">{tip.value}</p>
-                    </div>
-                    <p className="mt-2 break-keep text-[13px] leading-relaxed text-[#f7efe2]/62">{tip.text}</p>
+            {firstVisitCards.map((card) => (
+              <article
+                key={card.title}
+                className="rounded-lg border border-[#d9c49a]/20 bg-[#202519]/72 p-8 shadow-[0_28px_80px_rgba(0,0,0,0.26)] backdrop-blur-md transition hover:-translate-y-1 hover:border-[#aeb995]/50"
+              >
+                <div className="mb-6 flex items-center gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d9c49a]/10 text-[#d9c49a]">
+                    <InfoLineIcon name={card.icon} className="h-7 w-7" />
+                  </span>
+                  <div>
+                    <h3 className="text-2xl font-black text-[#d9c49a]">{card.title}</h3>
+                    <p className="mt-1 text-sm font-bold text-[#aeb995]">{card.subtitle}</p>
                   </div>
-                ))}
-              </div>
-            </article>
-
-            <article className="rounded-lg border border-[#d9c49a]/20 bg-[#202519]/72 p-8 shadow-[0_28px_80px_rgba(0,0,0,0.26)] backdrop-blur-md transition hover:-translate-y-1 hover:border-[#aeb995]/50">
-              <div className="mb-6 flex items-center gap-4">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#d9c49a]/10 text-2xl text-[#d9c49a]">
-                  💡
-                </span>
-                <h3 className="text-2xl font-black text-[#d9c49a]">방문 팁</h3>
-              </div>
-              <ul className="space-y-4 text-[14px] leading-relaxed text-[#f7efe2]/70">
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#aeb995]">✓</span>
-                  <span className="break-keep">방문 전 원하는 분위기와 이용 목적을 알려주시면 더 알맞은 상담이 가능합니다.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#aeb995]">✓</span>
-                  <span className="break-keep">주말과 공휴일은 예약 문의가 집중될 수 있어 미리 연락 주시는 편이 좋습니다.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#aeb995]">✓</span>
-                  <span className="break-keep">해운대, 광안리, 센텀시티 등 이동 지역을 함께 말씀해주시면 동선 안내에 도움이 됩니다.</span>
-                </li>
-              </ul>
-            </article>
-
-            <article
-              id="menu-price"
-              className="scroll-mt-28 rounded-lg border border-[#d9c49a]/20 bg-[#202519]/72 p-8 shadow-[0_28px_80px_rgba(0,0,0,0.26)] backdrop-blur-md transition hover:-translate-y-1 hover:border-[#aeb995]/50"
-            >
-              <div className="mb-6 flex items-center gap-4">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#d9c49a]/10 text-2xl text-[#d9c49a]">
-                  📋
-                </span>
-                <h3 className="text-2xl font-black text-[#d9c49a]">맞춤형 안내</h3>
-              </div>
-              <ul className="space-y-4 text-[14px] leading-relaxed text-[#f7efe2]/70">
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#aeb995]">✓</span>
-                  <span className="break-keep">소규모 방문은 부담을 낮춘 기본 구성부터 편하게 상담해드립니다.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#aeb995]">✓</span>
-                  <span className="break-keep">중규모 모임은 룸 분위기와 주류 구성의 균형을 맞춰 안내합니다.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#aeb995]">✓</span>
-                  <span className="break-keep">단체 및 생일 파티는 방문 목적과 예산에 맞춰 {managerName}이 직접 상담합니다.</span>
-                </li>
-              </ul>
-            </article>
+                </div>
+                <p className="break-keep text-[14px] leading-[1.8] text-[#f7efe2]/70">
+                  {card.text}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
