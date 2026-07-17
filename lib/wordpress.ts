@@ -86,6 +86,13 @@ type WordPressRestPost = {
   };
 };
 
+type WordPressPublicRequestInit = RequestInit & {
+  next?: {
+    revalidate?: number | false;
+    tags?: string[];
+  };
+};
+
 const envNames = {
   url: ["WP_URL", "NEXT_PUBLIC_WORDPRESS_API_URL"],
   user: ["WP_USER", "WORDPRESS_USER"],
@@ -221,13 +228,15 @@ async function wordpressRequest<T>(endpoint: string, init: RequestInit = {}): Pr
   return response.json() as Promise<T>;
 }
 
-async function wordpressPublicRequest<T>(endpoint: string, init: RequestInit = {}): Promise<T> {
+async function wordpressPublicRequest<T>(
+  endpoint: string,
+  init: WordPressPublicRequestInit = {}
+): Promise<T> {
   const headers = new Headers(init.headers);
 
   headers.set("Accept", "application/json");
 
   const response = await fetch(endpointUrl(getWordPressApiBase(), endpoint), {
-    cache: "no-store",
     ...init,
     headers
   });
@@ -400,21 +409,29 @@ export async function uploadImage(filePath: string, filename: string): Promise<n
 }
 
 export async function getCategories(): Promise<WordPressCategory[]> {
-  return wordpressPublicRequest<WordPressCategory[]>("categories?per_page=100");
+  return wordpressPublicRequest<WordPressCategory[]>("categories?per_page=100", {
+    next: { revalidate: 3600 }
+  });
 }
 
 export async function getBlogPosts(first = 12): Promise<BlogPostSummary[]> {
-  const posts = await wordpressPublicRequest<WordPressRestPost[]>(postListEndpoint(first));
+  const posts = await wordpressPublicRequest<WordPressRestPost[]>(postListEndpoint(first), {
+    next: { revalidate: 60 }
+  });
 
   return posts.map((post) => mapWordPressPost(post));
 }
 
 export async function getBlogPostsByCategory(
   categorySlug: string,
-  first = 18
+  first = 18,
+  revalidateSeconds = 60
 ): Promise<BlogPostSummary[]> {
   const categories = await wordpressPublicRequest<WordPressCategory[]>(
-    `categories?slug=${encodeURIComponent(categorySlug)}&per_page=1`
+    `categories?slug=${encodeURIComponent(categorySlug)}&per_page=1`,
+    {
+      next: { revalidate: revalidateSeconds }
+    }
   );
   const category = categories[0];
 
@@ -423,7 +440,10 @@ export async function getBlogPostsByCategory(
   }
 
   const posts = await wordpressPublicRequest<WordPressRestPost[]>(
-    postListEndpoint(first, { categories: category.id })
+    postListEndpoint(first, { categories: category.id }),
+    {
+      next: { revalidate: revalidateSeconds }
+    }
   );
 
   return posts.map((post) => mapWordPressPost(post));
@@ -431,7 +451,10 @@ export async function getBlogPostsByCategory(
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   const posts = await wordpressPublicRequest<WordPressRestPost[]>(
-    `posts?slug=${encodeURIComponent(slug)}&_embed=1&per_page=1`
+    `posts?slug=${encodeURIComponent(slug)}&_embed=1&per_page=1`,
+    {
+      next: { revalidate: 300 }
+    }
   );
   const post = posts[0];
 
@@ -446,7 +469,10 @@ export async function getBlogPostSlugs(first = 50) {
     per_page: String(clampPerPage(first))
   });
   const posts = await wordpressPublicRequest<Pick<WordPressRestPost, "slug" | "modified">[]>(
-    `posts?${params.toString()}`
+    `posts?${params.toString()}`,
+    {
+      next: { revalidate: 300 }
+    }
   );
 
   return posts.map((post) => ({

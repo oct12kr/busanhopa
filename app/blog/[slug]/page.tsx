@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { getBlogPostBySlug } from "@/lib/wordpress";
 import { businessName, siteUrl } from "@/lib/constants";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 300;
 
 type BlogPostPageProps = {
   params: Promise<{

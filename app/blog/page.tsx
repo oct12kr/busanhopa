@@ -4,8 +4,7 @@ import Link from "next/link";
 import { getBlogPostsByCategory, type BlogPostSummary } from "@/lib/wordpress";
 import { businessName, siteUrl } from "@/lib/constants";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: `블로그 | ${businessName}`,
@@ -44,8 +43,7 @@ const postsPerCategory = 12;
 
 type BlogCategoryConfig = {
   name: "부산호빠" | "수빈실장";
-  slug: "busan-hoppa" | "subin-manager";
-  lookupSlugs: string[];
+  slug: "aaa" | "bbb";
   description: string;
 };
 
@@ -56,28 +54,18 @@ type BlogCategoryGroup = BlogCategoryConfig & {
 const blogCategoryConfigs: BlogCategoryConfig[] = [
   {
     name: "부산호빠",
-    slug: "busan-hoppa",
-    lookupSlugs: ["busan-hoppa", "busanhoppa", "부산호빠", "aaa"],
+    slug: "aaa",
     description: "부산호빠 이용 안내와 공간, 예약 흐름을 정리한 글입니다."
   },
   {
     name: "수빈실장",
-    slug: "subin-manager",
-    lookupSlugs: ["subin-manager", "subin", "수빈실장", "bbb"],
+    slug: "bbb",
     description: "수빈실장이 직접 전하는 방문 팁과 상담 안내입니다."
   }
 ];
 
 async function fetchPostsByCategory(config: BlogCategoryConfig) {
-  for (const slug of config.lookupSlugs) {
-    const posts = await getBlogPostsByCategory(slug, postsPerCategory).catch(() => []);
-
-    if (posts.length > 0) {
-      return posts;
-    }
-  }
-
-  return [];
+  return getBlogPostsByCategory(config.slug, postsPerCategory, 60).catch(() => []);
 }
 
 async function fetchBlogListingData(): Promise<BlogCategoryGroup[]> {
