@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Busan Host Bar icon">
+  <rect width="512" height="512" rx="96" fill="#151812"/>
+  <path d="M112 388V214c0-79.5 64.5-144 144-144s144 64.5 144 144v174h-64V214c0-44.2-35.8-80-80-80s-80 35.8-80 80v174h-64Z" fill="#d9c49a"/>
+  <path d="M176 388V226c0-44.2 35.8-80 80-80s80 35.8 80 80v162h-48V226c0-17.7-14.3-32-32-32s-32 14.3-32 32v162h-48Z" fill="#8f9a78"/>
+  <path d="M136 420h240" stroke="#f7efe2" stroke-width="28" stroke-linecap="round"/>
+</svg>

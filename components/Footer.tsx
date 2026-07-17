@@ -1,18 +1,18 @@
 import React from "react";
-import { businessName, area, detailAddress, phoneDisplay } from "@/lib/constants";
+import { businessName, area, detailAddress, phoneDisplay, managerName } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black px-5 py-8 text-sm leading-7 text-white/60">
+    <footer className="border-t border-[#d9c49a]/12 bg-[#10130d] px-5 py-8 text-sm leading-7 text-[#f7efe2]/62">
       <div className="mx-auto max-w-7xl">
-        <p className="font-black text-white">
+        <p className="font-black text-[#f7efe2]">
           {businessName} | 예약 및 이용 안내
         </p>
         <p>
-          사업자 정보: 입력 예정 · 주소: {area} {detailAddress} · 전화: {phoneDisplay}
+          사업자 정보: 입력 예정 · 주소: {area} {detailAddress} · 전화: {phoneDisplay} · 담당: {managerName}
         </p>
         <p>
-          건대 W 예약 안내, 건대 W 이용 방법, 건대 W 방문 가이드, 건대 W 고객 상담, 건대 프리미엄 라운지, 건대 예약 문의, 광진구 아차산로 방문 안내 정보를 제공합니다.
+          부산호빠 예약 안내, 부산호빠 이용 방법, 해운대 방문 가이드, 부산 프리미엄 라운지, 해운대 예약 문의, 부산 VIP룸 상담 정보를 제공합니다.
         </p>
       </div>
     </footer>

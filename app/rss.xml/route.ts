@@ -1,6 +1,7 @@
 import { getBlogPosts } from "@/lib/wordpress";
-import { siteUrl } from "@/lib/constants";
+import { businessName, siteUrl } from "@/lib/constants";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 export async function GET() {
@@ -9,9 +10,9 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>건대W 건대호빠 | 소식 및 가이드</title>
+    <title>${businessName} | 소식 및 가이드</title>
     <link>${siteUrl}</link>
-    <description>건대호빠 건대W. 프라이빗한 공간, 완벽한 서비스. 베테랑 준건실장이 잊지 못할 최고의 순간을 만들어 드립니다.</description>
+    <description>${businessName}. 해운대 프라이빗 공간과 차분한 서비스. 부산호빠 매니저가 부산 방문 흐름에 맞춰 상담을 안내해드립니다.</description>
     <language>ko</language>
     <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
 ${posts

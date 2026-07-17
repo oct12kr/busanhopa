@@ -1,49 +1,63 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
+import { businessName, managerName, phoneDisplay, siteUrl } from "@/lib/constants";
 
-const siteUrl = "https://www.hopa.kr";
-const defaultTitle = "건대호빠 건대W | 010-9561-7332 준건실장";
+const defaultTitle = `${businessName} | ${phoneDisplay} ${managerName}`;
 const description =
-  "건대호빠 건대W. 프라이빗한 공간, 완벽한 서비스. 베테랑 준건실장이 잊지 못할 최고의 순간을 만들어 드립니다. 지금 바로 예약하세요.";
+  `${businessName}. 부산 해운대 영무파라드 호텔 지하 2층 프라이빗 라운지 예약 상담. 올리브세이지와 샌드베이지 톤의 차분한 VIP 공간을 ${managerName}가 안내해드립니다.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: "%s | 건대W"
+    template: `%s | ${businessName}`
   },
   description,
   keywords: [
-    "건대호빠",
-    "건대W",
-    "건대호빠 예약",
-    "건대W 예약",
-    "건대 라운지",
-    "광진구 호빠",
-    "건대 하이엔드 라운지",
-    "건대호빠 예약문의",
-    "건대W 예약문의",
-    "건대W 오시는길"
+    "부산호빠",
+    "부산 호빠",
+    "해운대호빠",
+    "부산호빠 예약",
+    "부산 프리미엄 라운지",
+    "해운대 프라이빗 라운지",
+    "부산 VIP룸",
+    "부산 예약문의",
+    "부산호빠"
   ],
   alternates: {
     canonical: siteUrl
   },
+  applicationName: businessName,
+  authors: [{ name: businessName, url: siteUrl }],
+  creator: businessName,
+  publisher: businessName,
+  icons: {
+    icon: [
+      {
+        url: "/busanhostbar-icon.svg",
+        type: "image/svg+xml"
+      }
+    ],
+    shortcut: "/busanhostbar-icon.svg",
+    apple: "/busanhostbar-icon.svg"
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
     locale: "ko_KR",
     url: siteUrl,
-    siteName: "건대W",
+    siteName: businessName,
     title: defaultTitle,
     description,
     images: [
       {
-        url: "/images/seven%20(1).png",
+        url: "/images/000.png",
         width: 2400,
         height: 1000,
-        alt: "건대W 예약 상담"
+        alt: `${businessName} 예약 상담`
       }
     ]
   },
@@ -51,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: defaultTitle,
     description,
-    images: ["/images/seven%20(1).png"]
+    images: ["/images/000.png"]
   },
   robots: {
     index: true,
@@ -65,6 +79,13 @@ export const metadata: Metadata = {
     }
   },
   category: "nightlife"
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#151812"
 };
 
 export default function RootLayout({

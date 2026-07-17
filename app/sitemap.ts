@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getBlogPostSlugs } from "@/lib/wordpress";
+import { siteUrl } from "@/lib/constants";
 
-const siteUrl = "https://www.hopa.kr";
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await getBlogPostSlugs().catch(() => []);

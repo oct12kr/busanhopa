@@ -1,20 +1,31 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { phoneHref } from "@/lib/constants";
+import { businessName } from "@/lib/constants";
 
-export const navItems = [
-  { href: "/#hero", label: "W소개" },
-  { href: "/#system", label: "시스템" },
-  { href: "/#room", label: "VIP룸" },
-  { href: "/#gallery", label: "Gallery" },
-  { href: "/#guide", label: "이용가이드" },
+type HeaderVariant = "transparent" | "dark";
+
+type HeaderProps = {
+  variant?: HeaderVariant;
+};
+
+const leftNavItems = [
+  { href: "/#hero", label: "수빈실장" },
+  { href: "/#system", label: "이용안내" },
+  { href: "/#room", label: "부산VIP" },
+  { href: "/#gallery", label: "시설안내" }
+];
+
+const rightNavItems = [
+  { href: "/#guide", label: "처음이라면" },
+  { href: "/#contact", label: "예약안내" },
   { href: "/#location", label: "오시는길" },
-  { href: "/#contact", label: "예약문의" },
   { href: "/blog", label: "블로그" }
 ];
+
+const navItems = [...leftNavItems, ...rightNavItems];
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
@@ -23,32 +34,38 @@ function HamburgerIcon({ open }: { open: boolean }) {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={1.7}
       aria-hidden="true"
     >
-      {/* 상단 선: open 시 X 왼쪽 대각선으로 회전 */}
       <line
-        x1="4" y1="6" x2="20" y2="6"
+        x1="4"
+        y1="7"
+        x2="20"
+        y2="7"
         className="origin-center transition-all duration-300"
         style={
           open
-            ? { transform: "translateY(6px) rotate(45deg)" }
+            ? { transform: "translateY(5px) rotate(45deg)" }
             : { transform: "translateY(0) rotate(0)" }
         }
       />
-      {/* 중간 선: open 시 투명 */}
       <line
-        x1="4" y1="12" x2="20" y2="12"
+        x1="4"
+        y1="12"
+        x2="20"
+        y2="12"
         className="transition-opacity duration-200"
         style={{ opacity: open ? 0 : 1 }}
       />
-      {/* 하단 선: open 시 X 오른쪽 대각선으로 회전 */}
       <line
-        x1="4" y1="18" x2="20" y2="18"
+        x1="4"
+        y1="17"
+        x2="20"
+        y2="17"
         className="origin-center transition-all duration-300"
         style={
           open
-            ? { transform: "translateY(-6px) rotate(-45deg)" }
+            ? { transform: "translateY(-5px) rotate(-45deg)" }
             : { transform: "translateY(0) rotate(0)" }
         }
       />
@@ -56,106 +73,174 @@ function HamburgerIcon({ open }: { open: boolean }) {
   );
 }
 
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+function LogoBlock() {
+  return (
+    <Link
+      href="/"
+      className="group flex flex-col items-center text-center text-white"
+      aria-label={`${businessName} 홈`}
+    >
+      <span className="font-serif-kr text-[22px] font-semibold leading-none tracking-[0.08em] transition-opacity group-hover:opacity-75">
+        SUBIN
+      </span>
+      <span className="mt-1 text-[10px] font-light uppercase leading-none tracking-[0.32em] text-white/62">
+        BUSAN HOST BAR
+      </span>
+    </Link>
+  );
+}
 
-  // 페이지 이동 시 메뉴 닫기
+function NavLink({
+  href,
+  label,
+  active,
+  dark
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+  dark: boolean;
+}) {
+  if (active) {
+    return (
+      <Link
+        href={href}
+        className="inline-flex items-center justify-center rounded-full border border-[#c9a876] px-4 py-2 text-[14px] font-semibold text-[#c9a876] transition hover:bg-[#c9a876] hover:text-[#141210]"
+      >
+        {label}
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className={`relative whitespace-nowrap text-[15px] font-normal transition-opacity duration-200 after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:transition-all after:duration-300 hover:opacity-75 hover:after:w-full ${
+        dark
+          ? "text-white/88 after:bg-[#c9a876]"
+          : "text-white after:bg-white/80"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
+
+export default function Header({ variant }: HeaderProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isBlog = pathname === "/blog" || pathname?.startsWith("/blog/");
+  const dark = variant === "dark" || (!variant && isBlog);
+
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // 메뉴 열림 시 body 스크롤 잠금
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
 
-  return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#08080a]/88 backdrop-blur-xl">
-      <nav
-        aria-label="건대W 주요 메뉴"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4"
-      >
-        {/* 로고 */}
-        <Link href="/" className="flex items-center gap-2 text-base font-black text-[#f7d680]">
-          <span className="flex h-8 w-8 items-center justify-center rounded border border-[#f7d680]/40 text-lg font-black">W</span>
-          <span>건대 W</span>
-        </Link>
+  const headerClass = dark
+    ? "border-[#c9a876]/18 bg-[#0d0d0d]/96 shadow-[0_18px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl"
+    : isScrolled || isOpen
+      ? "border-white/10 bg-[#151812]/58 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+      : "border-transparent bg-transparent";
 
-        {/* PC 가로 메뉴 (md 이상) */}
-        <div className="hidden items-center gap-5 text-sm font-semibold text-white/72 md:flex">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-[#ff5f7a] transition">
-              {item.label}
-            </Link>
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-[90] border-b transition-all duration-300 ${headerClass}`}
+    >
+      <nav
+        aria-label={`${businessName} 주요 메뉴`}
+        className="mx-auto grid max-w-[1680px] grid-cols-[1fr_auto_1fr] items-center gap-5 px-5 py-5 md:px-10 lg:px-16 xl:px-20"
+      >
+        <div className="hidden items-center justify-start gap-7 xl:gap-10 lg:flex">
+          {leftNavItems.map((item) => (
+            <NavLink
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              active={pathname === item.href}
+              dark={dark}
+            />
           ))}
         </div>
 
-        {/* 우측: 전화예약 버튼 + 모바일 햄버거 */}
-        <div className="flex items-center gap-3">
-          <a
-            href={phoneHref}
-            className="rounded-md bg-[#ff5f7a] px-4 py-2 text-sm font-black text-white shadow-glow hover:bg-[#e44b65] transition"
-          >
-            전화 예약
-          </a>
+        <div className="col-start-2">
+          <LogoBlock />
+        </div>
 
-          {/* 햄버거 버튼 (md 미만에서만 표시) */}
+        <div className="hidden items-center justify-end gap-7 xl:gap-10 lg:flex">
+          {rightNavItems.map((item) => (
+            <NavLink
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              active={item.href === "/blog" && isBlog}
+              dark={dark}
+            />
+          ))}
+        </div>
+
+        <div className="col-start-3 flex justify-end lg:hidden">
           <button
             type="button"
             aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
             aria-expanded={isOpen}
             onClick={() => setIsOpen((prev) => !prev)}
-            className="flex items-center justify-center rounded-md border border-white/15 bg-white/[0.06] p-2 text-white/80 transition hover:bg-white/10 hover:text-white md:hidden"
+            className="flex h-11 w-11 items-center justify-center border border-white/20 bg-white/[0.04] text-white backdrop-blur-md transition hover:bg-white/10"
           >
             <HamburgerIcon open={isOpen} />
           </button>
         </div>
       </nav>
 
-      {/* ───── 모바일 드롭다운 메뉴 (md 미만) ───── */}
       <div
-        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out md:hidden ${
-          isOpen ? "max-h-[480px] opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 lg:hidden ${
+          isOpen ? "max-h-[560px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="border-t border-white/10 bg-[#0a0a0e]/95 backdrop-blur-xl px-5 pb-6 pt-4">
-          <ul className="flex flex-col gap-1">
-            {navItems.map((item, idx) => (
-              <li
-                key={item.href}
-                className="transition-all duration-300"
-                style={{
-                  transitionDelay: isOpen ? `${idx * 40}ms` : "0ms",
-                  opacity: isOpen ? 1 : 0,
-                  transform: isOpen ? "translateY(0)" : "translateY(-8px)"
-                }}
-              >
-                <Link
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center rounded-lg px-4 py-3 text-base font-bold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-[#ff5f7a] active:bg-white/10"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="border-t border-white/10 bg-[#0d0d0d]/95 px-5 pb-6 pt-3 backdrop-blur-xl">
+          <ul className="grid gap-1">
+            {navItems.map((item, index) => {
+              const active = item.href === "/blog" && isBlog;
 
-          {/* 모바일 메뉴 하단 전화 예약 */}
-          <a
-            href={phoneHref}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#ff5f7a] px-6 py-3.5 text-base font-black text-white shadow-[0_0_24px_rgba(255,95,122,0.35)] transition hover:bg-[#e44b65]"
-          >
-            📞 전화 예약하기
-          </a>
+              return (
+                <li
+                  key={item.href}
+                  className="transition-all duration-300"
+                  style={{
+                    transitionDelay: isOpen ? `${index * 35}ms` : "0ms",
+                    opacity: isOpen ? 1 : 0,
+                    transform: isOpen ? "translateY(0)" : "translateY(-8px)"
+                  }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-4 py-3 text-base font-normal transition ${
+                      active
+                        ? "rounded-full border border-[#c9a876] text-[#c9a876]"
+                        : "text-white/86 hover:bg-white/[0.06] hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </header>

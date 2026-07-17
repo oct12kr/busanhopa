@@ -4,7 +4,7 @@ import { phoneDisplay, phoneHref, kakaoOpenChatHref } from "@/lib/constants";
 import { PhoneIcon, ChatIcon, MenuIcon } from "./Icons";
 
 const floatingActionBaseClass =
-  "group flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_28px_rgba(0,0,0,0.38)] backdrop-blur transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#f7d680] focus:ring-offset-2 focus:ring-offset-[#08080a] md:h-16 md:w-16";
+  "group flex h-14 w-14 items-center justify-center rounded-full border shadow-[0_12px_28px_rgba(0,0,0,0.38)] backdrop-blur transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#d9c49a] focus:ring-offset-2 focus:ring-offset-[#151812] md:h-16 md:w-16";
 
 export default function FloatingActionButtons() {
   return (
@@ -16,7 +16,7 @@ export default function FloatingActionButtons() {
         href={phoneHref}
         aria-label={`전화 상담 ${phoneDisplay}`}
         title={`전화 상담 ${phoneDisplay}`}
-        className={`${floatingActionBaseClass} border-[#ff8aa0]/50 bg-[#ff5f7a] text-white hover:border-white/70 hover:bg-[#ff7690]`}
+        className={`${floatingActionBaseClass} border-[#d9c49a]/60 bg-[#8f9a78] text-[#11140e] hover:border-[#f7efe2]/80 hover:bg-[#aeb995]`}
       >
         <PhoneIcon />
         <span className="sr-only">전화 상담</span>
@@ -27,7 +27,7 @@ export default function FloatingActionButtons() {
         title="카카오톡 오픈채팅 상담"
         target="_blank"
         rel="noreferrer"
-        className={`${floatingActionBaseClass} border-[#f7d680]/70 bg-[#fee500] text-[#2a2115] hover:border-white/80 hover:bg-[#f7d680]`}
+        className={`${floatingActionBaseClass} border-[#d9c49a]/70 bg-[#fee500] text-[#2a2115] hover:border-[#f7efe2]/80 hover:bg-[#ead8b3]`}
       >
         <ChatIcon />
         <span className="sr-only">카카오톡 오픈채팅 상담</span>
@@ -36,7 +36,7 @@ export default function FloatingActionButtons() {
         href="/#menu-price"
         aria-label="메뉴판 가격 안내"
         title="메뉴판 가격 안내"
-        className={`${floatingActionBaseClass} border-[#f7d680]/55 bg-[#111015]/92 text-[#f7d680] hover:border-[#ff5f7a] hover:bg-[#19131a] hover:text-[#ff5f7a]`}
+        className={`${floatingActionBaseClass} border-[#d9c49a]/55 bg-[#202519]/92 text-[#d9c49a] hover:border-[#aeb995] hover:bg-[#2a301f] hover:text-[#f7efe2]`}
       >
         <MenuIcon />
         <span className="sr-only">메뉴판 가격 안내</span>
