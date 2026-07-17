@@ -86,6 +86,14 @@ type WordPressRestPost = {
   };
 };
 
+type WordPressRequestErrorContext = {
+  endpoint: string;
+  url: string;
+  status?: number;
+  statusText?: string;
+  message: string;
+};
+
 type WordPressPublicRequestInit = RequestInit & {
   next?: {
     revalidate?: number | false;
@@ -193,6 +201,10 @@ function endpointUrl(apiBaseUrl: string, endpoint: string) {
   return new URL(endpoint, apiBaseUrl).toString();
 }
 
+function logWordPressRequestError(context: WordPressRequestErrorContext) {
+  console.error("[wordpress] REST request failed", context);
+}
+
 async function parseWordPressError(response: Response, endpoint: string) {
   const fallback = `${response.status} ${response.statusText}`.trim();
   const text = await response.text().catch(() => "");
@@ -222,7 +234,17 @@ async function wordpressRequest<T>(endpoint: string, init: RequestInit = {}): Pr
   });
 
   if (!response.ok) {
-    throw new Error(await parseWordPressError(response, endpoint));
+    const message = await parseWordPressError(response, endpoint);
+
+    logWordPressRequestError({
+      endpoint,
+      url: endpointUrl(config.apiBaseUrl, endpoint),
+      status: response.status,
+      statusText: response.statusText,
+      message
+    });
+
+    throw new Error(message);
   }
 
   return response.json() as Promise<T>;
@@ -236,13 +258,38 @@ async function wordpressPublicRequest<T>(
 
   headers.set("Accept", "application/json");
 
-  const response = await fetch(endpointUrl(getWordPressApiBase(), endpoint), {
-    ...init,
-    headers
-  });
+  const requestUrl = endpointUrl(getWordPressApiBase(), endpoint);
+  let response: Response;
+
+  try {
+    response = await fetch(requestUrl, {
+      ...init,
+      headers
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+
+    logWordPressRequestError({
+      endpoint,
+      url: requestUrl,
+      message
+    });
+
+    throw error;
+  }
 
   if (!response.ok) {
-    throw new Error(await parseWordPressError(response, endpoint));
+    const message = await parseWordPressError(response, endpoint);
+
+    logWordPressRequestError({
+      endpoint,
+      url: requestUrl,
+      status: response.status,
+      statusText: response.statusText,
+      message
+    });
+
+    throw new Error(message);
   }
 
   return response.json() as Promise<T>;
@@ -427,24 +474,28 @@ export async function getBlogPostsByCategory(
   first = 18,
   revalidateSeconds = 60
 ): Promise<BlogPostSummary[]> {
+  const encodedSlug = encodeURIComponent(categorySlug);
   const categories = await wordpressPublicRequest<WordPressCategory[]>(
-    `categories?slug=${encodeURIComponent(categorySlug)}&per_page=1`,
+    `categories?slug=${encodedSlug}&per_page=1`,
     {
       next: { revalidate: revalidateSeconds }
     }
   );
   const category = categories[0];
 
-  if (!category) {
-    return [];
-  }
-
-  const posts = await wordpressPublicRequest<WordPressRestPost[]>(
-    postListEndpoint(first, { categories: category.id }),
-    {
-      next: { revalidate: revalidateSeconds }
-    }
-  );
+  const posts = category
+    ? await wordpressPublicRequest<WordPressRestPost[]>(
+        postListEndpoint(first, { categories: category.id }),
+        {
+          next: { revalidate: revalidateSeconds }
+        }
+      )
+    : await wordpressPublicRequest<WordPressRestPost[]>(
+        postListEndpoint(first, { category_name: categorySlug }),
+        {
+          next: { revalidate: revalidateSeconds }
+        }
+      );
 
   return posts.map((post) => mapWordPressPost(post));
 }

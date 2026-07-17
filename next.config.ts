@@ -10,10 +10,10 @@ const nextConfig: NextConfig = {
         has: [
           {
             type: "host",
-            value: "busanhostbar.kr",
+            value: "busanhopa.com",
           },
         ],
-        destination: "https://www.busanhostbar.kr/:path*",
+        destination: "https://www.busanhopa.com/:path*",
         permanent: true,
       },
     ];

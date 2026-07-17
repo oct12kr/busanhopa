@@ -65,7 +65,15 @@ const blogCategoryConfigs: BlogCategoryConfig[] = [
 ];
 
 async function fetchPostsByCategory(config: BlogCategoryConfig) {
-  return getBlogPostsByCategory(config.slug, postsPerCategory, 60).catch(() => []);
+  return getBlogPostsByCategory(config.slug, postsPerCategory, 60).catch((error) => {
+    console.error("[blog] Failed to fetch WordPress category posts", {
+      categoryName: config.name,
+      categorySlug: config.slug,
+      message: error instanceof Error ? error.message : String(error)
+    });
+
+    return [];
+  });
 }
 
 async function fetchBlogListingData(): Promise<BlogCategoryGroup[]> {
