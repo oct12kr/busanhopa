@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogPostBySlug } from "@/lib/wordpress";
 import { businessName, siteUrl } from "@/lib/constants";
+import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -24,24 +25,6 @@ function formatDate(value: string | null) {
   }).format(new Date(value));
 }
 
-function buildDescription(excerpt: string, title: string) {
-  const description = excerpt || `${title} 본문을 확인해 보세요.`;
-
-  return description.length > 150 ? `${description.slice(0, 147)}...` : description;
-}
-
-function absoluteImageUrl(sourceUrl?: string | null) {
-  if (!sourceUrl) {
-    return undefined;
-  }
-
-  if (/^https?:\/\//i.test(sourceUrl)) {
-    return sourceUrl;
-  }
-
-  return `${siteUrl}${sourceUrl.startsWith("/") ? "" : "/"}${sourceUrl}`;
-}
-
 async function findBlogPost(slug: string) {
   return getBlogPostBySlug(slug).catch(() => null);
 }
@@ -52,40 +35,78 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = await findBlogPost(slug);
 
   if (!post) {
+    const fallbackUrl = canonicalUrl(`/blog/${slug}`);
+    const fallbackTitle = buildMetaTitle("부산호빠 블로그 글");
+    const fallbackDescription = buildMetaDescription({
+      fallback: defaultSeo.fallbackDescription
+    });
+    const fallbackImage = absoluteAssetUrl(defaultSeo.blogImage);
+
     return {
-      title: `블로그 글 | ${businessName}`
+      title: fallbackTitle,
+      description: fallbackDescription,
+      alternates: {
+        canonical: fallbackUrl
+      },
+      openGraph: {
+        type: "article",
+        locale: defaultSeo.locale,
+        url: fallbackUrl,
+        siteName: defaultSeo.siteName,
+        title: fallbackTitle,
+        description: fallbackDescription,
+        images: [
+          {
+            url: fallbackImage,
+            alt: `${businessName} 블로그 대표 이미지`
+          }
+        ]
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: fallbackTitle,
+        description: fallbackDescription,
+        images: [fallbackImage]
+      }
     };
   }
 
-  const imageUrl = absoluteImageUrl(post.featuredImage?.sourceUrl);
+  const pageTitle = buildMetaTitle(post.title);
+  const pageDescription = buildMetaDescription({
+    description: post.excerpt,
+    content: post.content,
+    fallback: `${post.title} 본문을 확인해 보세요.`
+  });
+  const pageUrl = canonicalUrl(`/blog/${post.slug}`);
+  const imageUrl = absoluteAssetUrl(post.featuredImage?.sourceUrl, defaultSeo.blogImage);
 
   return {
-    title: `${post.title} | ${businessName}`,
-    description: buildDescription(post.excerpt, post.title),
+    title: pageTitle,
+    description: pageDescription,
     alternates: {
-      canonical: `${siteUrl}/blog/${post.slug}`
+      canonical: pageUrl
     },
     openGraph: {
       type: "article",
-      url: `${siteUrl}/blog/${post.slug}`,
-      title: post.title,
-      description: buildDescription(post.excerpt, post.title),
+      locale: defaultSeo.locale,
+      url: pageUrl,
+      siteName: defaultSeo.siteName,
+      title: pageTitle,
+      description: pageDescription,
       publishedTime: post.date ?? undefined,
       modifiedTime: post.modified ?? undefined,
-      images: imageUrl
-        ? [
-            {
-              url: imageUrl,
-              alt: post.featuredImage?.altText || post.title
-            }
-          ]
-        : undefined
+      images: [
+        {
+          url: imageUrl,
+          alt: post.featuredImage?.altText || post.title
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | ${businessName}`,
-      description: buildDescription(post.excerpt, post.title),
-      images: imageUrl ? [imageUrl] : undefined
+      title: pageTitle,
+      description: pageDescription,
+      images: [imageUrl]
     }
   };
 }
@@ -108,30 +129,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const canonicalUrl = `${siteUrl}/blog/${post.slug}`;
-  const imageUrl = absoluteImageUrl(post.featuredImage?.sourceUrl);
+  const pageUrl = canonicalUrl(`/blog/${post.slug}`);
+  const pageDescription = buildMetaDescription({
+    description: post.excerpt,
+    content: post.content,
+    fallback: `${post.title} 본문을 확인해 보세요.`
+  });
+  const imageUrl = absoluteAssetUrl(post.featuredImage?.sourceUrl, defaultSeo.blogImage);
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": `${pageUrl}#blogposting`,
+    url: pageUrl,
     headline: post.title,
-    description: buildDescription(post.excerpt, post.title),
-    datePublished: post.date,
-    dateModified: post.modified,
+    description: pageDescription,
+    datePublished: post.date ?? post.modified ?? undefined,
+    dateModified: post.modified ?? post.date ?? undefined,
     author: {
-      "@type": "Organization",
-      name: businessName,
-      url: siteUrl
+      "@type": "Person",
+      name: post.author || businessName
     },
     publisher: {
       "@type": "Organization",
       name: businessName,
-      url: siteUrl
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteAssetUrl("/busanhostbar-icon.svg")
+      }
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": canonicalUrl
+      "@id": pageUrl
     },
-    image: imageUrl
+    image: [imageUrl],
+    inLanguage: "ko-KR"
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -141,19 +173,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "@type": "ListItem",
         position: 1,
         name: businessName,
-        item: siteUrl
+        item: canonicalUrl("/")
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "블로그",
-        item: `${siteUrl}/blog`
+        item: canonicalUrl("/blog")
       },
       {
         "@type": "ListItem",
         position: 3,
         name: post.title,
-        item: canonicalUrl
+        item: pageUrl
       }
     ]
   };

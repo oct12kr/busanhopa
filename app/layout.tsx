@@ -3,19 +3,19 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
-import { businessName, managerName, phoneDisplay, siteUrl } from "@/lib/constants";
+import { businessName, siteUrl } from "@/lib/constants";
+import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
-const defaultTitle = `${businessName} | ${phoneDisplay} ${managerName}`;
-const description =
-  `${businessName}. 부산 해운대 영무파라드 호텔 지하 2층 프라이빗 라운지 예약 상담. 올리브세이지와 샌드베이지 톤의 차분한 VIP 공간을 ${managerName}가 안내해드립니다.`;
+const fallbackTitle = buildMetaTitle(defaultSeo.fallbackTitle);
+const fallbackDescription = buildMetaDescription({
+  description: defaultSeo.fallbackDescription
+});
+const defaultOgImage = absoluteAssetUrl(defaultSeo.defaultImage);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: defaultTitle,
-    template: `%s | ${businessName}`
-  },
-  description,
+  title: fallbackTitle,
+  description: fallbackDescription,
   keywords: [
     "부산호빠",
     "부산 호빠",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "부산호빠"
   ],
   alternates: {
-    canonical: siteUrl
+    canonical: canonicalUrl("/")
   },
   applicationName: businessName,
   authors: [{ name: businessName, url: siteUrl }],
@@ -47,14 +47,14 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
-    locale: "ko_KR",
-    url: siteUrl,
-    siteName: businessName,
-    title: defaultTitle,
-    description,
+    locale: defaultSeo.locale,
+    url: canonicalUrl("/"),
+    siteName: defaultSeo.siteName,
+    title: fallbackTitle,
+    description: fallbackDescription,
     images: [
       {
-        url: "/images/000.png",
+        url: defaultOgImage,
         width: 2400,
         height: 1000,
         alt: `${businessName} 예약 상담`
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
-    description,
-    images: ["/images/000.png"]
+    title: fallbackTitle,
+    description: fallbackDescription,
+    images: [defaultOgImage]
   },
   robots: {
     index: true,

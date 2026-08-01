@@ -4,25 +4,34 @@ import Link from "next/link";
 import { PhoneIcon } from "@/components/Icons";
 import { getBlogPostsByCategory, type BlogPostSummary } from "@/lib/wordpress";
 import { businessName, phoneDisplay, phoneHref, siteUrl } from "@/lib/constants";
+import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: `블로그 | ${businessName}`,
+const blogTitle = buildMetaTitle("부산호빠 블로그 | 해운대 예약 가이드와 방문 팁");
+const blogDescription = buildMetaDescription({
   description:
-    `부산호빠 ${businessName}의 이야기, 방문 가이드, 프라이빗 공간과 VIP 서비스 소식을 전하는 블로그입니다.`,
+    "부산호빠 예약 전 알아두면 좋은 방문 가이드, 해운대 프라이빗 라운지 소식, VIP 서비스 안내를 최신 글로 확인해 보세요."
+});
+const blogUrl = canonicalUrl("/blog");
+const blogOgImage = absoluteAssetUrl(defaultSeo.blogImage);
+
+export const metadata: Metadata = {
+  title: blogTitle,
+  description: blogDescription,
   alternates: {
-    canonical: `${siteUrl}/blog`
+    canonical: blogUrl
   },
   openGraph: {
     type: "website",
-    url: `${siteUrl}/blog`,
-    title: `블로그 | ${businessName}`,
-    description:
-      `부산호빠 ${businessName}의 이야기, 방문 가이드, 프라이빗 공간과 VIP 서비스 소식을 전하는 블로그입니다.`,
+    locale: defaultSeo.locale,
+    url: blogUrl,
+    siteName: defaultSeo.siteName,
+    title: blogTitle,
+    description: blogDescription,
     images: [
       {
-        url: "/images/888.png",
+        url: blogOgImage,
         width: 2400,
         height: 1000,
         alt: `${businessName} 블로그 대표 이미지`
@@ -31,10 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `블로그 | ${businessName}`,
-    description:
-      `부산호빠 ${businessName}의 이야기, 방문 가이드, 프라이빗 공간과 VIP 서비스 소식을 전하는 블로그입니다.`,
-    images: ["/images/888.png"]
+    title: blogTitle,
+    description: blogDescription,
+    images: [blogOgImage]
   }
 };
 
@@ -108,6 +116,53 @@ function EmptyPosts({ categoryName }: { categoryName: string }) {
     </div>
   );
 }
+
+function JsonLd({ data }: { data: Record<string, unknown> }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${blogUrl}#blog`,
+  name: blogTitle,
+  description: blogDescription,
+  url: blogUrl,
+  inLanguage: "ko-KR",
+  publisher: {
+    "@type": "Organization",
+    name: businessName,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteAssetUrl("/busanhostbar-icon.svg")
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: businessName,
+      item: canonicalUrl("/")
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "블로그",
+      item: blogUrl
+    }
+  ]
+};
 
 function BlogPostCard({ post, categoryName }: { post: BlogPostSummary; categoryName: string }) {
   const imageUrl = post.featuredImage?.sourceUrl;
@@ -275,6 +330,8 @@ export default async function BlogPage() {
 
   return (
     <main className="min-h-screen bg-[#f3ede3] text-[#2a2a24]">
+      <JsonLd data={blogSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <section className="relative isolate flex min-h-[390px] items-center justify-center overflow-hidden bg-[#0d0d0d] px-5 pb-16 pt-32 text-center text-white">
         <Image
           src="/images/888.png"

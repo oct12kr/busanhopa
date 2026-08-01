@@ -2,14 +2,12 @@ import {
   fullAddress,
   mapEmbedSrc,
   mapDirectionsHref,
-  venueName,
-  latitude,
-  longitude
+  venueName
 } from "@/lib/constants";
 
 export default function LocationMap() {
   return (
-    <div className="relative h-full min-h-[320px]" data-latitude={latitude} data-longitude={longitude}>
+    <div className="relative h-full min-h-[320px]">
       <iframe
         title={`${venueName} 구글 지도`}
         src={mapEmbedSrc}

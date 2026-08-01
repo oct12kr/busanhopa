@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: process.cwd(),
+  skipTrailingSlashRedirect: true,
   async redirects() {
     return [
       {
@@ -14,7 +15,7 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: "https://www.busanhopa.com/:path*",
-        permanent: true,
+        statusCode: 301,
       },
     ];
   }

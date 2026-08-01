@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import {
   businessName,
@@ -6,8 +7,6 @@ import {
   detailAddress,
   phoneDisplay,
   phoneHref,
-  latitude,
-  longitude,
   managerName,
   siteUrl,
   fullAddress,
@@ -15,6 +14,7 @@ import {
 } from "@/lib/constants";
 import Hero from "@/components/Hero";
 import LocationMap from "@/components/LocationMap";
+import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
 const imageAssets = {
   hero: "/images/000.png",
@@ -26,6 +26,43 @@ const imageAssets = {
   guide: "/images/888.png",
   reservation: "/images/555.png",
   location: "/images/666.png"
+};
+
+const homeTitle = buildMetaTitle(defaultSeo.homeTitle);
+const homeDescription = buildMetaDescription({
+  description: defaultSeo.homeDescription
+});
+const homeUrl = canonicalUrl("/");
+const homeOgImage = absoluteAssetUrl(imageAssets.hero);
+
+export const metadata: Metadata = {
+  title: homeTitle,
+  description: homeDescription,
+  alternates: {
+    canonical: homeUrl
+  },
+  openGraph: {
+    type: "website",
+    locale: defaultSeo.locale,
+    url: homeUrl,
+    siteName: defaultSeo.siteName,
+    title: homeTitle,
+    description: homeDescription,
+    images: [
+      {
+        url: homeOgImage,
+        width: 2400,
+        height: 1000,
+        alt: `${businessName} 해운대 프라이빗 라운지`
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
+    images: [homeOgImage]
+  }
 };
 
 const archLayers = [
@@ -46,7 +83,7 @@ const infoFeatures = [
   {
     icon: "user",
     title: "1:1 맞춤 응대",
-    text: "부산호빠 매니저가 처음부터 끝까지\n세심하게 케어합니다."
+    text: "수빈실장이 처음부터 끝까지\n세심하게 케어합니다."
   },
   {
     icon: "shield",
@@ -149,12 +186,12 @@ const locationTransits = [
   {
     icon: "car",
     title: "자가용",
-    text: "네비게이션 '부산호빠'\n또는 영무파라드 호텔 검색"
+    text: "네비게이션 '부산호빠'\n또는 마린시티2로 33 검색"
   },
   {
     icon: "parking",
     title: "주차 안내",
-    text: "영무파라드 호텔 주차장\n이용 전 문의 권장"
+    text: "방문 전 주차 가능 여부\n문의 권장"
   }
 ];
 
@@ -184,7 +221,7 @@ const firstVisitCards = [
     icon: "pin",
     title: "쉬운 위치 안내",
     subtitle: "헤매지 않도록 확실하게",
-    text: "해운대 영무파라드 호텔 지하 2층, 찾기 쉬운 위치에 자리하고 있습니다. 방문 전 정확한 안내와 함께 도착까지 편하게 도와드립니다."
+    text: "부산시 해운대구 마린시티2로 33, 찾기 쉬운 위치에 자리하고 있습니다. 방문 전 정확한 안내와 함께 도착까지 편하게 도와드립니다."
   },
   {
     icon: "shield",
@@ -240,11 +277,6 @@ const localBusinessSchema = {
     addressRegion: "부산광역시",
     addressCountry: "KR"
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude,
-    longitude
-  },
   contactPoint: {
     "@type": "ContactPoint",
     telephone: phoneDisplay,
@@ -289,10 +321,10 @@ const websiteSchema = {
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": `${siteUrl}/#webpage`,
-  url: siteUrl,
-  name: `${businessName} | ${phoneDisplay} ${managerName}`,
-  description: `${businessName} 예약 상담, 부산 해운대 프라이빗 라운지와 VIP룸 이용 안내.`,
+  "@id": `${homeUrl}/#webpage`,
+  url: homeUrl,
+  name: homeTitle,
+  description: homeDescription,
   isPartOf: {
     "@id": `${siteUrl}/#website`
   },
@@ -310,7 +342,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: businessName,
-      item: siteUrl
+      item: homeUrl
     }
   ]
 };
@@ -713,7 +745,7 @@ export default function Home() {
                   처음 방문하셔도 걱정하지 마세요.
                 </h3>
                 <p className="mx-auto mt-4 max-w-[720px] break-keep text-[14px] leading-[1.7] text-white/88 md:text-[15px] lg:mt-2 lg:text-[13px] lg:leading-[1.55]">
-                  부산호빠 매니저가 친절하고 상세하게 안내해드리며, 최고의 시간을 선사해드립니다.
+                  수빈실장이 친절하고 상세하게 안내해드리며, 최고의 시간을 선사해드립니다.
                 </p>
 
                 <div className="mt-6 grid gap-5 md:grid-cols-3 md:divide-x md:divide-white/18 lg:mt-4 lg:gap-3">
@@ -1065,7 +1097,7 @@ export default function Home() {
               <span className="h-px flex-1 bg-current/45" />
             </div>
             <p className="mt-4 max-w-[560px] break-keep text-[15px] leading-[1.65] text-[#5f5c52] md:text-base">
-              부산호빠는 해운대 영무파라드 호텔에 위치하여 대중교통 및 자가용 이용이 편리합니다.
+              부산호빠는 해운대 마린시티에 위치하여 대중교통 및 자가용 이용이 편리합니다.
             </p>
 
             <address className="mt-5 flex flex-col gap-4 rounded-xl bg-[#efe8da]/92 p-4 not-italic shadow-[0_16px_42px_rgba(93,78,54,0.12)] backdrop-blur sm:flex-row sm:items-center sm:justify-between">

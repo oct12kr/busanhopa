@@ -1,5 +1,5 @@
 import { getBlogPosts } from "@/lib/wordpress";
-import { businessName, siteUrl } from "@/lib/constants";
+import { businessName, managerName, siteUrl } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
@@ -12,7 +12,7 @@ export async function GET() {
   <channel>
     <title>${businessName} | 소식 및 가이드</title>
     <link>${siteUrl}</link>
-    <description>${businessName}. 해운대 프라이빗 공간과 차분한 서비스. 부산호빠 매니저가 부산 방문 흐름에 맞춰 상담을 안내해드립니다.</description>
+    <description>${businessName}. 해운대 프라이빗 공간과 차분한 서비스. ${managerName}이 부산 방문 흐름에 맞춰 상담을 안내해드립니다.</description>
     <language>ko</language>
     <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
 ${posts

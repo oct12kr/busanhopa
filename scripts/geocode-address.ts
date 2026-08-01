@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 
-const address = "부산광역시 해운대구 해운대해변로298번길 25";
+const address = "부산시 해운대구 마린시티2로 33";
 const envPath = resolve(process.cwd(), ".env");
 
 function loadEnvFile() {
