@@ -25,6 +25,7 @@ dev-stderr.log
 
 # local env
 .env*
+!.env.example
 
 # misc
 .DS_Store

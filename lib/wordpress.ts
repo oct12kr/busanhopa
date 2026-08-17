@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 export type BlogPostSummary = {
   id: number;
   title: string;
@@ -345,6 +347,7 @@ function clampPerPage(first: number) {
 function postListEndpoint(first: number, extraParams: Record<string, string | number> = {}) {
   const params = new URLSearchParams({
     _embed: "1",
+    _fields: "id,slug,date,modified,title,excerpt,_links,_embedded",
     order: "desc",
     orderby: "date",
     per_page: String(clampPerPage(first))
@@ -478,7 +481,8 @@ export async function getBlogPostsByCategory(
   const categories = await wordpressPublicRequest<WordPressCategory[]>(
     `categories?slug=${encodedSlug}&per_page=1`,
     {
-      next: { revalidate: revalidateSeconds }
+      // Category slug -> id mapping rarely changes, so cache it far longer than the post list itself.
+      next: { revalidate: 3600 }
     }
   );
   const category = categories[0];
@@ -500,7 +504,7 @@ export async function getBlogPostsByCategory(
   return posts.map((post) => mapWordPressPost(post));
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
   const posts = await wordpressPublicRequest<WordPressRestPost[]>(
     `posts?slug=${encodeURIComponent(slug)}&_embed=1&per_page=1`,
     {
@@ -510,7 +514,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const post = posts[0];
 
   return post ? mapWordPressPost(post, true) : null;
-}
+});
 
 export async function getBlogPostSlugs(first = 50) {
   const params = new URLSearchParams({

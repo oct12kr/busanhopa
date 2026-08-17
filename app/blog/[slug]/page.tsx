@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPostBySlug } from "@/lib/wordpress";
+import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/wordpress";
 import { businessName, siteUrl } from "@/lib/constants";
 import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
@@ -12,6 +12,12 @@ type BlogPostPageProps = {
     slug: string;
   }>;
 };
+
+export async function generateStaticParams() {
+  const slugs = await getBlogPostSlugs().catch(() => []);
+
+  return slugs.map(({ slug }) => ({ slug }));
+}
 
 function formatDate(value: string | null) {
   if (!value) {
