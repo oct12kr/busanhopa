@@ -66,11 +66,11 @@ a {
 
 @layer components {
   .font-display {
-    font-family: "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-family: var(--font-display), "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
   }
 
   .font-serif-kr {
-    font-family: "Noto Serif KR", "Nanum Myeongjo", "Apple SD Gothic Neo", "Malgun Gothic", serif;
+    font-family: var(--font-serif-kr), "Noto Serif KR", "Nanum Myeongjo", "Apple SD Gothic Neo", "Malgun Gothic", serif;
   }
 
   .wp-content {

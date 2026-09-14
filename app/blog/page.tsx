@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   }
 };
 
-const postsPerCategory = 12;
+const postsPerCategory = 50;
 
 type BlogCategoryConfig = {
   name: "부산호빠" | "수빈실장";
@@ -368,9 +368,9 @@ export default async function BlogPage() {
             <p className="text-[12px] font-bold tracking-[0.22em] text-[#b8996a]">
               워드프레스 연동 글
             </p>
-            <h1 className="font-serif-kr mt-2 text-[28px] font-bold text-[#2a2a24]">
+            <h2 className="font-serif-kr mt-2 text-[28px] font-bold text-[#2a2a24]">
               최신 게시글
-            </h1>
+            </h2>
           </div>
 
           <div className="grid gap-10 lg:grid-cols-2 xl:gap-10">

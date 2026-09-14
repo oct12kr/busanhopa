@@ -33,7 +33,7 @@ export default function FloatingActionButtons() {
         <span className="sr-only">카카오톡 오픈채팅 상담</span>
       </a>
       <Link
-        href="/#menu-price"
+        href="/#contact"
         aria-label="메뉴판 가격 안내"
         title="메뉴판 가격 안내"
         className={`${floatingActionBaseClass} border-[#d9c49a]/55 bg-[#202519]/92 text-[#d9c49a] hover:border-[#aeb995] hover:bg-[#2a301f] hover:text-[#f7efe2]`}

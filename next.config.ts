@@ -3,7 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: process.cwd(),
-  skipTrailingSlashRedirect: true,
   async redirects() {
     return [
       {

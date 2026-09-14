@@ -1,10 +1,26 @@
 import type { Metadata, Viewport } from "next";
+import { Noto_Serif_KR, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
 import { businessName, siteUrl } from "@/lib/constants";
 import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
+
+const notoSerifKr = Noto_Serif_KR({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "900"],
+  variable: "--font-serif-kr",
+  display: "swap"
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap"
+});
 
 const fallbackTitle = buildMetaTitle(defaultSeo.fallbackTitle);
 const fallbackDescription = buildMetaDescription({
@@ -94,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${notoSerifKr.variable} ${playfairDisplay.variable}`}>
       <body>
         <FloatingActionButtons />
         <Header />
