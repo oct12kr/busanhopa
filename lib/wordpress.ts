@@ -340,6 +340,82 @@ function htmlToText(value = "") {
   return decodeHtmlEntities(value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim());
 }
 
+const wordpressSystemPathPrefixes = new Set([
+  "wp-content",
+  "wp-json",
+  "wp-admin",
+  "wp-includes",
+  "feed",
+  "category",
+  "tag",
+  "author",
+  "page",
+  "sitemap.xml",
+  "sitemap_index.xml"
+]);
+
+function getWordPressSiteOrigins(): string[] {
+  const url = firstEnvValue(envNames.url);
+
+  if (!url) {
+    return [];
+  }
+
+  try {
+    const origin = new URL(url).origin;
+    const withWww = origin.replace("://", "://www.");
+    const withoutWww = origin.replace("://www.", "://");
+
+    return [...new Set([origin, withWww, withoutWww])];
+  } catch {
+    return [];
+  }
+}
+
+// WordPress auto-published content (e.g. "함께 보면 좋은 글") embeds raw
+// permalinks pointing at the WordPress origin. Rewrite those to internal
+// /blog/[slug] routes so readers never leave the headless frontend.
+function rewriteInternalPostLinks(html: string): string {
+  if (!html) {
+    return html;
+  }
+
+  const origins = getWordPressSiteOrigins();
+
+  if (origins.length === 0) {
+    return html;
+  }
+
+  return html.replace(/href=(["'])(.*?)\1/gi, (match, quote: string, rawHref: string) => {
+    let parsed: URL;
+
+    try {
+      parsed = new URL(rawHref);
+    } catch {
+      return match;
+    }
+
+    if (!origins.includes(parsed.origin)) {
+      return match;
+    }
+
+    const segments = parsed.pathname.split("/").filter(Boolean);
+    const firstSegment = segments[0]?.toLowerCase();
+
+    if (segments.length === 0) {
+      return `href=${quote}/blog${quote}`;
+    }
+
+    if (firstSegment && wordpressSystemPathPrefixes.has(firstSegment)) {
+      return match;
+    }
+
+    const slug = segments[segments.length - 1];
+
+    return `href=${quote}/blog/${slug}${quote}`;
+  });
+}
+
 function clampPerPage(first: number) {
   return Math.max(1, Math.min(Math.floor(first), 100));
 }
@@ -407,7 +483,7 @@ function mapWordPressPost(post: WordPressRestPost, includeContent = false): Blog
     author: post._embedded?.author?.[0]?.name ?? "부산호빠",
     categories: getPostCategories(post),
     featuredImage: getPostFeaturedImage(post),
-    content: includeContent ? post.content?.rendered ?? "" : ""
+    content: includeContent ? rewriteInternalPostLinks(post.content?.rendered ?? "") : ""
   };
 }
 
