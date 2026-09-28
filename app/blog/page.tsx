@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 const postsPerCategory = 50;
 
 type BlogCategoryConfig = {
-  name: "부산호빠" | "수빈실장";
+  name: "부산호빠" | "해운대호빠";
   slug: "aaa" | "bbb";
   description: string;
 };
@@ -65,9 +65,9 @@ const blogCategoryConfigs: BlogCategoryConfig[] = [
     description: "부산호빠 이용 안내와 공간, 예약 흐름을 정리한 글입니다."
   },
   {
-    name: "수빈실장",
+    name: "해운대호빠",
     slug: "bbb",
-    description: "수빈실장이 직접 전하는 방문 팁과 상담 안내입니다."
+    description: "해운대호빠 방문 팁과 상담 안내를 정리한 글입니다."
   }
 ];
 
