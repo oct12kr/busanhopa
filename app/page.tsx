@@ -662,7 +662,7 @@ export default function Home() {
 
       <section
         id="system"
-        className="relative isolate border-b border-[#d7cbb7] bg-[#f3ede3] py-16 text-[#2a2a24] md:py-20 lg:h-[800px] lg:py-6"
+        className="cv-auto relative isolate border-b border-[#d7cbb7] bg-[#f3ede3] py-16 text-[#2a2a24] md:py-20 lg:h-[800px] lg:py-6"
       >
         <div
           aria-hidden="true"
@@ -771,7 +771,7 @@ export default function Home() {
 
       <section
         id="room"
-        className="relative isolate overflow-hidden border-b border-[#e1cfad] bg-[#f5ead6] py-24 text-[#3a2e1e] md:py-32 lg:py-36"
+        className="cv-auto relative isolate overflow-hidden border-b border-[#e1cfad] bg-[#f5ead6] py-24 text-[#3a2e1e] md:py-32 lg:py-36"
       >
         <Image
           src={imageAssets.busanIntro}
@@ -831,7 +831,7 @@ export default function Home() {
 
       <section
         id="gallery"
-        className="relative isolate overflow-hidden border-b border-[#ded2bf] bg-[#f7f3ea] py-20 text-[#2a2a24] md:py-24 lg:h-[650px] lg:py-7"
+        className="cv-auto relative isolate overflow-hidden border-b border-[#ded2bf] bg-[#f7f3ea] py-20 text-[#2a2a24] md:py-24 lg:h-[650px] lg:py-7"
       >
         <div
           aria-hidden="true"
@@ -913,7 +913,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="guide" className="relative isolate flex min-h-[820px] items-center border-b border-[#d9c49a]/12 py-24">
+      <section id="guide" className="cv-auto relative isolate flex min-h-[820px] items-center border-b border-[#d9c49a]/12 py-24">
         <Image
           src={imageAssets.guide}
           alt="부산호빠 방문 가이드 배경"
@@ -971,7 +971,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="relative isolate overflow-hidden border-b border-white/10 bg-[#11120d] px-5 py-24 text-white md:py-32 lg:py-36"
+        className="cv-auto relative isolate overflow-hidden border-b border-white/10 bg-[#11120d] px-5 py-24 text-white md:py-32 lg:py-36"
       >
         <Image
           src={imageAssets.reservation}
@@ -1066,7 +1066,7 @@ export default function Home() {
 
       <section
         id="location"
-        className="relative isolate overflow-hidden border-b border-[#d7cbb7] bg-[#f3ede3] text-[#2a2a24] lg:h-[500px]"
+        className="cv-auto relative isolate overflow-hidden border-b border-[#d7cbb7] bg-[#f3ede3] text-[#2a2a24] lg:h-[500px]"
       >
         <Image
           src={imageAssets.location}

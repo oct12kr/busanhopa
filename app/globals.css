@@ -64,6 +64,33 @@ a {
   border-color: rgba(151, 161, 130, 0.42);
 }
 
+/*
+ * Below-the-fold home sections: skip their layout/paint until they approach
+ * the viewport so the first screen renders sooner. Placeholder heights match
+ * the measured section heights (mobile / lg) so anchor jumps stay accurate;
+ * `auto` keeps the real height once a section has rendered.
+ */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1250px;
+}
+
+#system.cv-auto { contain-intrinsic-size: auto 2040px; }
+#room.cv-auto { contain-intrinsic-size: auto 1200px; }
+#gallery.cv-auto { contain-intrinsic-size: auto 1800px; }
+#guide.cv-auto { contain-intrinsic-size: auto 1260px; }
+#contact.cv-auto { contain-intrinsic-size: auto 1270px; }
+#location.cv-auto { contain-intrinsic-size: auto 1220px; }
+
+@media (min-width: 1024px) {
+  #system.cv-auto { contain-intrinsic-size: auto 800px; }
+  #room.cv-auto { contain-intrinsic-size: auto 960px; }
+  #gallery.cv-auto { contain-intrinsic-size: auto 650px; }
+  #guide.cv-auto { contain-intrinsic-size: auto 820px; }
+  #contact.cv-auto { contain-intrinsic-size: auto 1140px; }
+  #location.cv-auto { contain-intrinsic-size: auto 500px; }
+}
+
 @layer components {
   .font-display {
     font-family: var(--font-display), "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;

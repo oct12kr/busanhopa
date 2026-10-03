@@ -7,19 +7,23 @@ import FloatingActionButtons from "@/components/FloatingActionButtons";
 import { businessName, siteUrl } from "@/lib/constants";
 import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
+// Variable font: one @font-face per unicode slice instead of one per weight
+// (400/500/600/700/900 are all still available from the wght axis).
 const notoSerifKr = Noto_Serif_KR({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
+  weight: "variable",
   variable: "--font-serif-kr",
   display: "swap"
 });
 
+// Only used below the fold (phone CTA) and on /blog, so skip the preload.
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
   style: ["normal", "italic"],
   variable: "--font-display",
-  display: "swap"
+  display: "swap",
+  preload: false
 });
 
 const fallbackTitle = buildMetaTitle(defaultSeo.fallbackTitle);
