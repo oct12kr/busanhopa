@@ -15,8 +15,15 @@ export type BlogPostSummary = {
   }[];
   featuredImage?: {
     sourceUrl: string;
+    cardUrl: string;
     altText: string;
   } | null;
+};
+
+export type BlogPostPage = {
+  posts: BlogPostSummary[];
+  total: number;
+  totalPages: number;
 };
 
 export type BlogPost = BlogPostSummary & {
@@ -252,10 +259,11 @@ async function wordpressRequest<T>(endpoint: string, init: RequestInit = {}): Pr
   return response.json() as Promise<T>;
 }
 
-async function wordpressPublicRequest<T>(
+async function wordpressPublicResponse(
   endpoint: string,
-  init: WordPressPublicRequestInit = {}
-): Promise<T> {
+  init: WordPressPublicRequestInit = {},
+  allowedStatuses: number[] = []
+): Promise<Response> {
   const headers = new Headers(init.headers);
 
   headers.set("Accept", "application/json");
@@ -280,7 +288,7 @@ async function wordpressPublicRequest<T>(
     throw error;
   }
 
-  if (!response.ok) {
+  if (!response.ok && !allowedStatuses.includes(response.status)) {
     const message = await parseWordPressError(response, endpoint);
 
     logWordPressRequestError({
@@ -293,6 +301,15 @@ async function wordpressPublicRequest<T>(
 
     throw new Error(message);
   }
+
+  return response;
+}
+
+async function wordpressPublicRequest<T>(
+  endpoint: string,
+  init: WordPressPublicRequestInit = {}
+): Promise<T> {
+  const response = await wordpressPublicResponse(endpoint, init);
 
   return response.json() as Promise<T>;
 }
@@ -465,6 +482,8 @@ function getPostFeaturedImage(post: WordPressRestPost) {
 
   return {
     sourceUrl,
+    // Listing cards render at ~300px wide, so prefer a smaller rendition than the detail/OG image.
+    cardUrl: media.media_details?.sizes?.medium_large?.source_url ?? sourceUrl,
     altText: htmlToText(media.alt_text ?? post.title?.rendered ?? "")
   };
 }
@@ -548,11 +567,13 @@ export async function getBlogPosts(first = 12): Promise<BlogPostSummary[]> {
   return posts.map((post) => mapWordPressPost(post));
 }
 
-export async function getBlogPostsByCategory(
-  categorySlug: string,
-  first = 18,
-  revalidateSeconds = 60
-): Promise<BlogPostSummary[]> {
+function headerCount(response: Response, name: string, fallback: number) {
+  const value = Number(response.headers.get(name));
+
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
+
+async function getCategoryPostFilter(categorySlug: string): Promise<Record<string, string | number>> {
   const encodedSlug = encodeURIComponent(categorySlug);
   const categories = await wordpressPublicRequest<WordPressCategory[]>(
     `categories?slug=${encodedSlug}&per_page=1`,
@@ -563,21 +584,58 @@ export async function getBlogPostsByCategory(
   );
   const category = categories[0];
 
-  const posts = category
-    ? await wordpressPublicRequest<WordPressRestPost[]>(
-        postListEndpoint(first, { categories: category.id }),
-        {
-          next: { revalidate: revalidateSeconds }
-        }
-      )
-    : await wordpressPublicRequest<WordPressRestPost[]>(
-        postListEndpoint(first, { category_name: categorySlug }),
-        {
-          next: { revalidate: revalidateSeconds }
-        }
-      );
+  return category ? { categories: category.id } : { category_name: categorySlug };
+}
 
-  return posts.map((post) => mapWordPressPost(post));
+export async function getBlogPostsByCategory(
+  categorySlug: string,
+  {
+    page = 1,
+    perPage = 18,
+    revalidateSeconds = 60
+  }: { page?: number; perPage?: number; revalidateSeconds?: number } = {}
+): Promise<BlogPostPage> {
+  const filter = await getCategoryPostFilter(categorySlug);
+  const pageNumber = Math.max(1, Math.floor(page));
+
+  // WordPress paginates server-side: only the requested page is fetched, and the
+  // X-WP-Total / X-WP-TotalPages headers describe the whole category.
+  const response = await wordpressPublicResponse(
+    postListEndpoint(perPage, { ...filter, page: pageNumber }),
+    {
+      next: { revalidate: revalidateSeconds }
+    },
+    // WordPress answers 400 (rest_post_invalid_page_number) for a page past the end.
+    pageNumber > 1 ? [400] : []
+  );
+
+  if (!response.ok) {
+    return { posts: [], total: 0, totalPages: 0 };
+  }
+
+  const posts = (await response.json()) as WordPressRestPost[];
+  const total = headerCount(response, "X-WP-Total", posts.length);
+
+  return {
+    posts: posts.map((post) => mapWordPressPost(post)),
+    total,
+    totalPages: headerCount(response, "X-WP-TotalPages", Math.ceil(total / clampPerPage(perPage)))
+  };
+}
+
+export async function getBlogPostTotalByCategory(categorySlug: string, revalidateSeconds = 60) {
+  const filter = await getCategoryPostFilter(categorySlug);
+  const params = new URLSearchParams({ _fields: "id", per_page: "1" });
+
+  for (const [key, value] of Object.entries(filter)) {
+    params.set(key, String(value));
+  }
+
+  const response = await wordpressPublicResponse(`posts?${params.toString()}`, {
+    next: { revalidate: revalidateSeconds }
+  });
+
+  return headerCount(response, "X-WP-Total", 0);
 }
 
 export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
