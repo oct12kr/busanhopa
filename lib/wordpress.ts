@@ -28,6 +28,11 @@ export type BlogPostPage = {
 
 export type BlogPost = BlogPostSummary & {
   content: string;
+  // Set when the content ends with the auto-published "함께 보면 좋은 글" link list.
+  relatedLinks: {
+    slugs: string[];
+    contentWithoutLinks: string;
+  } | null;
 };
 
 export type WordPressPostStatus = "draft" | "publish" | "pending" | "private" | "future";
@@ -259,6 +264,32 @@ async function wordpressRequest<T>(endpoint: string, init: RequestInit = {}): Pr
   return response.json() as Promise<T>;
 }
 
+// Static generation renders many blog pages at once; cap parallel REST calls
+// so a build or revalidation burst cannot exhaust the WordPress server.
+const maxConcurrentPublicRequests = 3;
+let activePublicRequests = 0;
+const publicRequestQueue: (() => void)[] = [];
+
+async function withPublicRequestSlot<T>(task: () => Promise<T>): Promise<T> {
+  if (activePublicRequests >= maxConcurrentPublicRequests) {
+    await new Promise<void>((resolve) => publicRequestQueue.push(resolve));
+  } else {
+    activePublicRequests += 1;
+  }
+
+  try {
+    return await task();
+  } finally {
+    const next = publicRequestQueue.shift();
+
+    if (next) {
+      next();
+    } else {
+      activePublicRequests -= 1;
+    }
+  }
+}
+
 async function wordpressPublicResponse(
   endpoint: string,
   init: WordPressPublicRequestInit = {},
@@ -272,10 +303,12 @@ async function wordpressPublicResponse(
   let response: Response;
 
   try {
-    response = await fetch(requestUrl, {
-      ...init,
-      headers
-    });
+    response = await withPublicRequestSlot(() =>
+      fetch(requestUrl, {
+        ...init,
+        headers
+      })
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
 
@@ -433,6 +466,31 @@ function rewriteInternalPostLinks(html: string): string {
   });
 }
 
+const trailingRelatedLinksPattern =
+  /<h2[^>]*>\s*함께 보면 좋은 글\s*<\/h2>\s*<ul[^>]*>([\s\S]*?)<\/ul>\s*$/;
+
+// Runs on content already passed through rewriteInternalPostLinks, so the list
+// items point at /blog/[slug]. Lets the detail page render those picks as cards
+// instead of a second, text-only related list.
+function extractTrailingRelatedLinks(html: string): BlogPost["relatedLinks"] {
+  const match = trailingRelatedLinksPattern.exec(html);
+
+  if (!match) {
+    return null;
+  }
+
+  const slugs = [...match[1].matchAll(/href=["']\/blog\/([^"'/?#]+)["']/gi)].map((link) => link[1]);
+
+  if (slugs.length === 0) {
+    return null;
+  }
+
+  return {
+    slugs: [...new Set(slugs)],
+    contentWithoutLinks: html.slice(0, match.index).trimEnd()
+  };
+}
+
 function clampPerPage(first: number) {
   return Math.max(1, Math.min(Math.floor(first), 100));
 }
@@ -490,6 +548,7 @@ function getPostFeaturedImage(post: WordPressRestPost) {
 
 function mapWordPressPost(post: WordPressRestPost, includeContent = false): BlogPost {
   const title = htmlToText(post.title?.rendered ?? "") || "제목 없음";
+  const content = includeContent ? rewriteInternalPostLinks(post.content?.rendered ?? "") : "";
 
   return {
     id: post.id,
@@ -502,7 +561,8 @@ function mapWordPressPost(post: WordPressRestPost, includeContent = false): Blog
     author: post._embedded?.author?.[0]?.name ?? "부산호빠",
     categories: getPostCategories(post),
     featuredImage: getPostFeaturedImage(post),
-    content: includeContent ? rewriteInternalPostLinks(post.content?.rendered ?? "") : ""
+    content,
+    relatedLinks: includeContent ? extractTrailingRelatedLinks(content) : null
   };
 }
 
@@ -636,6 +696,77 @@ export async function getBlogPostTotalByCategory(categorySlug: string, revalidat
   });
 
   return headerCount(response, "X-WP-Total", 0);
+}
+
+function comparableSlug(slug: string) {
+  try {
+    return decodeURIComponent(slug).toLowerCase();
+  } catch {
+    return slug.toLowerCase();
+  }
+}
+
+const relatedPostPoolSize = 100;
+
+// One lean, cached list shared by every page that renders a "함께 읽어보세요"
+// block. Asking WordPress per page (slug / exclude / before filters) meant a
+// unique uncached request for each prerendered post, which overloaded the
+// WordPress server during builds.
+async function getRelatedPostPool(): Promise<BlogPostSummary[]> {
+  const posts = await wordpressPublicRequest<WordPressRestPost[]>(
+    postListEndpoint(relatedPostPoolSize, {
+      _embed: "wp:featuredmedia,wp:term",
+      _fields: "id,slug,date,modified,title,_links,_embedded"
+    }),
+    {
+      next: { revalidate: 300 }
+    }
+  );
+
+  return posts.map((post) => mapWordPressPost(post));
+}
+
+// Picks up to `limit` posts for a "함께 읽어보세요" block, in priority order:
+// editor-picked slugs, older posts of the same category, the category's latest,
+// then the latest posts of any category. Excluded posts are never returned and
+// no post appears twice. The result is deterministic for a given post list.
+export async function getRelatedBlogPosts({
+  preferredSlugs = [],
+  categorySlug,
+  before,
+  excludeIds = [],
+  limit = 5
+}: {
+  preferredSlugs?: string[];
+  categorySlug?: string;
+  before?: string | null;
+  excludeIds?: number[];
+  limit?: number;
+}): Promise<BlogPostSummary[]> {
+  const excluded = new Set(excludeIds);
+  // Newest first, as returned by WordPress.
+  const pool = (await getRelatedPostPool()).filter((post) => !excluded.has(post.id));
+  const order = preferredSlugs.map(comparableSlug);
+  const preferred = pool
+    .filter((post) => order.includes(comparableSlug(post.slug)))
+    .sort((a, b) => order.indexOf(comparableSlug(a.slug)) - order.indexOf(comparableSlug(b.slug)));
+  const sameCategory = categorySlug
+    ? pool.filter((post) => post.categories.some((category) => category.slug === categorySlug))
+    : [];
+  const olderSameCategory = before
+    ? sameCategory.filter((post) => post.date !== null && post.date < before)
+    : [];
+  const related = new Map<number, BlogPostSummary>();
+
+  for (const post of [...preferred, ...olderSameCategory, ...sameCategory, ...pool]) {
+    if (related.size >= limit) {
+      break;
+    }
+
+    related.set(post.id, post);
+  }
+
+  return [...related.values()];
 }
 
 export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {

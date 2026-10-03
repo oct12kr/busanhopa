@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/wordpress";
+import RelatedPosts from "@/components/RelatedPosts";
+import { getBlogPostBySlug, getBlogPostSlugs, getRelatedBlogPosts } from "@/lib/wordpress";
 import { businessName, siteUrl } from "@/lib/constants";
 import { absoluteAssetUrl, buildMetaDescription, buildMetaTitle, canonicalUrl, defaultSeo } from "@/lib/seo";
 
@@ -135,6 +136,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const relatedPosts = await getRelatedBlogPosts({
+    preferredSlugs: post.relatedLinks?.slugs,
+    categorySlug: post.categories[0]?.slug,
+    before: post.date,
+    excludeIds: [post.id]
+  }).catch(() => []);
+  // The cards below replace the text-only "함께 보면 좋은 글" list; keep that list if the cards could not load.
+  const contentHtml =
+    post.relatedLinks && relatedPosts.length > 0 ? post.relatedLinks.contentWithoutLinks : post.content;
   const pageUrl = canonicalUrl(`/blog/${post.slug}`);
   const pageDescription = buildMetaDescription({
     description: post.excerpt,
@@ -237,10 +247,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mx-auto max-w-4xl px-5 py-12 md:py-16">
           <div
             className="wp-content"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
         </div>
       </article>
+
+      {relatedPosts.length > 0 ? (
+        <div className="mx-auto max-w-6xl px-5 pb-16 md:pb-20">
+          <RelatedPosts posts={relatedPosts} tone="dark" />
+        </div>
+      ) : null}
     </main>
   );
 }

@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PhoneIcon } from "@/components/Icons";
+import RelatedPosts from "@/components/RelatedPosts";
 import {
   getBlogPostsByCategory,
   getBlogPostTotalByCategory,
+  getRelatedBlogPosts,
   type BlogPostPage,
   type BlogPostSummary
 } from "@/lib/wordpress";
@@ -510,7 +512,14 @@ export default async function BlogListing({
     notFound();
   }
 
-  const categories = await fetchCategoryTotals(category, total);
+  const [categories, relatedPosts] = await Promise.all([
+    fetchCategoryTotals(category, total),
+    // Same-category posts that are not already in the grid above, topped up with other categories.
+    getRelatedBlogPosts({
+      categorySlug: category.slug,
+      excludeIds: posts.map((post) => post.id)
+    }).catch(() => [])
+  ]);
 
   return (
     <main className="min-h-screen bg-[#f3ede3] text-[#2a2a24]">
@@ -581,6 +590,12 @@ export default async function BlogListing({
           <ProfileCard />
         </aside>
       </section>
+
+      {relatedPosts.length > 0 ? (
+        <div className="mx-auto max-w-[1680px] px-5 pb-14 sm:px-8 lg:pb-20">
+          <RelatedPosts posts={relatedPosts} />
+        </div>
+      ) : null}
     </main>
   );
 }
