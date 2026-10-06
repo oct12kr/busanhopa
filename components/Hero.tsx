@@ -73,12 +73,12 @@ export default function Hero() {
 
         <h1
           id="hero-title"
-          className="font-serif-kr mt-5 bg-[linear-gradient(135deg,#fff7e8_0%,#e8c888_38%,#c9a876_68%,#8f6f3f_100%)] bg-clip-text text-[48px] font-black leading-none tracking-[-0.025em] text-transparent drop-shadow-[0_18px_46px_rgba(0,0,0,0.46)] [-webkit-text-fill-color:transparent] sm:text-[64px] lg:text-[112px]"
+          className="font-serif-kr mt-5 bg-[linear-gradient(135deg,#fffefb_0%,#fbf4e3_45%,#f1e3c2_100%)] bg-clip-text text-[48px] font-black leading-none tracking-[-0.025em] text-transparent drop-shadow-[0_18px_46px_rgba(0,0,0,0.46)] [-webkit-text-fill-color:transparent] sm:text-[64px] lg:text-[112px]"
         >
           부산호빠
         </h1>
 
-        <p className="font-serif-kr mt-4 bg-[linear-gradient(135deg,#E8C888_0%,#C9A876_50%,#9C7B4A_100%)] bg-clip-text text-[22px] font-black tracking-[-0.02em] text-transparent drop-shadow-[0_2px_12px_rgba(201,168,118,0.42)] [-webkit-text-fill-color:transparent] md:text-[26px]">
+        <p className="font-serif-kr mt-4 bg-[linear-gradient(135deg,#f8ecd0_0%,#ecd6a6_50%,#dcc08a_100%)] bg-clip-text text-[22px] font-black tracking-[-0.02em] text-transparent drop-shadow-[0_2px_12px_rgba(201,168,118,0.42)] [-webkit-text-fill-color:transparent] md:text-[26px]">
           부산호빠 수빈실장
         </p>
 

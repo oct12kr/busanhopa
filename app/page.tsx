@@ -78,22 +78,22 @@ const infoFeatures = [
   {
     icon: "calendar",
     title: "예약 필수",
-    text: "원활한 안내와 최상의 서비스를 위해\n예약 후 방문 부탁드립니다."
+    text: "원활한 안내와 최상의 서비스를 위해 예약 후 방문 부탁드립니다."
   },
   {
     icon: "user",
     title: "1:1 맞춤 응대",
-    text: "수빈실장이 처음부터 끝까지\n세심하게 케어합니다."
+    text: "처음 방문하시는 분들도 편안하도록 처음부터 끝까지 세심하게 안내합니다."
   },
   {
     icon: "shield",
     title: "프라이빗 공간",
-    text: "고객님의 프라이버시를 최우선으로\n안전하고 편안한 공간을 제공합니다."
+    text: "고객님의 프라이버시를 최우선으로 편안한 공간을 제공합니다."
   },
   {
     icon: "clock",
     title: "편리한 일정",
-    text: "방문 일정에 맞춘 안내로\n더욱 편안하게 이용하세요."
+    text: "방문 일정에 맞춘 안내로 더욱 편안하게 이용하실 수 있습니다."
   }
 ];
 
@@ -197,16 +197,19 @@ const locationTransits = [
 
 const reassuranceItems = [
   {
+    icon: "crown",
     title: "고객 만족도 최우선",
-    text: "한 분 한 분 소중한 인연을\n최우선으로 생각합니다."
+    text: "한 분 한 분 소중한 시간을\n최우선으로 생각합니다."
   },
   {
+    icon: "handshake",
     title: "신뢰와 책임감",
     text: "언제나 신뢰를 바탕으로\n책임감 있게 응대합니다."
   },
   {
+    icon: "diamond",
     title: "특별한 경험",
-    text: "평범한 하루를 잊지 못할\n특별한 경험으로 만들어드립니다."
+    text: "평범한 하루를 잊게 해줄\n특별한 경험을 만들어드립니다."
   }
 ];
 
@@ -609,29 +612,35 @@ function InfoLineIcon({
     );
   }
 
+  if (name === "crown") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 48 48" className={className} fill="none">
+        <path d="M10 33 7 16l10 7 7-11 7 11 10-7-3 17H10ZM11 39h26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (name === "handshake") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 48 48" className={className} fill="none">
+        <path d="M4 16h7l9-3 4 2 4-2 9 3h7M4 30h6l11 9c1.4 1.1 3 1.1 4.3 0L38 30h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="m24 15-7 7c-1.6 1.7.8 4.4 3 2.8l5-3.8 9 8M19 33l3 3M24 30l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (name === "diamond") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 48 48" className={className} fill="none">
+        <path d="M15 9h18l9 11-18 21L6 20l9-11ZM6 20h36M18 20l6 21 6-21M15 9l3 11 6-11 6 11 3-11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
   return (
     <svg aria-hidden="true" viewBox="0 0 32 32" className={className} fill="none">
       <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="1.7" />
       <path d="m10.5 16.5 3.8 3.8 7.8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function LeafLineArt({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 240 260"
-      className={className}
-      fill="none"
-    >
-      <path d="M36 238C88 176 121 106 132 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M132 28C157 42 166 69 156 98C133 83 126 58 132 28Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M112 88C82 91 60 108 48 138C80 138 104 119 112 88Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M142 94C174 99 196 121 204 154C169 149 147 129 142 94Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M86 150C56 154 34 173 20 204C53 204 78 184 86 150Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M126 152C160 158 184 181 194 216C158 211 133 190 126 152Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M130 45c9 17 17 33 24 49M70 125c16 1 29-2 42-10M160 129c14 10 27 17 41 21M47 190c14-1 27-5 39-13M151 188c14 9 28 16 42 21" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.55" />
     </svg>
   );
 }
@@ -662,106 +671,136 @@ export default function Home() {
 
       <section
         id="system"
-        className="cv-auto relative isolate border-b border-[#d7cbb7] bg-[#f3ede3] py-16 text-[#2a2a24] md:py-20 lg:h-[800px] lg:py-6"
+        className="cv-auto relative isolate border-b border-[#d9b97f]/15 bg-[#0a0705] py-16 text-[#f7efe2] md:py-20 xl:py-6"
       >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_16%_12%,rgba(255,255,255,0.62),transparent_34%),radial-gradient(circle_at_76%_20%,rgba(125,122,84,0.08),transparent_28%),linear-gradient(180deg,#f6f0e6_0%,#efe8da_100%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-[0.26] bg-[repeating-linear-gradient(0deg,transparent_0,transparent_21px,rgba(125,122,84,0.06)_22px,transparent_23px)]"
-        />
-        <LeafLineArt className="pointer-events-none absolute right-[-28px] top-8 hidden h-[280px] w-[260px] text-[#8c8354]/18 md:block xl:right-10" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+          <Image
+            src="/images/busanhopa_002-2.png"
+            alt=""
+            fill
+            sizes="(max-width: 1280px) 70vw, 45vw"
+            className="scale-110 object-cover object-center blur-[9px]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,4,0.88)_0%,rgba(10,7,4,0.6)_28%,rgba(10,7,4,0.64)_72%,rgba(7,6,4,0.9)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_30%,rgba(140,92,34,0.16),transparent_58%)]" />
+        </div>
 
-        <div className="relative mx-auto max-w-[1720px] px-5 sm:px-8 lg:h-full lg:px-10">
-          <div className="grid gap-10 lg:h-full lg:grid-cols-[minmax(360px,0.4fr)_minmax(0,0.6fr)] lg:items-stretch xl:gap-12">
-            <div className="relative mx-auto w-full max-w-[580px] lg:mx-0 lg:h-full lg:max-w-none">
-              <div className="relative min-h-[520px] overflow-hidden rounded-t-[180px] bg-[#d9cbb7] shadow-[0_34px_90px_rgba(75,58,34,0.16)] md:min-h-[620px] lg:h-full lg:min-h-0 lg:rounded-t-[120px]">
+        <div className="relative mx-auto max-w-[1720px] px-5 sm:px-8 xl:px-10">
+          <div className="grid gap-9 xl:min-h-[752px] xl:grid-cols-[minmax(380px,0.44fr)_minmax(0,0.56fr)] xl:grid-rows-[auto_1fr] xl:gap-x-10 xl:gap-y-5 2xl:gap-x-12">
+            <div className="text-center xl:col-start-2 xl:row-start-1 xl:pt-7">
+              <div className="flex items-center justify-center gap-4 sm:gap-6">
+                <span className="h-px w-10 bg-[linear-gradient(90deg,transparent,rgba(217,185,127,0.7))] sm:w-28" />
+                <p className="pl-[0.42em] text-[12px] font-medium uppercase tracking-[0.42em] text-[#d9b97f] md:text-[13px]">
+                  BUSAN HOST BAR
+                </p>
+                <span className="h-px w-10 bg-[linear-gradient(270deg,transparent,rgba(217,185,127,0.7))] sm:w-28" />
+              </div>
+
+              <h2 className="font-serif-kr mt-5 break-keep text-[38px] leading-[1.15] sm:text-[52px] xl:mt-4 xl:text-[52px] 2xl:text-[60px]">
+                <span className="bg-[linear-gradient(135deg,#fbeccb_0%,#e8c888_45%,#c9a876_100%)] bg-clip-text font-black tracking-[-0.02em] text-transparent [-webkit-text-fill-color:transparent]">
+                  부산호빠
+                </span>{" "}
+                <span className="font-light tracking-[0.06em] text-[#ecd6a6]">이용안내</span>
+              </h2>
+              <p className="mt-4 pl-[0.4em] text-[12px] font-medium uppercase tracking-[0.4em] text-[#c9a876] xl:mt-3">
+                · INFORMATION ·
+              </p>
+              <p className="mx-auto mt-5 max-w-[640px] break-keep text-[15px] leading-[1.8] text-white/90 md:text-base xl:mt-4 xl:text-[15px] xl:leading-[1.7]">
+                부산호빠를 처음 방문하시는 분들도 편안하고 즐거운 시간을 보내실 수 있도록{" "}
+                <br className="hidden sm:block" />
+                처음부터 끝까지 세심하게 안내해드립니다.
+              </p>
+            </div>
+
+            <div className="relative mx-auto w-full max-w-[640px] xl:col-start-1 xl:row-span-2 xl:row-start-1 xl:mx-0 xl:max-w-none">
+              <div className="relative aspect-square overflow-hidden sm:aspect-[4/3] rounded-[26px] border border-[#d9b97f]/50 shadow-[0_24px_60px_rgba(0,0,0,0.45)] xl:absolute xl:inset-0 xl:aspect-auto xl:rounded-[40px]">
                 <Image
-                  src={imageAssets.info}
-                  alt="아치형 복도와 프라이빗 라운지 이미지"
+                  src="/images/busanhopa_002-1.png"
+                  alt="부산호빠 라운지에서 대화를 나누는 손님과 호스트"
                   title="부산호빠 이용안내 이미지"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-left"
+                  sizes="(max-width: 1280px) 100vw, 44vw"
+                  className="object-cover object-center xl:object-[24%_center] min-[1720px]:object-[60%_center]"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(55,42,24,0.02)_0%,rgba(55,42,24,0.08)_62%,rgba(42,42,36,0.18)_100%)]" />
-                <div className="absolute inset-x-0 bottom-0 bg-[#7d7a54]/96 p-6 text-white sm:p-7 lg:p-5">
-                  <div className="border border-white/32 px-6 py-6 sm:px-8 sm:py-7 lg:px-5 lg:py-5">
-                    <p className="font-serif-kr break-keep text-[22px] font-medium leading-[1.65] tracking-[0.02em] text-white sm:text-[24px] lg:text-[15px] lg:leading-[1.55]">
-                      편안함, 프라이빗함, 그리고
-                      <br />
-                      최상의 서비스를 약속드립니다.
-                    </p>
-                  </div>
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(180deg,transparent_0%,rgba(8,6,4,0.55)_45%,rgba(8,6,4,0.92)_100%)]" />
+                <div className="absolute bottom-5 left-5 right-5 sm:bottom-8 sm:left-8 xl:bottom-9 xl:left-8 xl:right-24">
+                  <span className="block h-px w-40 bg-[#d9b97f]/70" />
+                  <p className="font-serif-kr break-keep py-3 text-[16px] font-medium leading-[1.7] text-[#fbf4e3] sm:text-[19px] xl:text-[18px]">
+                    특별한 만남이
+                    <br />
+                    기억에 남는 시간으로 이어집니다.
+                  </p>
+                  <span className="block h-px w-full max-w-[270px] bg-[#d9b97f]/70" />
                 </div>
               </div>
             </div>
 
-            <div className="relative pt-2 lg:flex lg:h-full lg:flex-col lg:justify-between lg:pt-0">
-              <div className="mx-auto max-w-[1060px] text-center">
-                <div className="mx-auto h-px max-w-[520px] bg-[#8c8354]/36" />
+            <div className="xl:col-start-2 xl:row-start-2 xl:flex xl:flex-col xl:justify-between">
+              <div>
+                <div className="h-px w-full bg-[linear-gradient(90deg,transparent,rgba(217,185,127,0.5),transparent)]" />
 
-                <h2 className="font-serif-kr mt-5 text-[44px] font-semibold leading-none tracking-[0.08em] text-[#2a2a24] sm:text-[54px] md:text-[64px] lg:mt-4 lg:text-[48px]">
-                  이용안내
-                </h2>
-                <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.34em] text-[#8c8354] md:text-[14px] lg:mt-4 lg:text-[12px]">
-                  · INFORMATION ·
-                </p>
-                <p className="mx-auto mt-6 max-w-[780px] break-keep text-[15px] leading-[1.75] text-[#5f5c52] md:text-base lg:mt-4 lg:text-[14px] lg:leading-[1.55]">
-                  부산호빠는 처음 방문하시는 분들도 편안하고 즐거운 시간을 보내실 수 있도록
-                  <br className="hidden sm:block" />
-                  처음부터 끝까지 세심하게 도와드립니다.
-                </p>
-              </div>
-
-              <div className="mt-6 h-px w-full bg-[#8c8354]/20 lg:mt-4" />
-
-              <div className="mt-5 grid grid-cols-2 overflow-hidden lg:mt-4 lg:h-[190px] lg:grid-cols-4">
-                {infoFeatures.map((feature, index) => (
-                  <article
-                    key={feature.title}
-                    className={`min-h-[220px] border-[#8c8354]/18 px-4 py-6 text-center md:px-6 lg:h-[190px] lg:min-h-0 lg:border-l lg:px-4 lg:py-4 ${
-                      index % 2 === 1 ? "border-l" : ""
-                    } ${index === 0 ? "lg:border-l-0" : ""}`}
-                  >
-                    <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#8c8354] text-white shadow-[0_16px_36px_rgba(92,86,52,0.18)] lg:h-12 lg:w-12">
-                      <InfoLineIcon name={feature.icon} className="h-9 w-9 lg:h-7 lg:w-7" />
-                    </span>
-                    <h3 className="font-serif-kr mt-6 break-keep text-[18px] font-semibold text-[#2a2a24] md:text-[19px] lg:mt-4 lg:text-[16px]">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-4 whitespace-pre-line break-keep text-[13px] leading-[1.65] text-[#6b6b60] md:text-[14px] lg:mt-2 lg:text-[12px] lg:leading-[1.45]">
-                      {feature.text}
-                    </p>
-                  </article>
-                ))}
-              </div>
-
-              <div className="relative mt-6 rounded-[22px] bg-[linear-gradient(135deg,#85815a_0%,#706d48_50%,#64613e_100%)] px-6 py-7 text-center text-white shadow-[0_34px_80px_rgba(85,79,48,0.18)] sm:px-10 md:py-8 lg:-ml-20 lg:mt-4 lg:min-h-[260px] lg:rounded-[18px] lg:px-6 lg:py-5 xl:-ml-28">
-                <div className="pointer-events-none absolute inset-0 rounded-[22px] border border-white/10 lg:rounded-[18px]" />
-                <h3 className="font-serif-kr break-keep text-[22px] font-semibold leading-tight md:text-[26px] lg:text-[20px]">
-                  처음 방문하셔도 걱정하지 마세요.
-                </h3>
-                <p className="mx-auto mt-4 max-w-[720px] break-keep text-[14px] leading-[1.7] text-white/88 md:text-[15px] lg:mt-2 lg:text-[13px] lg:leading-[1.55]">
-                  수빈실장이 친절하고 상세하게 안내해드리며, 최고의 시간을 선사해드립니다.
-                </p>
-
-                <div className="mt-6 grid gap-5 md:grid-cols-3 md:divide-x md:divide-white/18 lg:mt-4 lg:gap-3">
-                  {reassuranceItems.map((item) => (
-                    <article key={item.title} className="px-2 md:px-7 lg:px-4">
-                      <span className="mx-auto flex h-7 w-7 items-center justify-center text-white/92 lg:h-6 lg:w-6">
-                        <InfoLineIcon name="check" className="h-7 w-7 lg:h-6 lg:w-6" />
-                      </span>
-                      <h4 className="mt-3 break-keep text-[16px] font-bold text-white lg:mt-2 lg:text-[14px]">
-                        {item.title}
-                      </h4>
-                      <p className="mt-2 whitespace-pre-line break-keep text-[13px] leading-[1.65] text-white/78 lg:mt-1.5 lg:text-[12px] lg:leading-[1.45]">
-                        {item.text}
-                      </p>
-                    </article>
+                <div className="mt-4 grid grid-cols-2 xl:mt-3 lg:grid-cols-4">
+                  {infoFeatures.map((feature, index) => (
+                    <div
+                      key={feature.title}
+                      className={`border-l p-1.5 ${
+                        [
+                          "border-transparent",
+                          "border-[#d9b97f]/25",
+                          "border-t border-l-transparent border-t-[#d9b97f]/25 lg:border-t-0 lg:border-l-[#d9b97f]/25",
+                          "border-t border-[#d9b97f]/25 lg:border-t-0"
+                        ][index]
+                      }`}
+                    >
+                      <article className="group h-full rounded-2xl border border-transparent px-2 py-6 text-center transition duration-300 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:border-[#d9b97f]/40 hover:bg-[#1c130a]/60 hover:shadow-[0_14px_34px_rgba(0,0,0,0.35)] motion-reduce:transform-none sm:px-4 xl:px-2 xl:py-5 2xl:px-3">
+                        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#d9b97f]/70 text-[#d9b97f] transition duration-300 group-hover:border-[#f0d9a8] group-hover:text-[#f6e4bb]">
+                          <InfoLineIcon name={feature.icon} className="h-7 w-7" />
+                        </span>
+                        <h3 className="font-serif-kr mt-5 break-keep text-[17px] font-bold text-[#fbf4e3] md:text-[18px] xl:mt-4 xl:text-[17px]">
+                          {feature.title}
+                        </h3>
+                        <p className="mt-3 break-keep text-[13px] leading-[1.65] text-white/75 [text-wrap:balance] xl:mt-2 xl:text-[12.5px] xl:leading-[1.6]">
+                          {feature.text}
+                        </p>
+                      </article>
+                    </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="relative mt-7 rounded-[20px] border border-[#d9b97f]/60 bg-[linear-gradient(135deg,rgba(40,27,12,0.92)_0%,rgba(13,9,5,0.94)_48%,rgba(32,21,9,0.92)_100%)] px-4 py-7 text-center shadow-[0_18px_50px_rgba(0,0,0,0.45)] sm:px-8 xl:-ml-20 xl:mt-4 xl:px-6 xl:py-6 2xl:-ml-28">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 rounded-[20px] bg-[radial-gradient(ellipse_at_10%_0%,rgba(217,185,127,0.16),transparent_44%),radial-gradient(ellipse_at_94%_100%,rgba(217,185,127,0.12),transparent_42%)]"
+                />
+                <div className="relative">
+                  <h3 className="font-serif-kr break-keep text-[21px] font-bold leading-tight text-[#ecd29c] md:text-[24px] xl:text-[22px]">
+                    처음 방문하셔도 걱정하지 마세요.
+                  </h3>
+                  <p className="mx-auto mt-3 max-w-[720px] break-keep text-[14px] leading-[1.7] text-white/85 [text-wrap:balance] xl:mt-2 xl:text-[13.5px]">
+                    처음부터 끝까지 친절하고 상세하게 안내해드리며, 편안한 시간을 보내실 수 있도록 도와드립니다.
+                  </p>
+
+                  <div className="mt-5 grid md:grid-cols-3 xl:mt-3">
+                    {reassuranceItems.map((item, index) => (
+                      <div
+                        key={item.title}
+                        className={`p-1.5 md:border-l ${index > 0 ? "border-t border-[#d9b97f]/30 md:border-t-0" : "border-transparent"}`}
+                      >
+                        <article className="group h-full rounded-xl px-3 py-5 transition duration-300 ease-out hover:-translate-y-[3px] hover:scale-[1.02] hover:bg-white/5 motion-reduce:transform-none xl:py-3.5">
+                          <span className="mx-auto flex h-9 w-9 items-center justify-center text-[#d9b97f] transition duration-300 group-hover:text-[#f6e4bb]">
+                            <InfoLineIcon name={item.icon} className="h-9 w-9" />
+                          </span>
+                          <h4 className="font-serif-kr mt-3 break-keep text-[16px] font-bold text-[#fbf4e3] transition duration-300 group-hover:text-[#f6e4bb] xl:mt-2">
+                            {item.title}
+                          </h4>
+                          <p className="mt-2 whitespace-pre-line break-keep text-[13px] leading-[1.65] text-white/75 xl:mt-1.5 xl:text-[12.5px] xl:leading-[1.55]">
+                            {item.text}
+                          </p>
+                        </article>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
