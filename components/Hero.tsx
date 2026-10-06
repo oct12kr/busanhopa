@@ -57,7 +57,7 @@ export default function Hero() {
       className="relative isolate flex min-h-screen items-center justify-center overflow-hidden border-b border-white/10 bg-[#070806] px-5 py-28 text-center"
     >
       <Image
-        src="/images/000.png"
+        src="/images/busanhopa_hero.png"
         alt="부산호빠 히어로 배경"
         title="부산호빠"
         fill
